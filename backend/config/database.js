@@ -14,3 +14,5 @@ const connectDatabase = () => {
 
 
 module.exports = connectDatabase
+
+// mongodb://localhost:27017/chainkart
