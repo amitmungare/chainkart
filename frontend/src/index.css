@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .side-bar {
+    @apply w-6 h-6 ml-4 text-gray-400 cursor-pointer hover:bg-red-600 hover:p-1 hover:text-white hover:rounded-md transition-all duration-300 ease-linear;
+  }
+
+  .logo {
+    @apply w-10 h-10 rounded-full text-white flex items-center justify-center mr-5;
+  }
+
+  .hover {
+    @apply hover:text-blue-600 hover:font-bold hover:cursor-pointer;
+  }
+}
