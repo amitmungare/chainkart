@@ -12,10 +12,9 @@ const Home = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/:category/:subCategory" element={<SubCategory />} />
+        <Route path="/*" element={<Main />} />
+        <Route path="/:category/:subCategory/*" element={<SubCategory />} />
         <Route path="/profile/*" element={<Profile />} />
-        <Route path="productItem" element={<ProductItem />} />
       </Routes>
       <Footer />
     </>

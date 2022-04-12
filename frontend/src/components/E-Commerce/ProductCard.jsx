@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ name, price, img }) => {
+const ProductCard = ({ name, price, img, category, subCategory }) => {
   return (
     <div>
-      <img className="mb-5 h-56 w-full object-contain" src={img} />
+      <Link to={`/${category}/${subCategory}/${name}`}>
+        <img className="mb-5 h-56 w-full object-contain" src={img} />
+      </Link>
       <div className="flex flex-col">
         <span>{name}</span>
         <span>₹{price}</span>

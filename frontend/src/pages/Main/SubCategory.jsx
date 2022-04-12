@@ -1,7 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Routes, useParams, Route } from "react-router-dom";
 import ProductCard from "../../components/E-Commerce/ProductCard";
+import Products from "../../components/E-Commerce/Products";
 import { data } from "../../data1";
+import ProductItem from "./ProductItem";
 
 const SubCategory = () => {
   const { category, subCategory } = useParams();
@@ -13,15 +15,24 @@ const SubCategory = () => {
   );
   const products = res1[0][1];
   return (
-    <div className="grid grid-cols-3 p-2 mt-5 mx-10 gap-10">
-      {products.map((product) => (
-        <ProductCard
-          name={product.name}
-          price={product.price}
-          img={product.img}
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Products
+              products={products}
+              category={category}
+              subCategory={subCategory}
+            />
+          }
         />
-      ))}
-    </div>
+        <Route
+          path=":productName"
+          element={<ProductItem products={products} />}
+        />
+      </Routes>
+    </>
   );
 };
 

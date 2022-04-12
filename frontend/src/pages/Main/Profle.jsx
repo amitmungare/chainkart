@@ -7,7 +7,7 @@ import Sidebar from "../../components/E-Commerce/Sidebar";
 
 const Profile = () => {
   return (
-    <div className="min-h-screen flex justify-around items-center">
+    <div className="min-h-screen ">
       <Sidebar />
       <Routes>
         <Route path="/basicInfo" element={<BasicInfo />} />
