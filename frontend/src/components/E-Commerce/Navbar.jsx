@@ -1,10 +1,12 @@
 import { PermIdentityOutlined, ShoppingBagOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const user = false;
+  const items = useSelector((state) => state.cart);
   const [isOpenE, setIsOpenE] = useState(false);
   const [isOpenS, setIsOpenS] = useState(false);
   const [isOpenF, setIsOpenF] = useState(false);
@@ -89,7 +91,7 @@ const Navbar = () => {
         </div>
 
         <div className="bg-[#F0F8FF] rounded-full p-1 w-9 h-9 text-gray-500 flex items-center justify-center mr-2">
-          <Badge badgeContent={2} color="primary">
+          <Badge badgeContent={items.length} color="primary">
             <ShoppingBagOutlined />
           </Badge>
         </div>
