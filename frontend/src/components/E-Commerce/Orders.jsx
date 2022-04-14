@@ -1,7 +1,7 @@
 import React from "react";
 
 const Orders = () => {
-  return <div>No Orders yet!</div>;
+  return <div className="text-lg">No orders yet.</div>;
 };
 
 export default Orders;

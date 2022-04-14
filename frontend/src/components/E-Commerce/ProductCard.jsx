@@ -5,9 +5,12 @@ import { addToCart } from "../../../store/cartSlice";
 
 // import { add } from ;
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, category, subCategory }) => {
   const dispatch = useDispatch();
-  const { name, price, img, category, subCategory } = product;
+  const { name, price, img } = product;
+
+  let formattedPrice = new Intl.NumberFormat("en-IN").format(price);
+  // console.log(formatted);
 
   const handleAdd = (product) => {
     dispatch(addToCart(product));
@@ -20,7 +23,7 @@ const ProductCard = ({ product }) => {
       </Link>
       <div className="flex flex-col">
         <span>{name}</span>
-        <span>₹{price}</span>
+        <span>₹{formattedPrice}</span>
         <button
           onClick={() => handleAdd(product)}
           className="bg-indigo-600 p-2 rounded-lg text-white w-28 h-auto"

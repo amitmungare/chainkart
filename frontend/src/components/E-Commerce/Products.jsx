@@ -10,8 +10,8 @@ const Products = ({ products, category, subCategory }) => {
           // name={product.name}
           // price={product.price}
           // img={product.img}
-          // category={category}
-          // subCategory={subCategory}
+          category={category}
+          subCategory={subCategory}
           product={product}
         />
       ))}

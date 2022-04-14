@@ -6,6 +6,7 @@ const ProductItem = ({ products }) => {
   const { productName } = useParams();
   const prod = products.filter((product) => product.name === productName);
   const product = prod[0];
+  console.log(product);
   return (
     <div
       className="relative max-w-screen-xl px-2 py-8 mx-auto"

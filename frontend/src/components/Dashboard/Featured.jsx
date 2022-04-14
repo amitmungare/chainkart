@@ -81,7 +81,7 @@ const Featured = () => {
           <CircularProgressbar value={70} text={"60%"} strokeWidth={5} />
         </FeaturedChart>
         <Title2>Total sales made today</Title2>
-        <Amount>$420</Amount>
+        <Amount>₹420</Amount>
         <Desc>
           Previous transaction processing. Last payments may not be included.
         </Desc>
@@ -90,21 +90,21 @@ const Featured = () => {
             <ItemTitle>Target</ItemTitle>
             <ItemResult>
               <KeyboardArrowDown fontSize="small" />
-              <ResultAmount>$12.4k</ResultAmount>
+              <ResultAmount>₹12.4k</ResultAmount>
             </ItemResult>
           </Item>
           <Item>
             <ItemTitle>Last Week</ItemTitle>
             <ItemResult>
               <KeyboardArrowUpOutlined fontSize="small" />
-              <resultAmount>$12.4k</resultAmount>
+              <resultAmount>₹12.4k</resultAmount>
             </ItemResult>
           </Item>
           <Item>
             <ItemTitle>Last Month</ItemTitle>
             <ItemResult>
               <KeyboardArrowUpOutlined fontSize="small" />
-              <resultAmount>$12.4k</resultAmount>
+              <resultAmount>₹12.4k</resultAmount>
             </ItemResult>
           </Item>
         </Summary>

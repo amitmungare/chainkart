@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, useParams, Route } from "react-router-dom";
-import ProductCard from "../../components/E-Commerce/ProductCard";
+// import ProductCard from "../../components/E-Commerce/ProductCard";
 import Products from "../../components/E-Commerce/Products";
 import { data } from "../../data1";
 import ProductItem from "./ProductItem";

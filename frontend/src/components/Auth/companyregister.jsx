@@ -29,7 +29,7 @@ const CompanyRegister = () => {
 
             <div>
               <label htmlFor="name" className="text-sm font-medium">
-                Comapany Name
+                Company Name
               </label>
 
               <div className="relative mt-1">
@@ -38,7 +38,7 @@ const CompanyRegister = () => {
                   id="name"
                   ref={nameRef}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter company's name"
+                  placeholder="Enter company name"
                 />
               </div>
             </div>
@@ -70,7 +70,7 @@ const CompanyRegister = () => {
                   ref={cinRef}
                   id="id"
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter cin number"
+                  placeholder="Enter CIN number"
                 />
               </div>
             </div>

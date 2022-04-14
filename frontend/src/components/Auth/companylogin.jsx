@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Key, Mail, Visibility } from "@mui/icons-material";
+import { InputOutlined, Key, Mail, Visibility } from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
 
@@ -39,7 +39,7 @@ function CompanyLogin() {
                 />
 
                 <span className="absolute inset-y-0 inline-flex items-center right-4">
-                  <Key />
+                  <InputOutlined />
                 </span>
               </div>
             </div>

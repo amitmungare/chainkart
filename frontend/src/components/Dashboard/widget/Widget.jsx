@@ -141,7 +141,8 @@ const Widget = ({ type }) => {
       <Left>
         <Title>{data.title}</Title>
         <Counter>
-          {data.isMoney && "₹"} {amount}
+          {data.isMoney && "₹"}
+          {amount}
         </Counter>
         <Link1>{data.link}</Link1>
       </Left>
