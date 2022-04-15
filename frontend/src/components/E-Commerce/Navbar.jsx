@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const user = false;
-  const items = useSelector((state) => state.cart);
+  const items = useSelector((state) => state.cart.cartItems);
   const [isOpenE, setIsOpenE] = useState(false);
   const [isOpenS, setIsOpenS] = useState(false);
   const [isOpenF, setIsOpenF] = useState(false);
@@ -90,11 +90,13 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="bg-[#F0F8FF] rounded-full p-1 w-9 h-9 text-gray-500 flex items-center justify-center mr-2">
-          <Badge badgeContent={items.length} color="primary">
-            <ShoppingBagOutlined />
-          </Badge>
-        </div>
+        <Link to="/cart">
+          <div className="bg-[#F0F8FF] rounded-full p-1 w-9 h-9 text-gray-500 flex items-center justify-center mr-2">
+            <Badge badgeContent={items.length} color="primary">
+              <ShoppingBagOutlined />
+            </Badge>
+          </div>
+        </Link>
       </div>
     </div>
   );
