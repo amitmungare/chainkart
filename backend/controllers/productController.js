@@ -2,7 +2,7 @@ const Product = require("../models/productModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
-const sendEmail = require("../utils/sendEmail");
+
 
 
 // create product 
@@ -99,43 +99,112 @@ exports.deleteProduct = catchAsyncErrors(async(req,res, next) => {
     })
 });
 
-// Forgot Password
-exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
-    
-    const user = await User.findOne({ email: req.body.email });
+
+
+// Create New Review or Update the review
+exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
+    const { rating, comment, productId } = req.body;
   
-    if (!user) {
-      return next(new ErrorHander("User not found", 404));
+    const review = {
+      user: req.user._id,
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+    };
+  
+    const product = await Product.findById(productId);
+  
+    const isReviewed = product.reviews.find(
+      (rev) => rev.user.toString() === req.user._id.toString()
+    );
+  
+    if (isReviewed) {
+      product.reviews.forEach((rev) => {
+        if (rev.user.toString() === req.user._id.toString())
+          (rev.rating = rating), (rev.comment = comment);
+      });
+    } else {
+      product.reviews.push(review);
+      product.numOfReviews = product.reviews.length;
     }
   
-    // Get ResetPassword Token
-    const resetToken = user.getResetPasswordToken();
+    let avg = 0;
   
-    await user.save({ validateBeforeSave: false });
+    product.reviews.forEach((rev) => {
+      avg += rev.rating;
+    });
   
-    const resetPasswordUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/password/reset/${resetToken}`;
+    product.ratings = avg / product.reviews.length;
   
-    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+    await product.save({ validateBeforeSave: false });
   
-    try {
-      await sendEmail({
-        email: user.email,
-        subject: `ChainKart Password Recovery`,
-        message,
-      });
-  
-      res.status(200).json({
-        success: true,
-        message: `Email sent to ${user.email} successfully`,
-      });
-    } catch (error) {
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpire = undefined;
-  
-      await user.save({ validateBeforeSave: false });
-  
-      return next(new ErrorHander(error.message, 500));
-    }
+    res.status(200).json({
+      success: true,
+    });
   });
+
+  
+  
+  // Get All Reviews of a product
+  exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
+    const product = await Product.findById(req.query.id);
+  
+    if (!product) {
+      return next(new ErrorHander("Product not found", 404));
+    }
+  
+    res.status(200).json({
+      success: true,
+      reviews: product.reviews,
+    });
+  });
+
+
+  
+  // Delete Review
+  exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
+    const product = await Product.findById(req.query.productId);
+  
+    if (!product) {
+      return next(new ErrorHander("Product not found", 404));
+    }
+  
+    const reviews = product.reviews.filter(
+      (rev) => rev._id.toString() !== req.query.id.toString()
+    );
+  
+    let avg = 0;
+  
+    reviews.forEach((rev) => {
+      avg += rev.rating;
+    });
+  
+    let ratings = 0;
+  
+    if (reviews.length === 0) {
+      ratings = 0;
+    } else {
+      ratings = avg / reviews.length;
+    }
+  
+    const numOfReviews = reviews.length;
+  
+    await Product.findByIdAndUpdate(
+      req.query.productId,
+      {
+        reviews,
+        ratings,
+        numOfReviews,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+  
+    res.status(200).json({
+      success: true,
+    });
+  });
+  

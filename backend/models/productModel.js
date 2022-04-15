@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
-    rating:{
+    ratings:{
         type:Number,
         default:0
     },
@@ -45,6 +45,11 @@ const productSchema = new mongoose.Schema({
     },
     reviews:[
         {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User",
+                required: true,
+            },
             name:{
                 type:String,
                 required:true
