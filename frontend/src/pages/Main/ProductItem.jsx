@@ -1,12 +1,24 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { addToCart } from "../../store/cartSlice";
 
 const ProductItem = ({ products }) => {
   const user = false;
   const { productName } = useParams();
   const prod = products.filter((product) => product.name === productName);
   const product = prod[0];
-  console.log(product);
+  // console.log(product);
+  const dispatch = useDispatch();
+
+  let formattedPrice = new Intl.NumberFormat("en-IN").format(product.price);
+  // console.log(formatted);
+
+  const handleAdd = (product) => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <div
       className="relative max-w-screen-xl px-2 py-8 mx-auto"
@@ -28,11 +40,12 @@ const ProductItem = ({ products }) => {
         <div className="lg:top-0 lg:sticky">
           <form className="space-y-4 lg:pt-8">
             <div>
-              <p className="text-xl font-bold">Price: ₹{product.price}</p>
+              <p className="text-xl font-bold">Price: ₹{formattedPrice}</p>
             </div>
 
             <button
               type="submit"
+              onClick={() => handleAdd(product)}
               className="w-full px-6 py-3 text-sm font-bold tracking-wide text-white uppercase bg-blue-700 rounded"
             >
               Add to cart

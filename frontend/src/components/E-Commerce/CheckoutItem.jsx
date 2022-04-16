@@ -6,7 +6,7 @@ import {
   decreaseCart,
   getTotal,
   removeFromCart,
-} from "../../../store/cartSlice";
+} from "../../store/cartSlice";
 
 export const CheckoutItemContainer = styled.div`
   width: 100%;

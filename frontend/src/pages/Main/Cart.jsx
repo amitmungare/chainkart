@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { getTotal } from "../../../store/cartSlice";
+import { clearCart, getTotal } from "../../store/cartSlice";
 
 import CheckoutItem from "../../components/E-Commerce/CheckoutItem";
 
@@ -44,6 +44,10 @@ const Cart = () => {
   let formattedAmount = new Intl.NumberFormat("en-IN").format(Amount);
   const dispatch = useDispatch();
 
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
   useEffect(() => {
     dispatch(getTotal());
   }, [cartItems, dispatch]);
@@ -72,9 +76,17 @@ const Cart = () => {
         <CheckoutItem cartItem={item} />
       ))}
       <Total>Total: ₹{formattedAmount}</Total>
-      <button className="bg-indigo-600 rounded-lg p-2 px-5 text-white">
-        Proceed
-      </button>
+      <div className="w-full flex justify-between mt-4">
+        <button
+          onClick={() => handleClearCart()}
+          className="bg-indigo-600 rounded-lg p-2 px-5 text-white"
+        >
+          Clear Cart
+        </button>
+        <button className="bg-indigo-600 rounded-lg p-2 px-5 text-white">
+          Proceed
+        </button>
+      </div>
     </CheckoutContainer>
   );
 };

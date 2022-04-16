@@ -6,22 +6,6 @@ const initialState = {
   cartTotalAmount: 0,
 };
 
-// const addItemToCart = (cartItem, productToAdd) => {
-//   // console.log(state.cart);
-//   // const cartItems = useSelector((state) => state.cart);
-//   // console.log(cartItems);
-//   const existingItem = cartItem;
-//   if (existingItem) {
-//     return cartItems.map((item) =>
-//       item.name === productToAdd.name
-//         ? { ...item, quantity: item.quantity + 1 }
-//         : item
-//     );
-//   }
-
-//   return [...cartItems, { ...productToAdd, quantity: 1 }];
-// };
-
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -39,7 +23,7 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const nextCartItems = state.cartItems.filter(
-        (item) => item.name !== action.payload.name
+        (item) => item.name !== action.payload
       );
 
       state.cartItems = nextCartItems;
