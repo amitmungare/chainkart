@@ -13,12 +13,18 @@ const UserSignUp = () => {
 
   const [passShow, setPassShow] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (pass !== cPass) {
       alert("Passwords do not match");
     }
+    const response = await axios.post("http://localhost:4000/api/v1/register", {
+      firstname: fName,
+      lastname: lName,
+      email: email,
+      password: pass,
+    });
   };
   return (
     <>
