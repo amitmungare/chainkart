@@ -1,17 +1,29 @@
 import { PermIdentityOutlined, ShoppingBagOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
+import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logoutUser } from "../../store/userSlice";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
   const items = useSelector((state) => state.cart.cartItems);
   const [isOpenE, setIsOpenE] = useState(false);
   const [isOpenS, setIsOpenS] = useState(false);
   const [isOpenF, setIsOpenF] = useState(false);
   const [isOpenB, setIsOpenB] = useState(false);
   const [isOpenH, setIsOpenH] = useState(false);
+
+  const handleLogOut = async () => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/logout");
+    if (data.success) {
+      dispatch(logoutUser());
+    }
+  };
+
   return (
     <div className="flex justify-between w-full mt-9 ">
       <Link to="/" className="text-indigo-600 text-2xl font-bold px-3 ">
@@ -82,7 +94,9 @@ const Navbar = () => {
         </div>
         <div className="flex justify-center items-center">
           {user ? (
-            <span className="hover mt-2">Logout</span>
+            <span onClick={handleLogOut} className="hover mt-2">
+              Logout
+            </span>
           ) : (
             <Link to="/login">
               <span className="hover mt-2">Sign in</span>

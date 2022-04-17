@@ -1,18 +1,34 @@
 import { Google, Mail, Visibility } from "@mui/icons-material";
+import axios from "axios";
 import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../../store/userSlice";
 
 function UserLogin() {
   const emailRef = useRef();
   const passRef = useRef();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [passShow, setPassShow] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(emailRef.current.value);
     console.log(passRef.current.value);
+    const { data } = await axios.post("http://localhost:4000/api/v1/login", {
+      email: emailRef.current.value,
+      password: passRef.current.value,
+    });
+    const user = data.user;
+
+    dispatch(registerUser(user));
+
+    if (user) {
+      navigate("/");
+    }
   };
 
   return (

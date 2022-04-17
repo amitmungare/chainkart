@@ -8,46 +8,46 @@ import {
   removeFromCart,
 } from "../../store/cartSlice";
 
-export const CheckoutItemContainer = styled.div`
-  width: 100%;
-  display: flex;
-  min-height: 100px;
-  border-bottom: 1px solid darkgrey;
-  padding: 15px 0;
-  font-size: 20px;
-  align-items: center;
-`;
+// export const CheckoutItemContainer = styled.div`
+//   width: 100%;
+//   display: flex;
+//   min-height: 100px;
+//   border-bottom: 1px solid darkgrey;
+//   padding: 15px 0;
+//   font-size: 20px;
+//   align-items: center;
+// `;
 
-export const ImageContainer = styled.div`
-  width: 23%;
-  padding-right: 15px;
+// export const ImageContainer = styled.div`
+//   width: 23%;
+//   padding-right: 15px;
 
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
+//   img {
+//     width: 100%;
+//     height: 100%;
+//   }
+// `;
 
-export const BaseSpan = styled.span`
-  width: 23%;
-`;
+// export const BaseSpan = styled.span`
+//   width: 23%;
+// `;
 
-export const Quantity = styled(BaseSpan)`
-  display: flex;
-`;
+// export const Quantity = styled(BaseSpan)`
+//   display: flex;
+// `;
 
-export const Arrow = styled.div`
-  cursor: pointer;
-`;
+// export const Arrow = styled.div`
+//   cursor: pointer;
+// `;
 
-export const Value = styled.span`
-  margin: 0 10px;
-`;
+// export const Value = styled.span`
+//   margin: 0 10px;
+// `;
 
-export const RemoveButton = styled.div`
-  padding-left: 12px;
-  cursor: pointer;
-`;
+// export const RemoveButton = styled.div`
+//   padding-left: 12px;
+//   cursor: pointer;
+// `;
 
 // export const Total = styled.span`
 //   margin-top: 30px;
@@ -74,21 +74,28 @@ const CheckoutItem = ({ cartItem }) => {
   };
 
   return (
-    <CheckoutItemContainer>
-      <ImageContainer>
-        <img src={cartItem.img} />
-      </ImageContainer>
-      <BaseSpan> {cartItem.name} </BaseSpan>
-      <Quantity>
-        <Arrow onClick={() => handleDecrease(cartItem)}>&#10094;</Arrow>
-        <Value>{cartItem.cartQuantity}</Value>
-        <Arrow onClick={() => handleIncrease(cartItem)}>&#10095;</Arrow>
-      </Quantity>
-      <BaseSpan>₹{formattedPrice}</BaseSpan>
-      <RemoveButton onClick={() => handleRemove(cartItem)}>
-        &#10005;
-      </RemoveButton>
-    </CheckoutItemContainer>
+    <div className="flex justify-between border-b-2 p-5">
+      <div>
+        <img className="h-[100px] w-[100px]" src={cartItem.img} />
+      </div>
+      <div className="flex flex-col justify-between">
+        <div className="flex flex-col">
+          <span>{cartItem.name}</span>
+          <span>₹{formattedPrice}</span>
+        </div>
+
+        <div className="border-2 p-1 inline-block ">
+          <span>&lt;</span>
+          <span>{cartItem.cartQuantity}</span>
+          <span>&gt;</span>
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-between">
+        <span>&#10005;</span>
+        <span>total:₹</span>
+      </div>
+    </div>
   );
 };
 
