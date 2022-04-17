@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Google, Mail, Visibility } from "@mui/icons-material";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../store/userSlice";
 
 const UserSignUp = () => {
   const [fName, setFName] = useState("");
@@ -10,6 +12,9 @@ const UserSignUp = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [cPass, setCPass] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [passShow, setPassShow] = useState(false);
 
@@ -19,12 +24,22 @@ const UserSignUp = () => {
     if (pass !== cPass) {
       alert("Passwords do not match");
     }
-    const response = await axios.post("http://localhost:4000/api/v1/register", {
+    const { data } = await axios.post("http://localhost:4000/api/v1/register", {
       firstname: fName,
       lastname: lName,
       email: email,
       password: pass,
     });
+
+    const user = data.user;
+
+    dispatch(registerUser(user));
+
+    if (user) {
+      navigate("/");
+    }
+
+    // console.log(user);
   };
   return (
     <>

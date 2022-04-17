@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const user = false;
+  const user = useSelector((state) => state.user);
   const items = useSelector((state) => state.cart.cartItems);
   const [isOpenE, setIsOpenE] = useState(false);
   const [isOpenS, setIsOpenS] = useState(false);
