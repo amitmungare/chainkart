@@ -42,6 +42,10 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const Amount = useSelector((state) => state.cart.cartTotalAmount);
   let formattedAmount = new Intl.NumberFormat("en-IN").format(Amount);
+  let sCharge = Amount > 500 ? 0 : 100;
+  let formatteTotaldAmount = new Intl.NumberFormat("en-IN").format(
+    Amount + (Amount === 0 ? 0 : sCharge)
+  );
   const dispatch = useDispatch();
 
   const handleClearCart = () => {
@@ -54,16 +58,43 @@ const Cart = () => {
 
   // console.log(cartItems);
   return (
-    <div className="w-full p-10">
-      <h1 className="text-4xl text-indigo-600 font-bold">Your bag</h1>
-      <div className="flex justify-between ">
-        <div className="">
-          {cartItems.map((cartItem) => (
-            <CheckoutItem cartItem={cartItem} />
-          ))}
+    <div className="w-full p-10 h-screen">
+      {cartItems.length === 0 ? (
+        <div className="text-center text-2xl text-gray-500">
+          Your Cart is Empty
         </div>
-        <div></div>
-      </div>
+      ) : (
+        <>
+          <h1 className="text-4xl text-indigo-600 font-bold">Your bag</h1>
+          <div className="flex justify-between gap-5 ">
+            <div className="flex-[2] max-w-2xl ml-4 mt-4">
+              {cartItems.map((cartItem) => (
+                <CheckoutItem cartItem={cartItem} />
+              ))}
+            </div>
+            <div className="bg-[#f0f8ff] w-[300px] max-h-[280px] p-7 relative mr-10 mt-4">
+              <span className="font-bold text-xl">Order Summary</span>
+              <div className="flex justify-between mt-6">
+                <span>Subtotal</span>
+                <span>₹{formattedAmount}</span>
+              </div>
+
+              <div className="flex justify-between mt-2">
+                <span>Shipping Charges</span>
+                <span>₹{Amount === 0 ? 0 : 100}</span>
+              </div>
+
+              <div className="flex justify-between mt-14">
+                <span>Total Price</span>
+                <span>₹{formatteTotaldAmount}</span>
+              </div>
+              <button className=" bg-black text-white p-2 absolute top-[242px] w-full left-0 ">
+                Proceed to checkout
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

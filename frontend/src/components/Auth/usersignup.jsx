@@ -20,20 +20,28 @@ const UserSignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let user;
 
     if (pass !== cPass) {
       alert("Passwords do not match");
     }
-    const { data } = await axios.post("http://localhost:4000/api/v1/register", {
-      firstname: fName,
-      lastname: lName,
-      email: email,
-      password: pass,
-    });
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/api/v1/register",
+        {
+          firstname: fName,
+          lastname: lName,
+          email: email,
+          password: pass,
+        }
+      );
 
-    const user = data.user;
+      user = data.user;
 
-    dispatch(registerUser(user));
+      dispatch(registerUser(user));
+    } catch (err) {
+      console.log(err);
+    }
 
     if (user) {
       navigate("/");

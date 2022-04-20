@@ -16,15 +16,21 @@ function UserLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(emailRef.current.value);
-    console.log(passRef.current.value);
-    const { data } = await axios.post("http://localhost:4000/api/v1/login", {
-      email: emailRef.current.value,
-      password: passRef.current.value,
-    });
-    const user = data.user;
+    let user;
+    try {
+      const { data } = await axios.post("http://localhost:4000/api/v1/login", {
+        email: emailRef.current.value,
+        password: passRef.current.value,
+      });
+      // console.log(data);
+      const token = data.token;
+      user = data.user;
+      user = { ...user, token };
 
-    dispatch(registerUser(user));
+      dispatch(registerUser(user));
+    } catch (err) {
+      console.log(err);
+    }
 
     if (user) {
       navigate("/");
