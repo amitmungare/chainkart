@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Address from "../../components/E-Commerce/Address";
 import BasicInfo from "../../components/E-Commerce/BasicInfo";
 import Orders from "../../components/E-Commerce/Orders";
@@ -9,6 +9,7 @@ import ChangePass from "./ChangePass";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   return (
     <>
       {user ? (

@@ -44,7 +44,7 @@ const Cart = () => {
   let formattedAmount = new Intl.NumberFormat("en-IN").format(Amount);
   let sCharge = Amount > 500 ? 0 : 100;
   let formatteTotaldAmount = new Intl.NumberFormat("en-IN").format(
-    Amount + (Amount === 0 ? 0 : sCharge)
+    Amount + sCharge
   );
   const dispatch = useDispatch();
 
@@ -81,7 +81,7 @@ const Cart = () => {
 
               <div className="flex justify-between mt-2">
                 <span>Shipping Charges</span>
-                <span>₹{Amount === 0 ? 0 : 100}</span>
+                <span>₹{Amount > 500 ? 0 : 100}</span>
               </div>
 
               <div className="flex justify-between mt-14">

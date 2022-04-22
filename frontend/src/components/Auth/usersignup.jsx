@@ -36,7 +36,9 @@ const UserSignUp = () => {
         }
       );
 
+      // const token = data.token;
       user = data.user;
+      // user = { ...user, token };
 
       dispatch(registerUser(user));
     } catch (err) {
