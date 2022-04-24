@@ -8,13 +8,29 @@ const crypto = require("crypto");
 
 // register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const { firstname, lastname, email, password } = req.body;
+  const {
+    firstname,
+    lastname,
+    email,
+    password,
+    hnumber,
+    city,
+    landmark,
+    state,
+    pincode,
+  } = req.body;
 
   const user = await User.create({
     firstname,
     lastname,
     email,
     password,
+    hnumber,
+    city,
+    landmark,
+    state,
+    pincode,
+
     // avatar:{
     //     public_id:"this is a sample id",
     //     url:"profilepicurl"

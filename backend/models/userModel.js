@@ -27,6 +27,27 @@ const userSchema = new mongoose.Schema({
     minLength: 8,
     select: false,
   },
+  hnumber: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  landmark: {
+    type: String,
+    required: true,
+  },
+  state: {
+    type: String,
+    required: true,
+  },
+  pincode: {
+    type: Number,
+    required: true,
+  },
+
   //   avatar: {
   //     public_id: {
   //       type: String,

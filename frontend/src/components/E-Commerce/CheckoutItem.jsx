@@ -59,6 +59,9 @@ const CheckoutItem = ({ cartItem }) => {
   const { price, cartQuantity, img, name } = cartItem;
   // console.log(cartItem);
   let formattedPrice = new Intl.NumberFormat("en-IN").format(cartItem.price);
+  let formattedTotalAmount = new Intl.NumberFormat("en-IN").format(
+    cartQuantity * price
+  );
 
   const dispatch = useDispatch();
 
@@ -106,7 +109,7 @@ const CheckoutItem = ({ cartItem }) => {
         <span className="cursor-pointer" onClick={() => handleRemove(cartItem)}>
           &#10005;
         </span>
-        <span>Total: ₹{price * cartQuantity}</span>
+        <span>Total: ₹{formattedTotalAmount}</span>
       </div>
     </div>
   );

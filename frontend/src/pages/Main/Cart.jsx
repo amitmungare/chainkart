@@ -58,10 +58,10 @@ const Cart = () => {
 
   // console.log(cartItems);
   return (
-    <div className="w-full p-10 h-screen">
+    <div className="w-full p-10">
       {cartItems.length === 0 ? (
-        <div className="text-center text-2xl text-gray-500">
-          Your Cart is Empty
+        <div className="text-center text-2xl text-gray-500 h-[70vh] flex justify-center items-center">
+          <span> Your cart is empty</span>
         </div>
       ) : (
         <>
@@ -72,7 +72,7 @@ const Cart = () => {
                 <CheckoutItem cartItem={cartItem} />
               ))}
             </div>
-            <div className="bg-[#f0f8ff] w-[300px] max-h-[280px] p-7 relative mr-10 mt-4">
+            <div className="bg-[#f0f8ff] w-[300px] max-h-[280px] p-7 relative mr-10 mt-4 rounded-2xl">
               <span className="font-bold text-xl">Order Summary</span>
               <div className="flex justify-between mt-6">
                 <span>Subtotal</span>
@@ -88,9 +88,13 @@ const Cart = () => {
                 <span>Total Price</span>
                 <span>₹{formatteTotaldAmount}</span>
               </div>
-              <button className=" bg-black text-white p-2 absolute top-[242px] w-full left-0 ">
+              <button className=" bg-indigo-600 text-white p-2 absolute top-[242px] w-full left-0 ">
                 Proceed to checkout
               </button>
+              <span className="absolute top-[300px] left-0 text-gray-600 text-sm">
+                *Shipping charges of ₹100 will be levied if cart value is below
+                ₹500.
+              </span>
             </div>
           </div>
         </>

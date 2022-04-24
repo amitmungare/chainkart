@@ -43,7 +43,7 @@ const AddNew = () => {
                   id="name"
                   ref={nameRef}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter product's name"
+                  placeholder="Enter product name"
                 />
               </div>
             </div>
@@ -55,7 +55,7 @@ const AddNew = () => {
                 <textarea
                   ref={desRef}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter email"
+                  placeholder="Enter product description"
                 />
               </div>
             </div>
@@ -102,7 +102,7 @@ const AddNew = () => {
             </div>
 
             <div className="mt-3">
-              <label className="block">Product's Images</label>
+              <label className="block">Product Images</label>
               {/* <Folder /> */}
               <input
                 id="file2"
