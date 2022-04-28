@@ -65,6 +65,7 @@ const Address = () => {
           landmark: uLandmark,
           state: uState,
           pincode: uPincode,
+          token,
         };
         dispatch(registerUser(uAddress));
         alert("Successfully updated");

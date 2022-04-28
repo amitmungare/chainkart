@@ -21,6 +21,8 @@ const BasicInfo = () => {
     token,
   } = user;
 
+  // console.log(token);
+
   const fNameRef = useRef();
   const lNameRef = useRef();
   const emailRef = useRef();
@@ -42,11 +44,11 @@ const BasicInfo = () => {
           firstname: uFirstName,
           lastname: uLastName,
           email: uEmail,
-          // hnumber,
-          // city,
-          // landmark,
-          // state,
-          // pincode,
+          hnumber,
+          city,
+          landmark,
+          state,
+          pincode,
         },
         {
           headers: {
@@ -65,6 +67,7 @@ const BasicInfo = () => {
           landmark,
           state,
           pincode,
+          token,
         };
         dispatch(registerUser(uUser));
         alert("Successfully updated");
