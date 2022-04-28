@@ -99,13 +99,6 @@ function UserLogin() {
               Sign in
             </button>
 
-            <button className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg">
-              <div className="flex gap-3 justify-center items-center">
-                <Google />
-                Log in with Google
-              </div>
-            </button>
-
             <p className="text-sm text-center text-gray-500">
               No account?
               <Link className="m-1" to="/signup">
