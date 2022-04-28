@@ -183,6 +183,11 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
+    hnumber: req.body.hnumber,
+    city: req.body.city,
+    landmark: req.body.landmark,
+    state: req.body.state,
+    pincode: req.body.pincode,
   };
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {

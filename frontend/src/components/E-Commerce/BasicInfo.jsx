@@ -9,7 +9,17 @@ import { registerUser } from "../../store/userSlice";
 
 const BasicInfo = () => {
   const { user } = useSelector((state) => state.user);
-  const { email, firstname, lastname, token } = user;
+  const {
+    email,
+    firstname,
+    lastname,
+    hnumber,
+    city,
+    landmark,
+    state,
+    pincode,
+    token,
+  } = user;
 
   const fNameRef = useRef();
   const lNameRef = useRef();
@@ -32,6 +42,11 @@ const BasicInfo = () => {
           firstname: uFirstName,
           lastname: uLastName,
           email: uEmail,
+          // hnumber,
+          // city,
+          // landmark,
+          // state,
+          // pincode,
         },
         {
           headers: {
@@ -41,7 +56,16 @@ const BasicInfo = () => {
       );
 
       if (res.status === 200) {
-        let uUser = { ...user, email: uEmail };
+        let uUser = {
+          firstname: uFirstName,
+          lastname: uLastName,
+          email: uEmail,
+          hnumber,
+          city,
+          landmark,
+          state,
+          pincode,
+        };
         dispatch(registerUser(uUser));
         alert("Successfully updated");
       }
