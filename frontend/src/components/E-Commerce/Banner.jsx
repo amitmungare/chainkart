@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -13,12 +14,12 @@ const Banner = () => {
         </h2>
         <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div className="inline-flex rounded-md shadow">
-            <a
-              href="#"
+            <Link
+              to="/cregister"
               className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
             >
               Get started
-            </a>
+            </Link>
           </div>
         </div>
       </div>

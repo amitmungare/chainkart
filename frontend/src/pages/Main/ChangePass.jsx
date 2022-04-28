@@ -52,7 +52,7 @@ const ChangePass = () => {
         style={{ boxShadow: "2px 4px 10px 1px rgba(201, 201, 201, 0.47)" }}
       >
         <div className="flex gap-2 items-center">
-          <label>Enter Current Password </label>
+          <label>Enter current password </label>
           <input
             onChange={(e) => setOldPass(e.target.value)}
             className="border-2 border-indigo-600 rounded-lg w-60"
@@ -61,7 +61,7 @@ const ChangePass = () => {
         </div>
 
         <div className="flex gap-2 items-center">
-          <label>Enter New Password </label>
+          <label>Enter new password </label>
           <input
             onChange={(e) => setNewPass(e.target.value)}
             className="border-2 border-indigo-600 rounded-lg w-60 ml-5"
@@ -70,7 +70,7 @@ const ChangePass = () => {
         </div>
 
         <div className="flex gap-2 items-center ">
-          <label>Confirm New Password </label>
+          <label>Confirm new password </label>
           <input
             onChange={(e) => setConfirmPass(e.target.value)}
             className="border-2 border-indigo-600 rounded-lg ml-1 w-60"

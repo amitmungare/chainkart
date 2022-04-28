@@ -65,7 +65,7 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          <h1 className="text-4xl text-indigo-600 font-bold">Your bag</h1>
+          <h1 className="text-3xl text-indigo-600 font-bold">Your Cart</h1>
           <div className="flex justify-between gap-5 ">
             <div className="flex-[2] max-w-2xl ml-4 mt-4">
               {cartItems.map((cartItem) => (
@@ -88,10 +88,10 @@ const Cart = () => {
                 <span>Total Price</span>
                 <span>₹{formatteTotaldAmount}</span>
               </div>
-              <button className=" bg-indigo-600 text-white p-2 absolute top-[242px] w-full left-0 ">
+              <button className=" bg-indigo-600 text-white p-2 w-full mt-6 ">
                 Proceed to checkout
               </button>
-              <span className="absolute top-[300px] left-0 text-gray-600 text-sm">
+              <span className=" text-gray-600 text-sm mt-3">
                 *Shipping charges of ₹100 will be levied if cart value is below
                 ₹500.
               </span>

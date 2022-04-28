@@ -101,14 +101,14 @@ function UserLogin() {
 
             <p className="text-sm text-center text-gray-500">
               No account?
-              <Link className="m-1" to="/signup">
+              <Link className="m-1 text-indigo-600" to="/signup">
                 Sign up
               </Link>
             </p>
 
             <p className="text-sm text-center text-gray-500">
               Forgot Password?
-              <Link className="m-1" to="/signup">
+              <Link className="m-1 text-indigo-600" to="/signup">
                 Reset
               </Link>
             </p>

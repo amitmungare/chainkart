@@ -16,11 +16,12 @@ const Footer = () => {
     <div className="flex mb-auto">
       <div className="flex flex-col flex-[1] p-5">
         <span className="font-bold text-lg mb-2">About Us</span>
-        <p className="mx-0 my-5">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-          quod quasi quae voluptas, sequi magnam adipisci repellendus blanditiis
-          necessitatibus aut inventore mollitia libero beatae fugit laboriosam
-          autem veritatis accusantium voluptate?
+        <p className="mx-0 my-5 text-justify">
+          Chainkart is a first of its kind Blockchain based e-commerce
+          marketplace. Backed by Ethereum blockchain, every transaction is
+          secured, authentic and from the original brand owner, guaranteed!
+          Looking for a secure shopping experience? Start shopping now! Wish to
+          sell on our platform? Sign your company up now!
         </p>
         <div className="flex">
           <div className="logo bg-[#3B5999] ">

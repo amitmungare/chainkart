@@ -65,7 +65,9 @@ const SideBar = () => {
   return (
     <Container>
       <Top>
-        <Logo>ChainKart</Logo>
+        <Logo>
+          <Link to="/">Chainkart</Link>
+        </Logo>
       </Top>
       <hr />
       <Center>
