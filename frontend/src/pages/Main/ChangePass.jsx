@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { updatePassword } from "../../store/api";
+import { updateUserPassword } from "../../store/userSlice";
 
 const ChangePass = () => {
   const {
@@ -10,39 +13,22 @@ const ChangePass = () => {
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const dispatch = useDispatch();
+  const formData = {
+    oldPassword: oldPass,
+    newPassword: newPass,
+    confirmPassword: confirmPass,
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
 
     if (newPass !== confirmPass) {
-      alert("New password and confirm password does not match");
+      toast.error("Password does not match");
       return;
     }
 
-    try {
-      const res = await axios.put(
-        "http://localhost:4000/api/v1/password/update",
-
-        {
-          oldPassword: oldPass,
-          newPassword: newPass,
-          confirmPassword: confirmPass,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (res.status === 200) {
-        // let uUser = { ...user, email: uEmail };
-        // dispatch(registerUser(uUser));
-        alert("Successfully updated");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(updateUserPassword({ formData, toast, token }));
   };
 
   return (

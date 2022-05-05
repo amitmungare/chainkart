@@ -1,10 +1,10 @@
 import { PermIdentityOutlined, ShoppingBagOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
-import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../store/userSlice";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
@@ -18,10 +18,7 @@ const Navbar = () => {
   const [isOpenH, setIsOpenH] = useState(false);
 
   const handleLogOut = async () => {
-    const { data } = await axios.get("http://localhost:4000/api/v1/logout");
-    if (data.success) {
-      dispatch(logoutUser());
-    }
+    dispatch(logoutUser({ toast }));
   };
 
   return (

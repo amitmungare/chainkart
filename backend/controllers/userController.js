@@ -8,6 +8,7 @@ const crypto = require("crypto");
 
 // register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  console.log(req.body);
   const {
     firstname,
     lastname,
@@ -51,7 +52,9 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
-    return next(new ErrorHander("Invalid email or password", 401));
+    // return next(new ErrorHander("Invalid email or password", 401));
+    return res.status(401).json({ message: "User not found" });
+    // Shreyas
   }
 
   const isPasswordMatched = await user.comparePassword(password);

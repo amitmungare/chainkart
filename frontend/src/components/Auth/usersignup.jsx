@@ -7,63 +7,53 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/userSlice";
 import { FaLandmark } from "react-icons/fa";
 import { FaCity } from "react-icons/fa";
+import { toast } from "react-toastify";
+
+const inititalState = {
+  email: "",
+  password: "",
+  confirmPassword: "",
+  firstname: "",
+  lastname: "",
+  city: "",
+  state: "",
+  pincode: "",
+  landmark: "",
+  hnumber: "",
+};
 
 const UserSignUp = () => {
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [cPass, setCPass] = useState("");
-  const [hno, setHno] = useState("");
-  const [pin, setPin] = useState("");
-  const [city, setCity] = useState("");
-  const [land, setLand] = useState("");
-  const [state, setState] = useState("");
-
+  const [formData, setFormData] = useState(inititalState);
+  const {
+    email,
+    city,
+    confirmPassword,
+    firstname,
+    hnumber,
+    landmark,
+    password,
+    lastname,
+    pincode,
+    state,
+  } = formData;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [passShow, setPassShow] = useState(false);
 
+  const onInputChange = (e) => {
+    let { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let user;
 
-    if (pass !== cPass) {
-      alert("Passwords do not match");
+    if (password !== confirmPassword) {
+      toast.error("Password and Confirm Password does not match");
     }
-    try {
-      const { data } = await axios.post(
-        "http://localhost:4000/api/v1/register",
-        {
-          firstname: fName,
-          lastname: lName,
-          email: email,
-          password: pass,
-          hnumber: hno,
-          pincode: pin,
-          city: city,
-          state: state,
-          landmark: land,
-        }
-      );
-
-      // console.log(data.token);
-
-      const token = data.token;
-      user = data.user;
-      user = { ...user, token };
-
-      dispatch(registerUser(user));
-    } catch (err) {
-      console.log(err);
-    }
-
-    if (user) {
-      navigate("/");
-    }
-
-    // console.log(user);
+    dispatch(registerUser({ formData, navigate, toast }));
+    // console.log(formData);
   };
   return (
     <>
@@ -79,15 +69,13 @@ const UserSignUp = () => {
 
               <div className="flex gap-1">
                 <div>
-                  <label htmlFor="name" className="text-sm font-medium">
-                    First Name
-                  </label>
+                  <label className="text-sm font-medium">First Name</label>
 
                   <div className="relative mt-1">
                     <input
                       type="text"
-                      id="name"
-                      onChange={(e) => setFName(e.target.value)}
+                      name="firstname"
+                      onChange={onInputChange}
                       className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                       placeholder="Enter first name"
                     />
@@ -95,15 +83,14 @@ const UserSignUp = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Last Name
-                  </label>
+                  <label className="text-sm font-medium">Last Name</label>
 
                   <div className="relative mt-1">
                     <input
                       type="text"
                       id="name"
-                      onChange={(e) => setLName(e.target.value)}
+                      name="lastname"
+                      onChange={onInputChange}
                       className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                       placeholder="Enter last name"
                     />
@@ -112,15 +99,14 @@ const UserSignUp = () => {
               </div>
 
               <div>
-                <label htmlFor="email" className="text-sm font-medium">
-                  Email
-                </label>
+                <label className="text-sm font-medium">Email</label>
 
                 <div className="relative mt-1">
                   <input
                     type="email"
                     id="email"
-                    onChange={(e) => setEmail(e.target.value)}
+                    name="email"
+                    onChange={onInputChange}
                     className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     placeholder="Enter email"
                   />
@@ -132,15 +118,14 @@ const UserSignUp = () => {
               </div>
 
               <div>
-                <label htmlFor="password" className="text-sm font-medium">
-                  Password
-                </label>
+                <label className="text-sm font-medium">Password</label>
 
                 <div className="relative mt-1">
                   <input
                     type={passShow ? "text" : "password"}
                     id="password"
-                    onChange={(e) => setPass(e.target.value)}
+                    name="password"
+                    onChange={onInputChange}
                     className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     placeholder="Enter password"
                   />
@@ -155,15 +140,14 @@ const UserSignUp = () => {
               </div>
 
               <div>
-                <label htmlFor="password" className="text-sm font-medium">
-                  Confirm Password
-                </label>
+                <label className="text-sm font-medium">Confirm Password</label>
 
                 <div className="relative mt-1">
                   <input
                     type={passShow ? "text" : "password"}
                     id="password"
-                    onChange={(e) => setCPass(e.target.value)}
+                    name="confirmPassword"
+                    onChange={onInputChange}
                     className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     placeholder="Confirm password"
                   />
@@ -185,7 +169,7 @@ const UserSignUp = () => {
             <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
               <div className="flex gap-1">
                 <div>
-                  <label htmlFor="name" className="text-sm font-medium">
+                  <label className="text-sm font-medium">
                     House No. / Flat No.
                   </label>
 
@@ -193,7 +177,8 @@ const UserSignUp = () => {
                     <input
                       type="text"
                       id="name"
-                      onChange={(e) => setHno(e.target.value)}
+                      name="hnumber"
+                      onChange={onInputChange}
                       className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                       placeholder="Enter house no. / flat no."
                     />
@@ -201,15 +186,14 @@ const UserSignUp = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Pincode
-                  </label>
+                  <label className="text-sm font-medium">Pincode</label>
 
                   <div className="relative mt-1">
                     <input
                       type="number"
                       id="name"
-                      onChange={(e) => setPin(e.target.value)}
+                      name="pincode"
+                      onChange={onInputChange}
                       className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                       placeholder="Enter pincode"
                     />
@@ -218,15 +202,13 @@ const UserSignUp = () => {
               </div>
 
               <div>
-                <label htmlFor="email" className="text-sm font-medium">
-                  Landmark
-                </label>
+                <label className="text-sm font-medium">Landmark</label>
 
                 <div className="relative mt-1">
                   <input
                     type="text"
-                    id="email"
-                    onChange={(e) => setLand(e.target.value)}
+                    name="landmark"
+                    onChange={onInputChange}
                     className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     placeholder="Enter landmark"
                   />
@@ -238,15 +220,13 @@ const UserSignUp = () => {
               </div>
 
               <div>
-                <label htmlFor="password" className="text-sm font-medium">
-                  City
-                </label>
+                <label className="text-sm font-medium">City</label>
 
                 <div className="relative mt-1">
                   <input
                     type="text"
-                    id="password"
-                    onChange={(e) => setCity(e.target.value)}
+                    name="city"
+                    onChange={onInputChange}
                     className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     placeholder="Enter city"
                   />
@@ -258,12 +238,11 @@ const UserSignUp = () => {
               </div>
 
               <div>
-                <label htmlFor="password" className="text-sm font-medium block">
-                  State
-                </label>
+                <label className="text-sm font-medium block">State</label>
 
                 <select
-                  onChange={(e) => setState(e.target.value.toString())}
+                  name="state"
+                  onChange={onInputChange}
                   className="mt-2 border-2 rounded-lg border-indigo-700 p-1"
                 >
                   <option value="">Select State</option>

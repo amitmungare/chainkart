@@ -5,10 +5,11 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { registerUser } from "../../store/userSlice";
+import { toast } from "react-toastify";
+import { updateUserProfile } from "../../store/userSlice";
 
 const BasicInfo = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => ({ ...state.user }));
   const {
     email,
     firstname,
@@ -21,60 +22,26 @@ const BasicInfo = () => {
     token,
   } = user;
 
-  // console.log(token);
-
-  const fNameRef = useRef();
-  const lNameRef = useRef();
-  const emailRef = useRef();
-
   const dispatch = useDispatch();
 
   const [uFirstName, setUFirstName] = useState(firstname);
   const [uLastName, setULastName] = useState(lastname);
   const [uEmail, setUEmail] = useState(email);
+  const formData = {
+    firstname: uFirstName,
+    lastname: uLastName,
+    email: uEmail,
+    hnumber,
+    city,
+    landmark,
+    state,
+    pincode,
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await axios.put(
-        "http://localhost:4000/api/v1/me/update",
-
-        {
-          firstname: uFirstName,
-          lastname: uLastName,
-          email: uEmail,
-          hnumber,
-          city,
-          landmark,
-          state,
-          pincode,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (res.status === 200) {
-        let uUser = {
-          firstname: uFirstName,
-          lastname: uLastName,
-          email: uEmail,
-          hnumber,
-          city,
-          landmark,
-          state,
-          pincode,
-          token,
-        };
-        dispatch(registerUser(uUser));
-        alert("Successfully updated");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(updateUserProfile({ formData, toast, token }));
   };
 
   return (
@@ -86,54 +53,31 @@ const BasicInfo = () => {
         <div className="flex gap-2 items-center">
           <label>First Name </label>
           <input
-            ref={fNameRef}
             onChange={(e) => setUFirstName(e.target.value)}
             placeholder={firstname}
             className="border-2 border-indigo-600 rounded-lg w-60"
             type="text"
           />
-          <button
-            onClick={(e) => (e.preventDefault(), fNameRef.current.focus())}
-            className="bg-indigo-700 text-white p-1 rounded-lg text-sm"
-          >
-            Edit
-          </button>
         </div>
 
         <div className="flex gap-2 items-center">
           <label>Last Name </label>
           <input
-            ref={lNameRef}
             onChange={(e) => setULastName(e.target.value)}
             placeholder={lastname}
             className="border-2 border-indigo-600 rounded-lg w-60"
             type="text"
           />
-          <button
-            // onClick={((e) => e.preventDefault(), lNameRef.current.focus())}
-            onClick={(e) => (e.preventDefault(), lNameRef.current.focus())}
-            className="bg-indigo-700 text-white p-1 rounded-lg text-sm"
-          >
-            Edit
-          </button>
         </div>
 
         <div className="flex gap-2 items-center ">
           <label>Email </label>
           <input
-            ref={emailRef}
             onChange={(e) => setUEmail(e.target.value)}
             placeholder={email}
             className="border-2 border-indigo-600 rounded-lg ml-9 w-60"
             type="email"
           />
-          <button
-            // onClick={((e) => e.preventDefault(), emailRef.current.focus())}
-            onClick={(e) => (e.preventDefault(), emailRef.current.focus())}
-            className="bg-indigo-700 text-white p-1 rounded-lg text-sm"
-          >
-            Edit
-          </button>
         </div>
 
         <Link to="/profile/basicInfo/changePassword">
