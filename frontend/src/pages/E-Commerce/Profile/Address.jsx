@@ -1,8 +1,7 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { updateUserProfile } from "../../store/userSlice";
+import { updateUserProfile } from "../../../store/userSlice";
 
 const Address = () => {
   const { user } = useSelector((state) => state.user);
@@ -131,7 +130,7 @@ const Address = () => {
 
         <button
           onClick={handleUpdate}
-          className="w-1/3 bg-indigo-600 p-3 rounded-lg text-white"
+          className="w-1/5 bg-[#0E3995] p-3 rounded-lg text-white "
         >
           Update
         </button>

@@ -1,11 +1,6 @@
 import React from "react";
-import logo from "../../assets/Logo.svg";
 import styled from "styled-components";
-import {
-  ExitToApp,
-  LanguageOutlined,
-  SearchOutlined,
-} from "@mui/icons-material";
+import { ExitToApp, SearchOutlined } from "@mui/icons-material";
 
 const Container = styled.div`
   height: 50px;

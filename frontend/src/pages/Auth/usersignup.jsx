@@ -1,6 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { Google, Mail, Visibility } from "@mui/icons-material";
+import { Mail, Visibility } from "@mui/icons-material";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -24,18 +23,7 @@ const inititalState = {
 
 const UserSignUp = () => {
   const [formData, setFormData] = useState(inititalState);
-  const {
-    email,
-    city,
-    confirmPassword,
-    firstname,
-    hnumber,
-    landmark,
-    password,
-    lastname,
-    pincode,
-    state,
-  } = formData;
+  const { confirmPassword, password } = formData;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

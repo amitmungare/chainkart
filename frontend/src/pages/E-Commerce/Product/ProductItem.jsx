@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { addToCart } from "../../store/cartSlice";
+import { addToCart } from "../../../store/cartSlice";
 
 const ProductItem = ({ products }) => {
   const user = false;

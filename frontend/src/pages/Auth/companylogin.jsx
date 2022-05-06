@@ -1,51 +1,24 @@
-import { Google, Mail, Visibility } from "@mui/icons-material";
-import axios from "axios";
-import React, { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useRef, useState } from "react";
+import { InputOutlined, Visibility } from "@mui/icons-material";
 
-import { Link, useNavigate } from "react-router-dom";
-import { loginUser, registerUser } from "../../store/userSlice";
-import { toast } from "react-toastify";
-import { useEffect } from "react";
-import { CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom";
 
-const initialState = {
-  email: "",
-  password: "",
-};
-
-function UserLogin() {
-  const [formData, setFormData] = useState(initialState);
-  const { email, password } = formData;
-  const { loading, error } = useSelector((state) => ({ ...state.user }));
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+function CompanyLogin() {
+  const idRef = useRef();
+  const passRef = useRef();
 
   const [passShow, setPassShow] = useState(false);
 
-  useEffect(() => {
-    error && toast.error(error);
-  }, [error]);
-
-  const onInputChange = (e) => {
-    let { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (email && password) {
-      dispatch(loginUser({ formData, navigate, toast }));
-    }
+    console.log(idRef.current.value);
   };
-
   return (
     <>
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto">
           <h1 className="text-2xl font-bold text-center text-indigo-600 sm:text-3xl">
-            Get started today!
+            Get started today
           </h1>
 
           <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
@@ -53,21 +26,20 @@ function UserLogin() {
 
             <div>
               <label htmlFor="email" className="text-sm font-medium">
-                Email
+                Company ID
               </label>
 
               <div className="relative mt-1">
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  onChange={onInputChange}
+                  type="text"
+                  id="text"
+                  ref={idRef}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter email"
+                  placeholder="Enter comapny Id"
                 />
 
                 <span className="absolute inset-y-0 inline-flex items-center right-4">
-                  <Mail />
+                  <InputOutlined />
                 </span>
               </div>
             </div>
@@ -80,9 +52,8 @@ function UserLogin() {
               <div className="relative mt-1">
                 <input
                   type={passShow ? "text" : "password"}
-                  name="password"
+                  ref={passRef}
                   id="password"
-                  onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter password"
                 />
@@ -103,19 +74,11 @@ function UserLogin() {
             >
               Sign in
             </button>
-            {loading && <CircularProgress />}
 
             <p className="text-sm text-center text-gray-500">
               No account?
-              <Link className="m-1 text-indigo-600" to="/signup">
+              <Link className="m-1" to="/cregister">
                 Sign up
-              </Link>
-            </p>
-
-            <p className="text-sm text-center text-gray-500">
-              Forgot Password?
-              <Link className="m-1 text-indigo-600" to="/signup">
-                Reset
               </Link>
             </p>
           </form>
@@ -125,4 +88,4 @@ function UserLogin() {
   );
 }
 
-export default UserLogin;
+export default CompanyLogin;

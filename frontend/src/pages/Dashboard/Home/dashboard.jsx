@@ -1,18 +1,17 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import CProfile from "../../components/Dashboard/cprofile";
-import DashHome from "../../components/Dashboard/DashHome";
-import Transaction from "../../components/Dashboard/Transaction";
-import AddProducts from "./AddProducts";
-import Products from "./Products";
-
-import SideBar from "../../components/Dashboard/sidebar";
-import TitleBar from "../../components/Dashboard/titlebar";
+import CProfile from "../cprofile";
+import DashHome from "./DashHome";
+import Transaction from "../Transaction";
+import SideBar from "../../../components/Dashboard/sidebar";
+import TitleBar from "../../../components/Dashboard/titlebar";
 
 import styled from "styled-components";
 
-import Users from "./Users";
+import Users from "../Users";
+import AddNew from "../Products/AddNew";
+import ProductTable from "../Products/ProductTable";
 
 const Container = styled.div`
   display: flex;
@@ -31,8 +30,8 @@ const Dashboard = () => {
           <Routes>
             <Route path="/" element={<DashHome />} />
             <Route path="users" element={<Users />} />
-            <Route path="products" element={<Products />} />
-            <Route path="addNew" element={<AddProducts />} />
+            <Route path="products" element={<ProductTable />} />
+            <Route path="addNew" element={<AddNew />} />
             <Route path="cprofile" element={<CProfile />} />
             <Route path="transactions" element={<Transaction />} />
           </Routes>

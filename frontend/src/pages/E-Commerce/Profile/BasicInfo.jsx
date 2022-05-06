@@ -1,12 +1,9 @@
-import axios, { Axios } from "axios";
-
 import React, { useState } from "react";
-import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { updateUserProfile } from "../../store/userSlice";
+import { updateUserProfile } from "../../../store/userSlice";
 
 const BasicInfo = () => {
   const { user } = useSelector((state) => ({ ...state.user }));
@@ -81,14 +78,14 @@ const BasicInfo = () => {
         </div>
 
         <Link to="/profile/basicInfo/changePassword">
-          <button className="w-1/3 bg-indigo-600 p-3 rounded-lg text-white">
+          <button className="w-1/5 bg-[#0E3995] p-3 rounded-lg text-white">
             Change Password
           </button>
         </Link>
 
         <button
           onClick={handleUpdate}
-          className=" w-1/3 bg-indigo-600 p-3 rounded-lg text-white"
+          className=" w-1/5 bg-[#0E3995] p-3 rounded-lg text-white"
         >
           Update
         </button>

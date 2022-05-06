@@ -1,16 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Address from "../../components/E-Commerce/Address";
-import BasicInfo from "../../components/E-Commerce/BasicInfo";
-import Orders from "../../components/E-Commerce/Orders";
-import Sidebar from "../../components/E-Commerce/Sidebar";
+import { Route, Routes } from "react-router-dom";
+import Address from "../Profile/Address";
+import BasicInfo from "../Profile/BasicInfo";
+import Orders from "../Profile/Orders";
+import Sidebar from "../../../pages/E-Commerce/Profile/Sidebar";
 import ChangePass from "./ChangePass";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate();
   return (
     <>
       {user ? (

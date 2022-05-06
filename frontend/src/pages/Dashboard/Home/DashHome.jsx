@@ -1,10 +1,10 @@
 import React from "react";
-import Widget from "./widget/Widget";
-import Chart from "./Chart";
-import Featured from "./Featured";
+import Widget from "../../../components/Dashboard/widget/Widget";
+import Chart from "../../../components/Dashboard/Chart";
+import Featured from "../../../components/Dashboard/Featured";
 
 import styled from "styled-components";
-import List from "./List";
+import List from "../../../components/Dashboard/List";
 
 const Widgets = styled.div`
   display: flex;

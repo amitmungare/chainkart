@@ -1,9 +1,7 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { updatePassword } from "../../store/api";
-import { updateUserPassword } from "../../store/userSlice";
+import { updateUserPassword } from "../../../store/userSlice";
 
 const ChangePass = () => {
   const {

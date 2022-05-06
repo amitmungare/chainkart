@@ -1,12 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "../../components/E-Commerce/Footer";
-import Main from "../../components/E-Commerce/Main";
+import Main from "../../components/E-Commerce/Main/Main";
 import Navbar from "../../components/E-Commerce/Navbar";
 import Cart from "./Cart";
-import ProductItem from "./ProductItem";
-import Profile from "./Profle";
-import SubCategory from "./SubCategory";
+import Profile from "./Profile/Profle";
+import SubCategory from "./Product/SubCategory";
 
 const Home = () => {
   return (

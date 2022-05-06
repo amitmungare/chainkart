@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 
 import styled from "styled-components";
-import { userColumns, userRows } from "../../productData";
+import { userColumns, userRows } from "../../../productData";
 
 const DataTable1 = styled.div`
   height: 600px;
