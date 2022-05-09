@@ -47,7 +47,10 @@ function UserLogin() {
             Get started today!
           </h1>
 
-          <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
+          <form
+            onSubmit={handleSubmit}
+            className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl"
+          >
             <p className="text-lg font-medium">Sign in to your account</p>
 
             <div>
@@ -63,6 +66,7 @@ function UserLogin() {
                   onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter email"
+                  required={true}
                 />
 
                 <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -82,8 +86,9 @@ function UserLogin() {
                   name="password"
                   id="password"
                   onChange={onInputChange}
-                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm   "
                   placeholder="Enter password"
+                  // required={true}
                 />
 
                 <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -97,7 +102,6 @@ function UserLogin() {
 
             <button
               type="submit"
-              onClick={handleSubmit}
               className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
             >
               Sign in

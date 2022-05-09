@@ -1,22 +1,46 @@
 import { PermIdentityOutlined, ShoppingBagOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../store/userSlice";
 import { toast } from "react-toastify";
+import styled from "styled-components";
+
+const ListItem = styled.div`
+  position: absolute;
+  top: 1.5rem;
+  background-color: #f0f8ff;
+  padding: 0.75rem;
+  z-index: 99;
+  display: none;
+`;
+
+const List = styled.li`
+  &:hover {
+    cursor: pointer;
+    color: rgb(37, 99, 235);
+    font-weight: bold;
+  }
+`;
+
+const Menu = styled.div`
+  position: relative;
+
+  &:hover {
+    ${ListItem} {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+`;
 
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const items = useSelector((state) => state.cart.cartItems);
-  const [isOpenE, setIsOpenE] = useState(false);
-  const [isOpenS, setIsOpenS] = useState(false);
-  const [isOpenF, setIsOpenF] = useState(false);
-  const [isOpenB, setIsOpenB] = useState(false);
-  const [isOpenH, setIsOpenH] = useState(false);
-
   const handleLogOut = async () => {
     dispatch(logoutUser({ toast }));
   };
@@ -26,62 +50,52 @@ const Navbar = () => {
       <Link to="/" className="text-indigo-600 text-2xl font-bold px-3 ">
         Chainkart
       </Link>
+
       <ul className="flex gap-5 ">
-        <li className="hover relative" onClick={() => setIsOpenE(!isOpenE)}>
-          Electronics
-        </li>
-        {isOpenE && (
-          <div className=" top-16 absolute bg-[#f0f8ff] p-3 z-50 flex flex-col gap-2 hover:text-black">
+        <Menu>
+          <List>Electronics</List>
+          <ListItem>
             <Link to="/Electronics/Laptops">Laptop</Link>
             <Link to="/Electronics/Headphones">Headphones</Link>
             <Link to="/Electronics/Smartphones">Smartphones</Link>
-          </div>
-        )}
+          </ListItem>
+        </Menu>
 
-        <li className="hover relative" onClick={() => setIsOpenS(!isOpenS)}>
-          Sports
-        </li>
-
-        {isOpenS && (
-          <div className=" top-16 left-[610px] absolute bg-[#f0f8ff] p-3 z-50 flex flex-col gap-2 hover:text-black">
+        <Menu>
+          <List>Sports</List>
+          <ListItem>
             <Link to="/Sports/Cricket">Cricket</Link>
             <Link to="/Sports/Football">Football</Link>
             <Link to="/Sports/Badminton">Badminton</Link>
-          </div>
-        )}
+          </ListItem>
+        </Menu>
 
-        <li className="hover relative" onClick={() => setIsOpenF(!isOpenF)}>
-          Fashion
-        </li>
-        {isOpenF && (
-          <div className=" top-16 left-[675px] absolute bg-[#f0f8ff] p-3 z-50 flex flex-col gap-2 hover:text-black">
+        <Menu>
+          <List>Fashion</List>
+          <ListItem>
             <Link to="/Fashion/Shirts">Shirts</Link>
             <Link to="/Fashion/Shoes">Shoes</Link>
             <Link to="/Fashion/Watches">Watches</Link>
-          </div>
-        )}
+          </ListItem>
+        </Menu>
 
-        <li className="hover relative" onClick={() => setIsOpenB(!isOpenB)}>
-          Books
-        </li>
-        {isOpenB && (
-          <div className=" top-16 left-[750px] absolute bg-[#f0f8ff] p-3 z-50 flex flex-col gap-2 hover:text-black">
+        <Menu>
+          <List>Books</List>
+          <ListItem>
             <Link to="/Books/Autobiography">Autobiography</Link>
             <Link to="/Books/Textbooks">Textbooks</Link>
             <Link to="/Books/Fiction">Fiction</Link>
-          </div>
-        )}
+          </ListItem>
+        </Menu>
 
-        <li className="hover relative" onClick={() => setIsOpenH(!isOpenH)}>
-          Home Appliances
-        </li>
-        {isOpenH && (
-          <div className=" top-16 left-[815px] absolute bg-[#f0f8ff] p-3 z-50 flex flex-col gap-2 hover:text-black">
+        <Menu>
+          <List>Home Appliances</List>
+          <ListItem>
             <Link to="/Home_Appliances/Television">Television</Link>
             <Link to="/Home_Appliances/Washing_Machine">Washing Machine</Link>
             <Link to="/Home_Appliances/Air_Conditioner">Air Conditioner</Link>
-          </div>
-        )}
+          </ListItem>
+        </Menu>
       </ul>
       <div className="px-3 flex gap-5">
         <div className="bg-[#F0F8FF] rounded-full p-1 w-9 h-9 text-gray-500 flex items-center justify-center">
