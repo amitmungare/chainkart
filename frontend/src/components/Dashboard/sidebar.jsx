@@ -57,7 +57,7 @@ const List = styled.li`
 const Text = styled.span`
   font-size: 17px;
   font-weight: 600;
-  color: #888;
+  color: #3d3d3d;
   margin-left: 10px;
 `;
 

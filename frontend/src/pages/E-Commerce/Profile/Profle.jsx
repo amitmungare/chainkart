@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
+  // let user = true;
   return (
     <>
       {user ? (

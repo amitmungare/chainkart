@@ -112,7 +112,7 @@ const NewArrival = () => {
                 <h3 className="mb-2 text-xl font-bold font-heading">
                   Autobiography
                 </h3>
-                <p className="text-lg font-bold font-heading text-indigo-600">
+                <p className="text-lg font-bold font-heading text-blue-500">
                   <span>₹99</span>
                   <span className="text-xs text-black font-semibold font-heading line-through">
                     ₹130

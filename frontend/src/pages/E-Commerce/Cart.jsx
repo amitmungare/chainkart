@@ -32,7 +32,7 @@ const Cart = () => {
       ) : (
         <>
           <h1 className="text-3xl text-indigo-600 font-bold">Your Cart</h1>
-          <div className="flex justify-between gap-5 ">
+          <div className="flex justify-between gap-5 min-h-[70vh] ">
             <div className="flex-[2] max-w-2xl ml-4 mt-4">
               {cartItems.map((cartItem) => (
                 <CheckoutItem cartItem={cartItem} />

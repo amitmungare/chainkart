@@ -18,4 +18,8 @@
   .dropdown-menu1 {
     @apply top-16 absolute bg-[#f0f8ff] p-3 z-50 flex flex-col gap-2 hover:text-black;
   }
+
+  .hover-1 {
+    @apply hover:bg-slate-200 hover:rounded-md hover:p-1;
+  }
 }

@@ -7,11 +7,13 @@ import Home from "./pages/E-Commerce/Home";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Dashboard from "./pages/Dashboard/Home/dashboard";
+import LoadingBar from "react-top-loading-bar";
 
 const App = () => {
   return (
     <div className=" flex flex-col justify-between">
       <ToastContainer />
+      {/* <LoadingBar color="#f11946" progress={10} /> */}
       <Routes>
         <Route path="/*" element={<Home />} />
         <Route path="login" element={<UserLogin />} />

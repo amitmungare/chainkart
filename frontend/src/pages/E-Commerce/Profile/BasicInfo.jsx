@@ -78,14 +78,14 @@ const BasicInfo = () => {
         </div>
 
         <Link to="/profile/basicInfo/changePassword">
-          <button className="w-1/5 bg-[#0E3995] p-3 rounded-lg text-white">
+          <button className="w-1/6 bg-indigo-600 p-3 rounded-lg text-white">
             Change Password
           </button>
         </Link>
 
         <button
           onClick={handleUpdate}
-          className=" w-1/5 bg-[#0E3995] p-3 rounded-lg text-white"
+          className=" w-1/6 bg-indigo-600 p-3 rounded-lg text-white"
         >
           Update
         </button>

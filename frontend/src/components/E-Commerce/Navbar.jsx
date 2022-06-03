@@ -55,45 +55,75 @@ const Navbar = () => {
         <Menu>
           <List>Electronics</List>
           <ListItem>
-            <Link to="/Electronics/Laptops">Laptop</Link>
-            <Link to="/Electronics/Headphones">Headphones</Link>
-            <Link to="/Electronics/Smartphones">Smartphones</Link>
+            <Link className="hover-1" to="/Electronics/Laptops">
+              Laptop
+            </Link>
+            <Link className="hover-1" to="/Electronics/Headphones">
+              Headphones
+            </Link>
+            <Link className="hover-1" to="/Electronics/Smartphones">
+              Smartphones
+            </Link>
           </ListItem>
         </Menu>
 
         <Menu>
           <List>Sports</List>
           <ListItem>
-            <Link to="/Sports/Cricket">Cricket</Link>
-            <Link to="/Sports/Football">Football</Link>
-            <Link to="/Sports/Badminton">Badminton</Link>
+            <Link className="hover-1" to="/Sports/Cricket">
+              Cricket
+            </Link>
+            <Link className="hover-1" to="/Sports/Football">
+              Football
+            </Link>
+            <Link className="hover-1" to="/Sports/Badminton">
+              Badminton
+            </Link>
           </ListItem>
         </Menu>
 
         <Menu>
           <List>Fashion</List>
           <ListItem>
-            <Link to="/Fashion/Shirts">Shirts</Link>
-            <Link to="/Fashion/Shoes">Shoes</Link>
-            <Link to="/Fashion/Watches">Watches</Link>
+            <Link className="hover-1" to="/Fashion/Shirts">
+              Shirts
+            </Link>
+            <Link className="hover-1" to="/Fashion/Shoes">
+              Shoes
+            </Link>
+            <Link className="hover-1" to="/Fashion/Watches">
+              Watches
+            </Link>
           </ListItem>
         </Menu>
 
         <Menu>
           <List>Books</List>
           <ListItem>
-            <Link to="/Books/Autobiography">Autobiography</Link>
-            <Link to="/Books/Textbooks">Textbooks</Link>
-            <Link to="/Books/Fiction">Fiction</Link>
+            <Link className="hover-1" to="/Books/Autobiography">
+              Autobiography
+            </Link>
+            <Link className="hover-1" to="/Books/Textbooks">
+              Textbooks
+            </Link>
+            <Link className="hover-1" to="/Books/Fiction">
+              Fiction
+            </Link>
           </ListItem>
         </Menu>
 
         <Menu>
           <List>Home Appliances</List>
           <ListItem>
-            <Link to="/Home_Appliances/Television">Television</Link>
-            <Link to="/Home_Appliances/Washing_Machine">Washing Machine</Link>
-            <Link to="/Home_Appliances/Air_Conditioner">Air Conditioner</Link>
+            <Link className="hover-1" to="/Home_Appliances/Television">
+              Television
+            </Link>
+            <Link className="hover-1" to="/Home_Appliances/Washing_Machine">
+              Washing Machine
+            </Link>
+            <Link className="hover-1" to="/Home_Appliances/Air_Conditioner">
+              Air Conditioner
+            </Link>
           </ListItem>
         </Menu>
       </ul>
