@@ -15,11 +15,41 @@ const AddNew = () => {
   const nameRef = useRef();
   const desRef = useRef();
   const priceRef = useRef();
-  const cRef = useRef();
-  const sCRef = useRef();
+  const [cat, setCat] = useState("");
+
+  const [selected, setSelected] = useState("");
+
+  const electronics = ["Laptops", "SmartPhones", "Headphones"];
+  const fashion = ["Shoes", "Shirts", "Watches"];
+  const sports = ["Badminton", "Cricket", "Football"];
+  const books = ["Autobiography", "Fiction", "Textbook"];
+  const home_appliances = ["Washing Machines", "Air Conditioner", "Television"];
+
+  let type = null;
+  let options = null;
+
+  if (selected === "Electronics") {
+    type = electronics;
+  } else if (selected === "Fashion") {
+    type = fashion;
+  } else if (selected === "Sports") {
+    type = sports;
+  } else if (selected === "Books") {
+    type = books;
+  } else if (selected === "Home_Appliances") {
+    type = home_appliances;
+  }
+
+  if (type) {
+    options = type.map((el) => <option key={el}>{el}</option>);
+  }
 
   const [card, setCard] = useState();
   const [cheque, setCheque] = useState();
+
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
 
   const handleSubmit = (e) => {};
 
@@ -78,12 +108,18 @@ const AddNew = () => {
                 <label className="text-sm font-medium">Category</label>
 
                 <div className="relative mt-1">
-                  <input
-                    type="text"
-                    ref={cRef}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Enter category"
-                  />
+                  <select
+                    name="category"
+                    onChange={handleSelect}
+                    className="mt-2 border-2 rounded-lg border-indigo-700 p-1"
+                  >
+                    <option value="">Select category</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Books">Books</option>
+                    <option value="Home_Appliances">Home Appliances</option>
+                  </select>
                 </div>
               </div>
 
@@ -91,12 +127,12 @@ const AddNew = () => {
                 <label className="text-sm font-medium">Sub-Category</label>
 
                 <div className="relative mt-1">
-                  <input
-                    type="text"
-                    ref={sCRef}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Enter sub-category"
-                  />
+                  <select
+                    // name="category"
+                    className="mt-2 border-2 rounded-lg border-indigo-700 p-1"
+                  >
+                    {options}
+                  </select>
                 </div>
               </div>
             </div>
