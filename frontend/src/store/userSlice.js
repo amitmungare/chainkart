@@ -6,7 +6,12 @@ export const loginUser = createAsyncThunk(
   async ({ formData, navigate, toast }, { rejectWithValue }) => {
     try {
       let user;
-      const { data } = await api.login(formData);
+      const res = await api.login(formData);
+      const data = res.data;
+      if (data.message) {
+        toast.error(data.message);
+        return;
+      }
       const token = data.token;
       user = data.user;
       user = { ...user, token };
@@ -14,7 +19,8 @@ export const loginUser = createAsyncThunk(
       navigate("/");
       return user;
     } catch (err) {
-      return rejectWithValue(err.response.data);
+      return rejectWithValue(err.message.data);
+      // toast.error(err);
     }
   }
 );
@@ -24,7 +30,9 @@ export const registerUser = createAsyncThunk(
   async ({ formData, navigate, toast }, { rejectWithValue }) => {
     try {
       let user;
-      const { data } = await api.register(formData);
+      const res = await api.register(formData);
+      console.log(res);
+      const data = res.data;
       const token = data.token;
       user = data.user;
       user = { ...user, token };
@@ -76,7 +84,7 @@ export const logoutUser = createAsyncThunk("user/logout", async ({ toast }) => {
 const initialState = {
   user: null,
   loading: false,
-  error: "",
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -93,6 +101,7 @@ const userSlice = createSlice({
     },
     [loginUser.rejected]: (state, action) => {
       state.loading = false;
+      // console.log(error);
       state.error = action.payload;
     },
 
@@ -103,9 +112,9 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = null;
     },
-    [logoutUser.rejected]: (state, action) => {
+    [logoutUser.rejected]: (state, { error }) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = error.message;
     },
 
     [registerUser.pending]: (state, action) => {
@@ -115,9 +124,9 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = action.payload;
     },
-    [registerUser.rejected]: (state, action) => {
+    [registerUser.rejected]: (state, { error }) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = error.message;
     },
 
     [updateUserProfile.pending]: (state, action) => {

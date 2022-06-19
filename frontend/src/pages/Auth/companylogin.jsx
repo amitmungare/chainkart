@@ -1,17 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { InputOutlined, Visibility } from "@mui/icons-material";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+const initialState = {
+  c_id: "",
+  password: "",
+};
 
 function CompanyLogin() {
-  const idRef = useRef();
-  const passRef = useRef();
-
+  const [formData, setFormData] = useState(initialState);
   const [passShow, setPassShow] = useState(false);
+
+  const onInputChange = (e) => {
+    let { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(idRef.current.value);
+    console.log(formData);
   };
   return (
     <>
@@ -32,8 +40,8 @@ function CompanyLogin() {
               <div className="relative mt-1">
                 <input
                   type="text"
-                  id="text"
-                  ref={idRef}
+                  name="c_id"
+                  onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter comapny Id"
                 />
@@ -52,8 +60,8 @@ function CompanyLogin() {
               <div className="relative mt-1">
                 <input
                   type={passShow ? "text" : "password"}
-                  ref={passRef}
-                  id="password"
+                  name="password"
+                  onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter password"
                 />
@@ -77,9 +85,9 @@ function CompanyLogin() {
 
             <p className="text-sm text-center text-gray-500">
               No account?
-              <Link className="m-1" to="/cregister">
+              <NavLink className="m-1 text-blue-600" to="/cregister">
                 Sign up
-              </Link>
+              </NavLink>
             </p>
           </form>
         </div>

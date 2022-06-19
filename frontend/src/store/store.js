@@ -12,9 +12,12 @@ import storage from "redux-persist/lib/storage";
 import cartReducer, { getTotal } from "./cartSlice";
 import userReducer from "./userSlice";
 
+let companyReducer;
+
 const reducers = combineReducers({
   cart: cartReducer,
   user: userReducer,
+  company: companyReducer,
 });
 
 const persistConfig = {

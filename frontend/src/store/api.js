@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://localhost:4000/api/v1" });
 
+// User
 export const login = (formData) => API.post("/login", formData);
 
 export const register = (formData) => API.post("/register", formData);
@@ -17,3 +18,9 @@ export const updatePassword = (formData, token) =>
   });
 
 export const logout = () => API.get("/logout");
+
+// Company
+
+export const cLogin = (formData) => API.post("/cLogin", formData);
+
+export const cRegister = (formData) => API.post("/cRegister", formData);

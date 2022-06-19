@@ -11,13 +11,17 @@ import {
 import Button from "@mui/material/Button";
 import React, { useState, useRef } from "react";
 
-const AddNew = () => {
-  const nameRef = useRef();
-  const desRef = useRef();
-  const priceRef = useRef();
-  const [cat, setCat] = useState("");
+const initialState = {
+  name: "",
+  desc: "",
+  price: "",
+};
 
+const AddNew = () => {
   const [selected, setSelected] = useState("");
+  const [formData, setFormData] = useState(initialState);
+  const [selected2, setSelected2] = useState("");
+  const [image, setImage] = useState(null);
 
   const electronics = ["Laptops", "SmartPhones", "Headphones"];
   const fashion = ["Shoes", "Shirts", "Watches"];
@@ -41,17 +45,32 @@ const AddNew = () => {
   }
 
   if (type) {
-    options = type.map((el) => <option key={el}>{el}</option>);
+    options = type.map((el) => (
+      <option key={el} value={el}>
+        {el}
+      </option>
+    ));
   }
 
-  const [card, setCard] = useState();
-  const [cheque, setCheque] = useState();
+  const onInputChange = (e) => {
+    let { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
 
-  const handleSubmit = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormData({
+      ...formData,
+      category: selected,
+      subCategory: selected2,
+      image,
+    });
+    console.log(formData);
+  };
 
   return (
     <>
@@ -70,8 +89,8 @@ const AddNew = () => {
               <div className="relative mt-1">
                 <input
                   type="text"
-                  id="name"
-                  ref={nameRef}
+                  name="name"
+                  onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter product name"
                 />
@@ -83,7 +102,8 @@ const AddNew = () => {
 
               <div className="relative mt-1">
                 <textarea
-                  ref={desRef}
+                  name="desc"
+                  onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter product description"
                 />
@@ -96,7 +116,8 @@ const AddNew = () => {
               <div className="relative mt-1">
                 <input
                   type="number"
-                  ref={priceRef}
+                  name="price"
+                  onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter price"
                 />
@@ -128,7 +149,9 @@ const AddNew = () => {
 
                 <div className="relative mt-1">
                   <select
+                    onChange={(e) => setSelected2(e.target.value)}
                     // name="category"
+
                     className="mt-2 border-2 rounded-lg border-indigo-700 p-1"
                   >
                     {options}
@@ -138,11 +161,12 @@ const AddNew = () => {
             </div>
 
             <div className="mt-3">
-              <label className="block">Product Images</label>
+              <label className="block">Product Image</label>
               {/* <Folder /> */}
               <input
+                accept="image/*"
                 id="file2"
-                onChange={(e) => setCheque(e.target.files[0])}
+                onChange={(e) => setImage(e.target.files[0])}
                 className="mt-2 block w-full text-sm text-slate-500
               file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0

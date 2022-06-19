@@ -22,9 +22,9 @@ function UserLogin() {
 
   const [passShow, setPassShow] = useState(false);
 
-  useEffect(() => {
-    error && toast.error(error);
-  }, [error]);
+  // useEffect(() => {
+  //   error && toast.error(error);
+  // }, [error]);
 
   const onInputChange = (e) => {
     let { name, value } = e.target;
