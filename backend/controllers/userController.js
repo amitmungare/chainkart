@@ -1,19 +1,37 @@
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const User = require("../models/userModel");
+// const User = require("../models/userModel");
+const User = require("../models/userModel.js");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 
 // register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const { firstname, lastname, email, password } = req.body;
+  console.log(req.body);
+  const {
+    firstname,
+    lastname,
+    email,
+    password,
+    hnumber,
+    city,
+    landmark,
+    state,
+    pincode,
+  } = req.body;
 
   const user = await User.create({
     firstname,
     lastname,
     email,
     password,
+    hnumber,
+    city,
+    landmark,
+    state,
+    pincode,
+
     // avatar:{
     //     public_id:"this is a sample id",
     //     url:"profilepicurl"
@@ -32,15 +50,18 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   }
 
   const user = await User.findOne({ email }).select("+password");
+  // console.log(user);
 
   if (!user) {
-    return next(new ErrorHander("Invalid email or password", 401));
+    // return next(new ErrorHander("Invalid email or password", 401));
+    return res.json({ message: "User not found" });
+    // Shreyas
   }
 
   const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
-    return next(new ErrorHander("Invalid email or password", 401));
+    return res.json({ message: "Invalid email or password" });
   }
 
   sendToken(user, 200, res);
@@ -163,8 +184,14 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 // update user profile
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
-    name: req.body.name,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     email: req.body.email,
+    hnumber: req.body.hnumber,
+    city: req.body.city,
+    landmark: req.body.landmark,
+    state: req.body.state,
+    pincode: req.body.pincode,
   };
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {

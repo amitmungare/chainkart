@@ -1,15 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/company/dashboard";
-import UserLogin from "./components/Auth/userlogin";
-import CompanyLogin from "./components/Auth/companylogin";
-import UserSignUp from "./components/Auth/usersignup";
-import CompanyRegister from "./components/Auth/companyregister";
-import Users from "./pages/company/Users";
-import Home from "./pages/Main/Home";
+import UserLogin from "./pages/Auth/userlogin";
+import CompanyLogin from "./pages/Auth/companylogin";
+import UserSignUp from "./pages/Auth/usersignup";
+import CompanyRegister from "./pages/Auth/companyregister";
+import Home from "./pages/E-Commerce/Home";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import Dashboard from "./pages/Dashboard/Home/dashboard";
+
+import { useState } from "react";
 
 const App = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className=" flex flex-col justify-between">
+      <ToastContainer />
       <Routes>
         <Route path="/*" element={<Home />} />
         <Route path="login" element={<UserLogin />} />

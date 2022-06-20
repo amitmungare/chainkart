@@ -1,11 +1,7 @@
 import React from "react";
-import logo from "../../assets/Logo.svg";
 import styled from "styled-components";
-import {
-  ExitToApp,
-  LanguageOutlined,
-  SearchOutlined,
-} from "@mui/icons-material";
+import { ExitToApp, SearchOutlined } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   height: 50px;
@@ -47,6 +43,21 @@ const Item = styled.div`
   margin-right: 20px;
 `;
 
+const Name = styled(NavLink)`
+  font-size: 24px;
+  // font-weight: bold;
+  color: #000;
+
+  &:hover {
+    background-color: rgb(160, 160, 160);
+    color: #fff;
+    border-radius: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+  }
+`;
+
 const TitleBar = () => {
   return (
     <Container>
@@ -55,6 +66,7 @@ const TitleBar = () => {
           <Input type="text" placeholder="Search..." />
           <SearchOutlined />
         </Search>
+        <Name to="/dashboard/cprofile">Flipkart</Name>
         <Items>
           <Item>
             <ExitToApp className="text-indigo-600" />
