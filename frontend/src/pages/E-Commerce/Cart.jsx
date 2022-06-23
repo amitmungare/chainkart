@@ -6,6 +6,9 @@ import { Navigate, useNavigate } from "react-router-dom";
 import CheckoutItem from "../../components/E-Commerce/Cart/CheckoutItem";
 
 const Cart = () => {
+  const { user } = useSelector((state) => state.user);
+  const name = `${user.firstname} ${user.lastname}`;
+  const address = `${user.hnumber} , ${user.landmark}, ${user.city}-${user.state},${user.pincode}`;
   const cartItems = useSelector((state) => state.cart.cartItems);
   const Amount = useSelector((state) => state.cart.cartTotalAmount);
   let formattedAmount = new Intl.NumberFormat("en-IN").format(Amount);
@@ -40,37 +43,61 @@ const Cart = () => {
                 <CheckoutItem cartItem={cartItem} />
               ))}
             </div>
-            <div className="bg-[#f0f8ff] w-[400px] max-h-[300px] relative mr-10 mt-4 rounded-2xl">
-              <div className="p-7">
-                <span className="font-bold text-xl">Order Summary</span>
-                <div className="flex justify-between mt-6">
-                  <span>Subtotal</span>
-                  <span>₹{formattedAmount}</span>
+            <div>
+              <div className="bg-[#f0f8ff] w-[400px] max-h-[300px] relative mr-10 mt-4 rounded-2xl">
+                <div className="p-7">
+                  <span className="font-bold text-xl">Order Summary</span>
+                  <div className="flex justify-between mt-6">
+                    <span>Subtotal</span>
+                    <span>₹{formattedAmount}</span>
+                  </div>
+
+                  <div className="flex justify-between mt-2">
+                    <span>Shipping Charges</span>
+                    <span>₹{Amount > 500 ? 0 : 100}</span>
+                  </div>
+
+                  <div className="flex justify-between mt-14">
+                    <span>Total Price</span>
+                    <span>₹{formatteTotaldAmount}</span>
+                  </div>
                 </div>
 
-                <div className="flex justify-between mt-2">
-                  <span>Shipping Charges</span>
-                  <span>₹{Amount > 500 ? 0 : 100}</span>
-                </div>
+                <button
+                  // to="/payment"
+                  onClick={() => navigate("/payment")}
+                  className=" bg-[#0E3995] text-white p-2 w-full mt-6 "
+                >
+                  Proceed to payment
+                </button>
 
-                <div className="flex justify-between mt-14">
-                  <span>Total Price</span>
-                  <span>₹{formatteTotaldAmount}</span>
-                </div>
+                <span className=" text-[#3B434E] text-sm mt-7">
+                  *Shipping charges of ₹100 will be levied if cart value is
+                  below ₹500.
+                </span>
               </div>
 
-              <button
-                // to="/payment"
-                onClick={() => navigate("/payment")}
-                className=" bg-[#0E3995] text-white p-2 w-full mt-6 "
-              >
-                Proceed to payment
-              </button>
+              <div className="bg-[#f0f8ff] w-[400px] max-h-[200px] relative mr-10 mt-16 rounded-2xl">
+                <div className="p-7">
+                  <span className="font-bold text-xl">Shipping details</span>
+                  <div className="flex justify-between mt-6">
+                    <span>Name</span>
+                    <span>{name}</span>
+                  </div>
 
-              <span className=" text-[#3B434E] text-sm mt-7">
-                *Shipping charges of ₹100 will be levied if cart value is below
-                ₹500.
-              </span>
+                  <div className="flex justify-between mt-2">
+                    <span>Address</span>
+                    <span>{address}</span>
+                  </div>
+
+                  <button
+                    onClick={() => navigate("/profile")}
+                    className=" bg-[#0E3995] text-white p-2 w-full mt-6 "
+                  >
+                    Change Details
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </>
