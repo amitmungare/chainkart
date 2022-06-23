@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import Dashboard from "./pages/Dashboard/Home/dashboard";
 
 import { useState } from "react";
+import Payment from "./pages/E-Commerce/Payment";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="cregister" element={<CompanyRegister />} />
         <Route path="signup" element={<UserSignUp />} />
         <Route path="dashboard/*" element={<Dashboard />} />
+        <Route path="payment" element={<Payment />} />
       </Routes>
     </div>
   );

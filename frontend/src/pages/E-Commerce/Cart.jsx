@@ -57,7 +57,7 @@ const Cart = () => {
                 </div>
               </div>
               <button className=" bg-[#0E3995] text-white p-2 w-full mt-6 ">
-                Proceed to checkout
+                Proceed to payment
               </button>
               <span className=" text-[#3B434E] text-sm mt-7">
                 *Shipping charges of ₹100 will be levied if cart value is below
