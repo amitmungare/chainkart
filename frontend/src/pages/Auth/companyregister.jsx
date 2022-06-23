@@ -13,12 +13,38 @@ const inititalState = {
 const CompanyRegister = () => {
   const [formData, setFormData] = useState(inititalState);
 
-  const [card, setCard] = useState(null);
-  const [cheque, setCheque] = useState(null);
+  const [card, setCard] = useState("");
+  const [cheque, setCheque] = useState("");
 
   const onInputChange = (e) => {
     let { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const transformedFile = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setCard(reader.result);
+      };
+    } else {
+      setCard("");
+    }
+  };
+
+  const transformedFileC = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setCheque(reader.result);
+      };
+    } else {
+      setCheque("");
+    }
   };
 
   const handleSubmit = (e) => {
@@ -126,7 +152,7 @@ const CompanyRegister = () => {
                 <input
                   id="file1"
                   required
-                  onChange={(e) => setCard(e.target.files[0])}
+                  onChange={(e) => transformedFile(e.target.files[0])}
                   accept="image/*"
                   className="mt-2 block w-full text-sm text-slate-500
                 file:mr-4 file:py-2 file:px-4
@@ -145,7 +171,7 @@ const CompanyRegister = () => {
                   id="file2"
                   required
                   accept="image/*"
-                  onChange={(e) => setCheque(e.target.files[0])}
+                  onChange={(e) => transformedFileC(e.target.files[0])}
                   className="mt-2 block w-full text-sm text-slate-500
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-full file:border-0
