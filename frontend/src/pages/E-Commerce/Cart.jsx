@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, getTotal } from "../../store/cartSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import CheckoutItem from "../../components/E-Commerce/Cart/CheckoutItem";
 
@@ -13,6 +14,7 @@ const Cart = () => {
     Amount + sCharge
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -56,9 +58,15 @@ const Cart = () => {
                   <span>₹{formatteTotaldAmount}</span>
                 </div>
               </div>
-              <button className=" bg-[#0E3995] text-white p-2 w-full mt-6 ">
+
+              <button
+                // to="/payment"
+                onClick={() => navigate("/payment")}
+                className=" bg-[#0E3995] text-white p-2 w-full mt-6 "
+              >
                 Proceed to payment
               </button>
+
               <span className=" text-[#3B434E] text-sm mt-7">
                 *Shipping charges of ₹100 will be levied if cart value is below
                 ₹500.
