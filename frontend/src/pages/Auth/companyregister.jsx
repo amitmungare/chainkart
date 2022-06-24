@@ -56,8 +56,8 @@ const CompanyRegister = () => {
       imagec,
     };
     // console.log(formData);
-    const res = await api.registerCompany(formData);
-    if (res.status === 200) {
+    const res = await api.cRegister(formData);
+    if (res.status === 201) {
       toast.success("Company registered successfully");
       navigate("/");
     }
