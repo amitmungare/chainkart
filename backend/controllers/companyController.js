@@ -16,6 +16,7 @@ exports.registerCompany = catchAsyncErrors(async (req, res, next) => {
         upload_presets: "blackCheque",
         upload_presets: "panCard",
       });
+      
 console.log(uploadRes)
       if (uploadRes) {
         const company = await Company.create({

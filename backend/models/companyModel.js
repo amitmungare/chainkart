@@ -1,31 +1,27 @@
 const mongoose = require("mongoose");
-const validator = require('validator');
-const bcrypt = require('bcryptjs');
+const validator = require("validator");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 const companySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  email:{
+  email: {
     type: String,
     required: true,
-    unique:true
+    unique: true,
   },
-  desc: {
+  password: {
     type: String,
-    required: true,
-  },
-  password:{
-    type:String
   },
   cin: {
     type: String,
     required: true,
   },
-  postalcode: {
+  postalCode: {
     type: Number,
     required: true,
   },
@@ -36,14 +32,13 @@ const companySchema = new mongoose.Schema({
   imagec: {
     type: Object,
   },
-  role:{
-      type:String,
-      default:"company"
+  role: {
+    type: String,
+    default: "company",
   },
 
   resetPasswordToken: String,
   resetPasswordExpire: Date,
-
 });
 
 companySchema.pre("save", async function (next) {
