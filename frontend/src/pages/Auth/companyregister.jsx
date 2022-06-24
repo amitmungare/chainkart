@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { registerCompany } from "../../store/companySlice";
+import * as api from "../../store/api";
 
 const CompanyRegister = () => {
   const [name, setName] = useState("");
@@ -43,7 +43,7 @@ const CompanyRegister = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = {
@@ -56,7 +56,16 @@ const CompanyRegister = () => {
       imagec,
     };
     // console.log(formData);
-    dispatch(registerCompany({ formData, navigate, toast }));
+    const res = await api.registerCompany(formData);
+    if (res.status === 200) {
+      toast.success("Company registered successfully");
+      navigate("/");
+    }
+    if (res.status === 400) {
+      toast.error("Something went wrong");
+    }
+
+    // dispatch(registerCompany({ formData, navigate, toast }));
   };
   return (
     <>

@@ -11,23 +11,31 @@ export const loginCompany = createAsyncThunk(
   }
 );
 
-export const registerCompany = createAsyncThunk(
-  "company/register",
-  async ({ formData, navigate, toast }, { rejectWithValue }) => {
+// export const registerCompany = createAsyncThunk(
+//   "company/register",
+//   async ({ formData, navigate, toast }, { rejectWithValue }) => {
+//     try {
+//       let company;
+//       // console.log(data);
+//       const res = await api.cRegister(formData);
+
+//       toast.success("Register successful");
+//       navigate("/");
+//       return company;
+//     } catch (err) {
+//       return rejectWithValue(err.response.data);
+//     }
+//   }
+// );
+
+export const logoutCompany = createAsyncThunk(
+  "comapny/logout",
+  async ({ toast }) => {
     try {
-      let company;
-      // console.log(data);
-      const res = await api.cRegister(formData);
-      console.log(res);
-      const data = res.data;
-      const token = data.token;
-      company = data.company;
-      company = { ...company, token };
-      toast.success("Register successful");
-      navigate("/");
-      return company;
+      const { data } = await api.cLogout();
+      toast.success("Logout successful");
     } catch (err) {
-      return rejectWithValue(err.response.data);
+      toast.error("Logout failed");
     }
   }
 );
@@ -51,18 +59,6 @@ const companySlice = createSlice({
       state.company = action.payload;
     });
     builder.addCase(loginCompany.rejected, (state, { error }) => {
-      state.isLoading = false;
-      state.error = error.message;
-    });
-
-    builder.addCase(registerCompany.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(registerCompany.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.company = action.payload;
-    });
-    builder.addCase(registerCompany.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error.message;
     });
