@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* * {
+  background: rgb(0 100 0 / 0.1) !important ;
+} */
+
 @layer components {
   .side-bar {
     @apply w-6 h-6 ml-4 text-gray-400 cursor-pointer hover:bg-red-600 hover:p-1 hover:text-white hover:rounded-md transition-all duration-300 ease-linear;

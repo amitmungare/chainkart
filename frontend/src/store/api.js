@@ -19,6 +19,10 @@ export const updatePassword = (formData, token) =>
 
 export const logout = () => API.get("/logout");
 
+// Payment
+
+export const processPayment = (data) => API.post("/payment/process", data);
+
 // Company
 
 export const cLogin = (formData) => API.post("/cLogin", formData);
