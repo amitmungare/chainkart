@@ -7,18 +7,19 @@ const crypto = require("crypto");
 const cloudinary = require("../utils/cloudinary");
 // register a company
 exports.registerCompany = catchAsyncErrors(async (req, res, next) => {
-  // console.log(req.body);
   const { name, email, cin, postalCode, imagep, imagec } = req.body;
   console.log(name);
   try {
-    if (imagep) {
-      const uploadRes = await cloudinary.uploader.upload(imagep, imagec, {
-        upload_presets: "blackCheque",
+    if (imagep && imagec) {
+      const uploadPan = await cloudinary.uploader.upload(imagep, {
         upload_presets: "panCard",
       });
-      
-console.log(uploadRes)
-      if (uploadRes) {
+
+      const uploadCheq = await cloudinary.uploader.upload(imagep, {
+        upload_presets: "blackCheque",
+      });
+
+      if (uploadPan && uploadCheq) {
         const company = await Company.create({
           name,
           email,
