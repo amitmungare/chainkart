@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/userSlice";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
 import { CircularProgress } from "@mui/material";
 
 const initialState = {
@@ -100,13 +99,16 @@ function UserLogin() {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
-            >
-              Sign in
-            </button>
-            {loading && <CircularProgress />}
+            {loading ? (
+              <CircularProgress className="ml-[6rem]" />
+            ) : (
+              <button
+                type="submit"
+                className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+              >
+                Sign in
+              </button>
+            )}
 
             <p className="text-sm text-center text-gray-500">
               No account?

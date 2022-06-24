@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Mail, Visibility } from "@mui/icons-material";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../store/userSlice";
 import { FaLandmark } from "react-icons/fa";
 import { FaCity } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 const inititalState = {
   email: "",
@@ -24,6 +25,7 @@ const inititalState = {
 const UserSignUp = () => {
   const [formData, setFormData] = useState(inititalState);
   const { confirmPassword, password } = formData;
+  const { loading, error } = useSelector((state) => ({ ...state.user }));
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -272,13 +274,17 @@ const UserSignUp = () => {
         </div>
       </div>
       <div className="absolute bottom-8 left-[670px]">
-        <button
-          type="submit"
-          onClick={handleSubmit}
-          className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
-        >
-          Create your Account
-        </button>
+        {loading ? (
+          <CircularProgress className="ml-20" />
+        ) : (
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+          >
+            Create your Account
+          </button>
+        )}
 
         <p className="text-sm text-center text-gray-500 mt-2">
           Already have an account?

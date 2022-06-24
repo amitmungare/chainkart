@@ -27,10 +27,10 @@ const companySchema = new mongoose.Schema({
   },
 
   imagep: {
-    type: Object,
+    type: String,
   },
   imagec: {
-    type: Object,
+    type: String,
   },
   role: {
     type: String,

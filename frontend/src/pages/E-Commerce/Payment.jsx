@@ -7,9 +7,6 @@ import "./payment.css";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as api from "../../store/api";
-// const stripePromise = loadStripe(
-//   "pk_test_51LC9yhSE5P4xQp6tex03MR2aoEiW5ZP1HvJ4ArhnZ4dN7fbBn5K6wlMrczHkpUJQSMLnr8ImJRE3G3rc17H1FPdg006fkGsf4G"
-// );
 
 const stripePromise = loadStripe(
   "pk_test_51LC9yhSE5P4xQp6tex03MR2aoEiW5ZP1HvJ4ArhnZ4dN7fbBn5K6wlMrczHkpUJQSMLnr8ImJRE3G3rc17H1FPdg006fkGsf4G"
@@ -21,7 +18,6 @@ const Payment = () => {
   const address = `${user.hnumber} , ${user.landmark}, ${user.city}-${user.state},${user.pincode}`;
   const cartItems = useSelector((state) => state.cart.cartItems);
   const Amount = useSelector((state) => state.cart.cartTotalAmount);
-  console.log(Amount);
 
   const paymentData = {
     name,
@@ -33,16 +29,10 @@ const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    // fetch("http://localhost:4000/api/v1/payment/process", {
-    //   body: Amount,
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => setClientSecret(data.clientSecret))
-    //   .catch((err) => console.log(err));
     const payment = async () => {
       try {
         const { data } = await api.processPayment(paymentData);
-        // console.log(res);
+
         setClientSecret(data.clientSecret);
       } catch (err) {
         console.log(err);

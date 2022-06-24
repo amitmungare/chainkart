@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as api from "../../store/api";
+import { CircularProgress } from "@mui/material";
 
 const CompanyRegister = () => {
   const [name, setName] = useState("");
@@ -11,8 +11,8 @@ const CompanyRegister = () => {
   const [cin, setCin] = useState("");
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [imagep, setImagep] = useState("");
   const [imagec, setImagec] = useState("");
@@ -55,19 +55,17 @@ const CompanyRegister = () => {
       imagep,
       imagec,
     };
-    // console.log(formData);
-    const res = await api.cRegister(formData);
-    console.log(res);
 
+    setLoading(true);
+    const res = await api.cRegister(formData);
+    setLoading(false);
     if (res.status === 201) {
       toast.success("Company registered successfully");
       navigate("/");
     }
-    if (res.status === 400) {
+    if (res.status === 401) {
       toast.error("Something went wrong");
     }
-
-    // dispatch(registerCompany({ formData, navigate, toast }));
   };
   return (
     <>
@@ -199,13 +197,17 @@ const CompanyRegister = () => {
                 />
               </div>
             </div>
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
-            >
-              Submit Application
-            </button>
+            {loading ? (
+              <CircularProgress className="ml-52" color="info" />
+            ) : (
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+              >
+                Submit Application
+              </button>
+            )}
 
             <p className="text-sm text-center text-gray-500">
               Already have an account ?

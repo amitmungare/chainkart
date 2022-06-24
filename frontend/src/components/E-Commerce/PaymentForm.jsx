@@ -6,9 +6,10 @@ import {
 } from "@stripe/react-stripe-js";
 import { toast } from "react-toastify";
 import { clearCart } from "../../store/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const PaymentForm = () => {
+  const { user } = useSelector((state) => state.user);
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
@@ -65,9 +66,14 @@ const PaymentForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-
-        return_url: "http://localhost:3000",
+        return_url: "http://localhost:3000/profile/orders",
+        payment_method_data: {
+          billing_details: {
+            name: `${user.firstname} ${user.lastname}`,
+            address: `${user.hnumber} , ${user.landmark}, ${user.city}-${user.state},${user.pincode}`,
+            email: user.email,
+          },
+        },
       },
     });
 
@@ -83,10 +89,14 @@ const PaymentForm = () => {
   };
 
   return (
-    <div>
-      <form id="payment-form" onSubmit={handleSubmit}>
+    <div className="h-screen flex justify-center">
+      <form className="form" id="payment-form" onSubmit={handleSubmit}>
         <PaymentElement id="payment-element" />
-        <button disabled={isLoading || !stripe || !elements} id="submit">
+        <button
+          className="button"
+          disabled={isLoading || !stripe || !elements}
+          id="submit"
+        >
           <span id="button-text">
             {isLoading ? (
               <div className="spinner" id="spinner"></div>
