@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-
-import { Link, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link,useNavigate, NavLink } from "react-router-dom";
 
 const inititalState = {
   name: "",
@@ -12,7 +12,9 @@ const inititalState = {
 
 const CompanyRegister = () => {
   const [formData, setFormData] = useState(inititalState);
-
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
   const [card, setCard] = useState("");
   const [cheque, setCheque] = useState("");
 
@@ -54,7 +56,9 @@ const CompanyRegister = () => {
       card,
       cheque,
     });
-    console.log(formData);
+
+  
+
   };
   return (
     <>

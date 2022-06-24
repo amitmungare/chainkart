@@ -15,7 +15,18 @@ export const registerCompany = createAsyncThunk(
   "company/register",
   async ({ formData, navigate, toast }, { rejectWithValue }) => {
     try {
-    } catch (err) {
+      let company
+      const res = await api.cRegister(formData);
+      console.log(res);
+      const data = res.data;
+      const token = data.token;
+      company = data.company;
+      company = { ...company, token };
+      toast.success("Register successful");
+      navigate("/dashboard")
+      return company;
+        } 
+        catch (err) {
       return rejectWithValue(err.response.data);
     }
   }
