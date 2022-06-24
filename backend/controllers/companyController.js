@@ -12,11 +12,11 @@ exports.registerCompany = catchAsyncErrors(async (req, res, next) => {
   try {
     if (imagep && imagec) {
       const uploadPan = await cloudinary.uploader.upload(imagep, {
-        upload_presets: "panCard",
+        folder: "panCard",
       });
 
-      const uploadCheq = await cloudinary.uploader.upload(imagep, {
-        upload_presets: "blackCheque",
+      const uploadCheq = await cloudinary.uploader.upload(imagec, {
+        folder: "cheque",
       });
 
       if (uploadPan && uploadCheq) {
