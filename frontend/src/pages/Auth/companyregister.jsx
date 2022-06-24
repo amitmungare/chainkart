@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
-
-import { Link, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { registerCompany } from "../../store/companySlice";
+import { toast } from "react-toastify";
 
 const inititalState = {
   name: "",
@@ -12,7 +14,8 @@ const inititalState = {
 
 const CompanyRegister = () => {
   const [formData, setFormData] = useState(inititalState);
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [card, setCard] = useState("");
   const [cheque, setCheque] = useState("");
 
@@ -54,7 +57,7 @@ const CompanyRegister = () => {
       card,
       cheque,
     });
-    console.log(formData);
+    dispatch(registerCompany(formData, navigate, toast));
   };
   return (
     <>
