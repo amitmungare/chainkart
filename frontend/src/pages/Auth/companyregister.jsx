@@ -1,27 +1,21 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link,useNavigate, NavLink } from "react-router-dom";
 
-const inititalState = {
-  name: "",
-  email: "",
-  c_number: "",
-  city: "",
-  postal_code: "",
-};
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { registerCompany } from "../../store/companySlice";
 
 const CompanyRegister = () => {
-  const [formData, setFormData] = useState(inititalState);
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  
-  const [card, setCard] = useState("");
-  const [cheque, setCheque] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [cin, setCin] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onInputChange = (e) => {
-    let { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const [imagep, setImagep] = useState("");
+  const [imagec, setImagec] = useState("");
 
   const transformedFile = (file) => {
     const reader = new FileReader();
@@ -29,10 +23,10 @@ const CompanyRegister = () => {
     if (file) {
       reader.readAsDataURL(file);
       reader.onload = () => {
-        setCard(reader.result);
+        setImagep(reader.result);
       };
     } else {
-      setCard("");
+      setImagep("");
     }
   };
 
@@ -42,23 +36,27 @@ const CompanyRegister = () => {
     if (file) {
       reader.readAsDataURL(file);
       reader.onload = () => {
-        setCheque(reader.result);
+        setImagec(reader.result);
       };
     } else {
-      setCheque("");
+      setImagec("");
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormData({
-      ...formData,
-      card,
-      cheque,
-    });
 
-  
-
+    const formData = {
+      name,
+      email,
+      cin,
+      city,
+      postalCode,
+      imagep,
+      imagec,
+    };
+    // console.log(formData);
+    dispatch(registerCompany({ formData, navigate, toast }));
   };
   return (
     <>
@@ -80,7 +78,7 @@ const CompanyRegister = () => {
                 <input
                   type="text"
                   name="name"
-                  onChange={onInputChange}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter company name"
                 />
@@ -96,7 +94,8 @@ const CompanyRegister = () => {
                 <input
                   type="email"
                   name="email"
-                  onChange={onInputChange}
+                  // onChange={onInputChange}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter email"
                 />
@@ -112,7 +111,8 @@ const CompanyRegister = () => {
                 <input
                   maxLength={30}
                   name="c_number"
-                  onChange={onInputChange}
+                  // onChange={onInputChange}
+                  onChange={(e) => setCin(e.target.value)}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter CIN number"
                 />
@@ -127,7 +127,8 @@ const CompanyRegister = () => {
                   <input
                     type="text"
                     name="city"
-                    onChange={onInputChange}
+                    // onChange={onInputChange}
+                    onChange={(e) => setCity(e.target.value)}
                     className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     placeholder="Enter city"
                   />
@@ -141,7 +142,8 @@ const CompanyRegister = () => {
                   <input
                     type="number"
                     name="postal_code"
-                    onChange={onInputChange}
+                    // onChange={onInputChange}
+                    onChange={(e) => setPostalCode(e.target.value)}
                     className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     placeholder="Enter postal code"
                   />

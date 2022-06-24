@@ -27,4 +27,7 @@ export const processPayment = (data) => API.post("/payment/process", data);
 
 export const cLogin = (formData) => API.post("/cLogin", formData);
 
-export const cRegister = (formData) => API.post("/cRegister", formData);
+export const cRegister = (formData) => {
+  // console.log(formData);
+  return API.post("/company/register", formData);
+};

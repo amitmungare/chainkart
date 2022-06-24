@@ -11,8 +11,8 @@ import {
 import storage from "redux-persist/lib/storage";
 import cartReducer, { getTotal } from "./cartSlice";
 import userReducer from "./userSlice";
+import companyReducer from "./companySlice";
 
-import companyReducer from "./companySlice"
 const reducers = combineReducers({
   cart: cartReducer,
   user: userReducer,
