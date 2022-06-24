@@ -31,3 +31,5 @@ export const cRegister = (formData) => {
   // console.log(formData);
   return API.post("/company/register", formData);
 };
+
+export const cLogout = () => API.get("/company/logout");
