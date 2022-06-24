@@ -19,6 +19,39 @@ exports.registerCompany = catchAsyncErrors(async(req,res, next) => {
         imagep,
         imagec
     } = req.body;
+    try{
+        if(imagep){
+            const uploadRes = await cloudinary.uploader.upload(imagep, imagec, {
+                upload_presets: "pan-card",
+                upload_presets: "cheque"
+  
+            })
+  
+            if(uploadRes){
+                const product = new Product({
+                    name,
+                    desc, 
+                    cin,
+                    postalcode,
+                    imagep: uploadRes,
+                    imagec: uploadRes
+  
+  
+                });
+                const savedProduct = await product.save();
+  
+                res.status(200).send(savedProduct);
+            }
+  
+  
+    }
+  
+  
+    }catch(error){
+        console.log(error);
+        res.status(500).send(error);
+  
+    }
     
 
     const company = await Company.create({

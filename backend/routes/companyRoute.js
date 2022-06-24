@@ -1,80 +1,48 @@
+
+
 const express = require("express");
-const cloudinary = require("..utils/cloudinary")
-const {
-  addCProduct,
-  updateCProduct,
-  deleteCProduct,
-} = require("../controllers/productController");
-
-const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 const router = express.Router();
-
-// authorizeRoles("user"),
-// isAuthenticatedUser,
-
-router.post("/cregister", (req, res) => {
-  const { name, desc, cin, postalcode, imagec, imagep } = req.body;
-  //upload image to cloudinary
-  try{
-      if(imagep){
-          const uploadRes = await cloudinary.uploader.upload(imagep, imagec, {
-              upload_presets: "pan-card",
-              upload_presets: "cheque"
-
-          })
-
-          if(uploadRes){
-              const product = new Product({
-                  name,
-                  desc, 
-                  cin,
-                  postalcode,
-                  imagep: uploadRes,
-                  imagec: uploadRes
+const { 
+    registerCompany, 
+    loginCompany, 
+    logout,
+    forgotPassword,
+    resetPassword,
+    getCompanyDetails,
+    updatePassword,
+    updateProfile,
+    getAllCompany,
+    getSingleCompany,
+    deleteCompany,
+} = require("../controllers/companyController");
 
 
-              });
-              const savedProduct = await product.save();
+const { isAuthenticatedCompany, authorizeRoles } = require("../middleware/auth");
 
-              res.status(200).send(savedProduct);
-          }
+router.route("/company/register").post(registerCompany);
 
+router.route("/company/login").post(loginCompany);
 
-  }
+router.route("/company/password/forgot").post(forgotPassword);
 
+router.route("/company/password/reset/:token").put(resetPassword);
 
-  }catch(error){
-      console.log(error);
-      res.status(500).send(error);
+router.route("/company/logout").get(logout);
 
-  }
-});
+router.route("/company/me").get(isAuthenticatedCompany, getCompanyDetails);
+
+router.route("/company/password/update").put(isAuthenticatedCompany, updatePassword);
+
+router.route("/company/me/update").put(isAuthenticatedCompany, updateProfile);
 
 router
-  .route("/admin/product/new")
-  .post(isAuthenticatedUser, authorizeRoles("admin"), createProduct);
-router
-  .route("/admin/product/:id")
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)
-  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);
-
-router.route("/product/:id").get(getProductDetails);
-
-router.route("/review").put(isAuthenticatedUser, createProductReview);
+    .route("/company/companys")
+    .get(isAuthenticatedCompany, authorizeRoles("company"), getAllCompany);
 
 router
-  .route("/reviews")
-  .get(getProductReviews)
-  .delete(isAuthenticatedUser, deleteReview);
+    .route("/company/company/:id")
+    .get(isAuthenticatedCompany, authorizeRoles("company"), getSingleCompany)
+    .delete(isAuthenticatedCompany, authorizeRoles("company"), deleteCompany)
 
-  router.get("/", async(req,res)=>{
-      try{
-        const products = await Product.find()
-        res.status(200).send(products)
-      }
-      catch(error){
-          res.status(500).send(error);
-      }
-  
-  })
+
 module.exports = router;
