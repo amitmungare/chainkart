@@ -13,6 +13,7 @@ const {
     getSingleUser,
     updateUserRole,
     deleteUser,
+    updateCompanyPassword
 } = require("../controllers/userController");
 
 
@@ -43,6 +44,12 @@ router
     .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
     .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
     .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser)
+
+
+router
+    .route("/company/admin/:id")
+    .put(isAuthenticatedUser, authorizeRoles("admin"), updateCompanyPassword)
+
 
 
 module.exports = router;

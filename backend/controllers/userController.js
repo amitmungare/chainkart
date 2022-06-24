@@ -1,6 +1,7 @@
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel");
+const Company = require("../models/companyModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require('crypto');
@@ -281,3 +282,27 @@ exports.deleteUser = catchAsyncErrors(async(req,res, next) => {
     }); 
 });
 
+
+
+// update Company password
+exports.updateCompanyPassword = catchAsyncErrors(async(req,res, next) => {
+
+    const newCompanyPassword={
+        password:req.body.password,
+    }
+    
+    const company = await Company.findByIdAndUpdate(req.params.id, newCompanyPassword, {
+        new:true,
+        runValidators:true,
+        userFindAndModify:false,
+    });
+
+    if(!company){
+        return next(new ErrorHander(`company dose not exist with id: ${req.params.id}`, 400));
+    }
+
+
+    res.status(200).json({
+        success: true,
+    }); 
+});
