@@ -8,7 +8,7 @@ const cloudinary = require("cloudinary");
 // register a company
 exports.registerCompany = catchAsyncErrors(async (req, res, next) => {
   console.log(req.body);
-  const { name, desc, email, cin, postalcode, imagep, imagec } = req.body;
+  const { name, email, cin, postalCode, imagep, imagec } = req.body;
   try {
     if (imagep) {
       const uploadRes = await cloudinary.uploader.upload(imagep, imagec, {
@@ -17,35 +17,22 @@ exports.registerCompany = catchAsyncErrors(async (req, res, next) => {
       });
 
       if (uploadRes) {
-        const product = new Product({
+        const company = await Company.create({
           name,
-          desc,
+          email,
           cin,
-          postalcode,
-          imagep: uploadRes,
-          imagec: uploadRes,
+          postalCode,
+          imagep,
+          imagec,
         });
-        const savedProduct = await product.save();
 
-        res.status(200).send(savedProduct);
+        sendToken(company, 201, res);
       }
     }
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
   }
-
-  const company = await Company.create({
-    name,
-    desc,
-    email,
-    cin,
-    postalcode,
-    imagep,
-    imagec,
-  });
-
-  sendToken(company, 201, res);
 });
 
 // login company
