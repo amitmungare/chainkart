@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { ExitToApp, SearchOutlined } from "@mui/icons-material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutCompany } from "../../store/companySlice";
 
 const Container = styled.div`
   height: 50px;
@@ -59,6 +61,14 @@ const Name = styled(NavLink)`
 `;
 
 const TitleBar = () => {
+  const company = useSelector((state) => state.company.company);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogOut = async () => {
+    dispatch(logoutCompany());
+    navigate("/");
+  };
   return (
     <Container>
       <Wrapper>
@@ -69,7 +79,7 @@ const TitleBar = () => {
         <Name to="/dashboard/cprofile">Flipkart</Name>
         <Items>
           <Item>
-            <ExitToApp className="text-indigo-600" />
+            <ExitToApp onClick={handleLogOut} className="text-indigo-600" />
             Logout
           </Item>
         </Items>

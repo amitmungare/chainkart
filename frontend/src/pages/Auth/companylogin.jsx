@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { InputOutlined, Visibility } from "@mui/icons-material";
 
-import { Link, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginCompany } from "../../store/companySlice";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 const initialState = {
   c_id: "",
@@ -11,6 +15,9 @@ const initialState = {
 function CompanyLogin() {
   const [formData, setFormData] = useState(initialState);
   const [passShow, setPassShow] = useState(false);
+  const { loading, error } = useSelector((state) => ({ ...state.company }));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onInputChange = (e) => {
     let { name, value } = e.target;
@@ -19,7 +26,7 @@ function CompanyLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(loginCompany({ formData, navigate, toast }));
   };
   return (
     <>
@@ -75,13 +82,17 @@ function CompanyLogin() {
               </div>
             </div>
 
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
-            >
-              Sign in
-            </button>
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+              >
+                Sign in
+              </button>
+            )}
 
             <p className="text-sm text-center text-gray-500">
               No account?
