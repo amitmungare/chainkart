@@ -51,5 +51,4 @@ router
     .put(isAuthenticatedUser, authorizeRoles("admin"), updateCompanyPassword)
 
 
-
 module.exports = router;

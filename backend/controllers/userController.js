@@ -287,11 +287,13 @@ exports.deleteUser = catchAsyncErrors(async(req,res, next) => {
 // update Company password
 exports.updateCompanyPassword = catchAsyncErrors(async(req,res, next) => {
 
+    email = req.body.email;
+
     const newCompanyPassword={
         password:req.body.password,
     }
     
-    const company = await Company.findByIdAndUpdate(req.params.id, newCompanyPassword, {
+    const company = await Company.findOneAndUpdate( email , newCompanyPassword, {
         new:true,
         runValidators:true,
         userFindAndModify:false,
