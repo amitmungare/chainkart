@@ -33,19 +33,17 @@ const PaymentForm = () => {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment succeeded!");
           toast.success("Payment succeeded!");
           break;
         case "processing":
-          setMessage("Your payment is processing.");
           toast.info("Your payment is processing.");
           break;
         case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
+          // setMessage("Your payment was not successful, please try again.");
           toast.error("Your payment was not successful, please try again.");
           break;
         default:
-          setMessage("Something went wrong.");
+          // setMessage("Something went wrong.");
           toast.error("Something went wrong.");
           break;
       }
@@ -66,7 +64,7 @@ const PaymentForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/profile/orders",
+        return_url: window.location.origin,
         payment_method_data: {
           billing_details: {
             name: `${user.firstname} ${user.lastname}`,

@@ -4,6 +4,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel.js");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
+const Company = require("../models/companyModel");
 const crypto = require("crypto");
 
 // register a user
@@ -270,5 +271,33 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "User deleted successfully",
+  });
+});
+
+exports.updateCompanyPassword = catchAsyncErrors(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  const newCompanyPassword = {
+    password,
+  };
+
+  const company = await Company.findOneAndUpdate(
+    { email: email },
+    newCompanyPassword,
+    {
+      new: true,
+      runValidators: true,
+      userFindAndModify: true,
+    }
+  );
+
+  if (!company) {
+    return next(
+      new ErrorHander(`company dose not exist with id: ${req.params.id}`, 400)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
   });
 });

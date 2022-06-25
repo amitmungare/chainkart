@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard/Home/dashboard";
 
 import { useState } from "react";
 import Payment from "./pages/E-Commerce/Payment";
+import CompPassword from "./pages/E-Commerce/CompPassword";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="cregister" element={<CompanyRegister />} />
         <Route path="signup" element={<UserSignUp />} />
         <Route path="dashboard/*" element={<Dashboard />} />
+        <Route path="/admin" element={<CompPassword />} />
         <Route path="payment" element={<Payment />} />
       </Routes>
     </div>
