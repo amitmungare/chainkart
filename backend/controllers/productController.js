@@ -2,23 +2,27 @@ const Product = require("../models/productModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
-
-
-
+const cloudinary = require("../utils/cloudinary");
 // create product 
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
+console.log(req.body)
+  const uploadProduct = await cloudinary.uploader.upload(pImage, {
+    
+    folder: "products"
 
-    req.body.user = req.user
-
-    const product = await Product.create(req.body);
-
+  });
+  const panCard = uploadPan.url;
+  const product = await Product.create(req.body);
+    
     res.status(201).json({
         success: true,
         product
+        
     });
 
 
 });
+
 
 // get all products 
 exports.getAllProducts = catchAsyncErrors(async(req,res, next) => {

@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
         required:true,
         trim:true
     },
-    description:{
+    desc:{
         type:String,
         required:true
     },
@@ -14,63 +14,19 @@ const productSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
-    ratings:{
-        type:Number,
-        default:0
-    },
-    images:[
-        {
-            public_id:{
-                type:String,
-                required:true
-            },
-            url:{
-                type:String,
-                required:true
-            }
+    pImages:[
+        { 
+            type:String,
+            required:True,
         }
     ],
     category:{
         type:String,
-        required:true,
+        required:True,
     },
-    Stock:{
-        type:Number,
-        required:true,
-        default:1
-    },
-    numOfReviews:{
-        type:Number,
-        default:0
-    },
-    reviews:[
-        {
-            user: {
-                type: mongoose.Schema.ObjectId,
-                ref: "User",
-                required: true,
-            },
-            name:{
-                type:String,
-                required:true
-            },
-            rating:{
-                type:Number,
-                required:true
-            },
-            comment:{
-                type:String
-            }
-        }
-    ],
-    user: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
-        required: true,
-      },
-    createdAt:{
-        type:Date,
-        default:Date.now
+    subcategory:{
+        type:String,
+        required:True,
     }
 })
 
