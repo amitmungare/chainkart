@@ -10,18 +10,22 @@ import {
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useState, useRef } from "react";
-
-const initialState = {
-  name: "",
-  desc: "",
-  price: "",
-};
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { createProduct } from "../../../store/productSlice";
 
 const AddNew = () => {
   const [selected, setSelected] = useState("");
-  const [formData, setFormData] = useState(initialState);
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [price, setPrice] = useState("");
+  // const [formData, setFormData] = useState(initialState);
   const [selected2, setSelected2] = useState("");
-  const [image, setImage] = useState(null);
+  const [pImage, setPImage] = useState(null);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const electronics = ["Laptops", "SmartPhones", "Headphones"];
   const fashion = ["Shoes", "Shirts", "Watches"];
@@ -52,24 +56,34 @@ const AddNew = () => {
     ));
   }
 
-  const onInputChange = (e) => {
-    let { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
 
+  const transformedFile = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setPImage(reader.result);
+      };
+    } else {
+      setPImage("");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormData({
-      ...formData,
-      category: selected,
-      subCategory: selected2,
-      image,
-    });
-    console.log(formData);
+    const formData = {
+      name,
+      desc,
+      price,
+      pImage,
+      selected,
+      selected2,
+    };
+    dispatch(createProduct({ formData, navigate, toast }));
   };
 
   return (
@@ -90,7 +104,7 @@ const AddNew = () => {
                 <input
                   type="text"
                   name="name"
-                  onChange={onInputChange}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter product name"
                 />
@@ -103,7 +117,7 @@ const AddNew = () => {
               <div className="relative mt-1">
                 <textarea
                   name="desc"
-                  onChange={onInputChange}
+                  onChange={(e) => setDesc(e.target.value)}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter product description"
                 />
@@ -117,7 +131,7 @@ const AddNew = () => {
                 <input
                   type="number"
                   name="price"
-                  onChange={onInputChange}
+                  onChange={(e) => setPrice(e.target.value)}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter price"
                 />
@@ -166,7 +180,7 @@ const AddNew = () => {
               <input
                 accept="image/*"
                 id="file2"
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => transformedFile(e.target.files[0])}
                 className="mt-2 block w-full text-sm text-slate-500
               file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0
