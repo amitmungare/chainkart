@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
 
 const initialState = {
-  c_id: "",
+  email: "",
   password: "",
 };
 
@@ -47,7 +47,7 @@ function CompanyLogin() {
               <div className="relative mt-1">
                 <input
                   type="text"
-                  name="c_id"
+                  name="email"
                   onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter comapny Id"

@@ -43,22 +43,26 @@ exports.registerCompany = catchAsyncErrors(async (req, res, next) => {
 
 // login company
 exports.loginCompany = catchAsyncErrors(async (req, res, next) => {
-  const { email, password } = req.body;
+  // console.log(req.body);
+  const { c_id, password } = req.body;
+  const email = c_id;
 
   if (!email || !password) {
     return next(new ErrorHander("Please enter email and password", 400));
   }
 
   const company = await Company.findOne({ email }).select("+password");
+  // console.log(company);
 
   if (!company) {
-    return next(new ErrorHander("Invalid email or password", 401));
+    return res.json({ message: "User not found" });
   }
 
   const isPasswordMatched = await company.comparePassword(password);
+  console.log(isPasswordMatched);
 
   if (!isPasswordMatched) {
-    return next(new ErrorHander("Invalid email or password", 401));
+    return res.json({ message: "Wrong password" });
   }
 
   sendToken(company, 200, res);
