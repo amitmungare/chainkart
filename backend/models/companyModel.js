@@ -41,13 +41,13 @@ const companySchema = new mongoose.Schema({
   resetPasswordExpire: Date,
 });
 
-companySchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next();
-  }
+// companySchema.pre("save", async function (next) {
+//   if (!this.isModified("password")) {
+//     next();
+//   }
 
-  this.password = await bcrypt.hash(this.password, 10);
-});
+//   this.password = await bcrypt.hash(this.password, 10);
+// });
 
 // jwt token
 companySchema.methods.getJWTToken = function () {
@@ -57,8 +57,8 @@ companySchema.methods.getJWTToken = function () {
 };
 
 // compare password
-companySchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+companySchema.methods.comparePassword = function (password) {
+  return password;
 };
 
 // password reset token

@@ -44,11 +44,10 @@ exports.registerCompany = catchAsyncErrors(async (req, res, next) => {
 // login company
 exports.loginCompany = catchAsyncErrors(async (req, res, next) => {
   // console.log(req.body);
-  const { c_id, password } = req.body;
-  const email = c_id;
+  const { email, password } = req.body;
 
   if (!email || !password) {
-    return next(new ErrorHander("Please enter email and password", 400));
+    return res.json({ message: "Enter email" });
   }
 
   const company = await Company.findOne({ email }).select("+password");

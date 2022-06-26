@@ -6,10 +6,11 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const Company = require("../models/companyModel");
 const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
 
 // register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const {
     firstname,
     lastname,
@@ -276,6 +277,9 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
 exports.updateCompanyPassword = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
+
+  // const newPassword = await bcrypt.hash(password, 10);
+  // console.log(newPassword);
 
   const newCompanyPassword = {
     password,

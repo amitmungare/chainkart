@@ -62,6 +62,7 @@ const Name = styled(NavLink)`
 
 const TitleBar = () => {
   const company = useSelector((state) => state.company.company);
+  console.log(company);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
