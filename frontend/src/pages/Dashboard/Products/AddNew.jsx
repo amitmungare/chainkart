@@ -33,6 +33,8 @@ const AddNew = () => {
   const books = ["Autobiography", "Fiction", "Textbook"];
   const home_appliances = ["Washing Machines", "Air Conditioner", "Television"];
 
+  const cat = [electronics, fashion, sports, books, home_appliances];
+
   let type = null;
   let options = null;
 
@@ -73,6 +75,14 @@ const AddNew = () => {
     }
   };
 
+  const handleCat2 = (e) => {
+    // const cat1 = cat.find((el) => el.includes(selected));
+    // console.log(cat1);
+    // const cat2 = cat1.find((el) => el.includes(e.target.value));
+    // console.log(cat2);
+    // setSelected2(cat2);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
@@ -80,8 +90,8 @@ const AddNew = () => {
       desc,
       price,
       pImage,
-      selected,
-      selected2,
+      category: selected,
+      subCategory: "Shoes",
     };
     dispatch(createProduct({ formData, navigate, toast }));
   };
@@ -163,7 +173,7 @@ const AddNew = () => {
 
                 <div className="relative mt-1">
                   <select
-                    onChange={(e) => setSelected2(e.target.value)}
+                    onChange={handleCat2}
                     // name="category"
 
                     className="mt-2 border-2 rounded-lg border-indigo-700 p-1"

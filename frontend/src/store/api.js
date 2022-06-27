@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://localhost:4000/api/v1" });
 
+
 // User
 export const login = (formData) => API.post("/login", formData);
 
@@ -33,3 +34,7 @@ export const cRegister = (formData) => {
 };
 
 export const cLogout = () => API.get("/company/logout");
+
+// Product
+
+export const createProduct = (formData) => API.post("/product/new", formData);
