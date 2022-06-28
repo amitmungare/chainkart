@@ -26,7 +26,7 @@ function CompanyLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginCompany({ formData, navigate, toast }));
+    dispatch(loginCompany({ formData, navigate }));
   };
   return (
     <>

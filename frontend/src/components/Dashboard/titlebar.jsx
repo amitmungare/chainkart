@@ -43,6 +43,7 @@ const Item = styled.div`
   display: flex;
   align-items: center;
   margin-right: 20px;
+  cursor: pointer;
 `;
 
 const Name = styled(NavLink)`
@@ -62,7 +63,7 @@ const Name = styled(NavLink)`
 
 const TitleBar = () => {
   const company = useSelector((state) => state.company.company);
-  console.log(company);
+  // console.log(company);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -77,10 +78,10 @@ const TitleBar = () => {
           <Input type="text" placeholder="Search..." />
           <SearchOutlined />
         </Search>
-        <Name to="/dashboard/cprofile">Flipkart</Name>
+        <Name to="/dashboard/cprofile">{company.name}</Name>
         <Items>
-          <Item>
-            <ExitToApp onClick={handleLogOut} className="text-indigo-600" />
+          <Item onClick={handleLogOut}>
+            <ExitToApp className="text-indigo-600" />
             Logout
           </Item>
         </Items>

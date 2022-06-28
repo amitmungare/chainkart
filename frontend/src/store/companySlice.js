@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import * as api from "./api";
 
 export const loginCompany = createAsyncThunk(
   "company/login",
-  async ({ formData, navigate, toast }, { rejectWithValue }) => {
+  async ({ formData, navigate }, { rejectWithValue }) => {
     try {
       let comapny;
       const res = await api.cLogin(formData);
@@ -14,7 +15,7 @@ export const loginCompany = createAsyncThunk(
         return;
       }
       const token = data.token;
-      comapny = data.comapny;
+      comapny = data.user;
       comapny = { ...comapny, token };
       toast.success("Login successful");
       navigate("/dashboard");
@@ -25,17 +26,14 @@ export const loginCompany = createAsyncThunk(
   }
 );
 
-export const logoutCompany = createAsyncThunk(
-  "comapny/logout",
-  async ({ toast }) => {
-    try {
-      const { data } = await api.cLogout();
-      toast.success("Logout successful");
-    } catch (err) {
-      toast.error("Logout failed");
-    }
+export const logoutCompany = createAsyncThunk("comapny/logout", async () => {
+  try {
+    const { data } = await api.cLogout();
+    toast.success("Logout successful");
+  } catch (err) {
+    toast.error("Logout failed");
   }
-);
+});
 
 const initialState = {
   company: null,
