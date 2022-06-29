@@ -1,62 +1,50 @@
-import {
-  Box,
-  FormControl,
-  Input,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextareaAutosize,
-  TextField,
-} from "@mui/material";
-import Button from "@mui/material/Button";
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createProduct } from "../../../store/productSlice";
 
 const AddNew = () => {
+  const { email } = useSelector((state) => state.company.company);
   const [selected, setSelected] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
-  // const [formData, setFormData] = useState(initialState);
+
   const [selected2, setSelected2] = useState("");
   const [pImage, setPImage] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const electronics = ["Laptops", "SmartPhones", "Headphones"];
-  const fashion = ["Shoes", "Shirts", "Watches"];
-  const sports = ["Badminton", "Cricket", "Football"];
-  const books = ["Autobiography", "Fiction", "Textbook"];
-  const home_appliances = ["Washing Machines", "Air Conditioner", "Television"];
+  // const electronics = ["Laptops", "SmartPhones", "Headphones"];
+  // const fashion = ["Shoes", "Shirts", "Watches"];
+  // const sports = ["Badminton", "Cricket", "Football"];
+  // const books = ["Autobiography", "Fiction", "Textbook"];
+  // const home_appliances = ["Washing Machines", "Air Conditioner", "Television"];
 
-  const cat = [electronics, fashion, sports, books, home_appliances];
+  // let type = null;
+  // let options = null;
 
-  let type = null;
-  let options = null;
+  // if (selected === "Electronics") {
+  //   type = electronics;
+  // } else if (selected === "Fashion") {
+  //   type = fashion;
+  // } else if (selected === "Sports") {
+  //   type = sports;
+  // } else if (selected === "Books") {
+  //   type = books;
+  // } else if (selected === "Home_Appliances") {
+  //   type = home_appliances;
+  // }
 
-  if (selected === "Electronics") {
-    type = electronics;
-  } else if (selected === "Fashion") {
-    type = fashion;
-  } else if (selected === "Sports") {
-    type = sports;
-  } else if (selected === "Books") {
-    type = books;
-  } else if (selected === "Home_Appliances") {
-    type = home_appliances;
-  }
-
-  if (type) {
-    options = type.map((el) => (
-      <option key={el} value={el}>
-        {el}
-      </option>
-    ));
-  }
+  // if (type) {
+  //   options = type.map((el) => (
+  //     <option key={el} value={el}>
+  //       {el}
+  //     </option>
+  //   ));
+  // }
 
   const handleSelect = (e) => {
     setSelected(e.target.value);
@@ -76,11 +64,7 @@ const AddNew = () => {
   };
 
   const handleCat2 = (e) => {
-    // const cat1 = cat.find((el) => el.includes(selected));
-    // console.log(cat1);
-    // const cat2 = cat1.find((el) => el.includes(e.target.value));
-    // console.log(cat2);
-    // setSelected2(cat2);
+    setSelected2(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -91,7 +75,8 @@ const AddNew = () => {
       price,
       pImage,
       category: selected,
-      subCategory: "Shoes",
+      subCategory: selected2,
+      cEmail: email,
     };
     dispatch(createProduct({ formData, navigate, toast }));
   };
@@ -178,7 +163,22 @@ const AddNew = () => {
 
                     className="mt-2 border-2 rounded-lg border-indigo-700 p-1"
                   >
-                    {options}
+                    <option value="">Select sub-category</option>
+                    <option value="Laptops">Laptops</option>
+                    <option value="Headphones">Headphones</option>
+                    <option value="SmartPhones">SmartPhones</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Shirts">Shirts</option>
+                    <option value="Watches">Watches</option>
+                    <option value="Badminton">Badminton</option>
+                    <option value="Cricket">Cricket</option>
+                    <option value="Football">Football</option>
+                    <option value="Autobiography">Autobiography</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Textbook">Textbook</option>
+                    <option value="Washing Machines">Washing Machines</option>
+                    <option value="Air Conditioner">Air Conditioner</option>
+                    <option value="Television">Television</option>
                   </select>
                 </div>
               </div>

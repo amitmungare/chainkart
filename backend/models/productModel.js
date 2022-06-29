@@ -27,10 +27,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // company: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Company",
-  // },
+  cEmail: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);
