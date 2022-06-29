@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createProduct } from "../../../store/productSlice";
+import { CircularProgress } from "@mui/material";
 
 const AddNew = () => {
   const { email } = useSelector((state) => state.company.company);
+  const { loading, error } = useSelector((state) => ({ ...state.company }));
   const [selected, setSelected] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
@@ -201,13 +203,17 @@ const AddNew = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
-            >
-              Add
-            </button>
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+              >
+                Add
+              </button>
+            )}
           </form>
         </div>
       </div>

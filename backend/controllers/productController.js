@@ -30,18 +30,36 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 // get all products
 
-exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
-
-  if (!product) {
-    return next(new ErrorHander("Product not found", 404));
-  }
-
+exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
+  const { cEmail } = req.body;
+  const products = await Product.find({ email: cEmail }, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      return data;
+    }
+  });
   res.status(200).json({
     success: true,
-    product,
+    products,
   });
 });
+
+// exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
+//   Product.find({ name: "bata" }, (err, data) => {
+//     console.log(h);
+//   });
+//   const product = await Product.findById(req.params.id);
+
+//   if (!product) {
+//     return next(new ErrorHander("Product not found", 404));
+//   }
+
+//   res.status(200).json({
+//     success: true,
+//     product,
+//   });
+// });
 
 // update product
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
