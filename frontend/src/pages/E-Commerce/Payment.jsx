@@ -16,6 +16,19 @@ const Payment = () => {
   const { user } = useSelector((state) => state.user);
   const name = `${user.firstname} ${user.lastname}`;
   const address = `${user.hnumber} , ${user.landmark}, ${user.city}-${user.state},${user.pincode}`;
+  const humber = user.hnumber;
+  const landmark = user.landmark;
+  const city = user.city;
+  const state = user.state;
+  const pincode = user.pincode;
+
+  const add1 = {
+    humber,
+    landmark,
+    city,
+    state,
+    pincode,
+  };
   const cartItems = useSelector((state) => state.cart.cartItems);
   const Amount = useSelector((state) => state.cart.cartTotalAmount);
 
@@ -52,7 +65,7 @@ const Payment = () => {
     <div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <PaymentForm />
+          <PaymentForm name={name} address={address} add1={add1} />
         </Elements>
       )}
     </div>

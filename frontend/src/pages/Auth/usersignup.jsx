@@ -42,7 +42,7 @@ const UserSignUp = () => {
     if (password !== confirmPassword) {
       toast.error("Password and Confirm Password does not match");
     }
-    dispatch(registerUser({ formData, navigate, toast }));
+    dispatch(registerUser({ formData, navigate }));
     // console.log(formData);
   };
   return (

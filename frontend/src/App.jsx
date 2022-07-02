@@ -8,9 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Dashboard from "./pages/Dashboard/Home/dashboard";
 
-import { useState } from "react";
 import Payment from "./pages/E-Commerce/Payment";
 import CompPassword from "./pages/E-Commerce/CompPassword";
+import Success from "./pages/E-Commerce/success";
 
 const App = () => {
   return (
@@ -26,6 +26,7 @@ const App = () => {
         <Route path="dashboard/*" element={<Dashboard />} />
         <Route path="/admin" element={<CompPassword />} />
         <Route path="payment" element={<Payment />} />
+        <Route path="success" element={<Success />} />
       </Routes>
     </div>
   );

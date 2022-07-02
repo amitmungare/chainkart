@@ -26,7 +26,7 @@ const ChangePass = () => {
       return;
     }
 
-    dispatch(updateUserPassword({ formData, toast, token }));
+    dispatch(updateUserPassword({ formData, token }));
   };
 
   return (

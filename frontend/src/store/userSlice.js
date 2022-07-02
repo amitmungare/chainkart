@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "./api";
+import { toast } from "react-toastify";
 
 export const loginUser = createAsyncThunk(
   "user/login",
-  async ({ formData, navigate, toast }, { rejectWithValue }) => {
+  async ({ formData, navigate }, { rejectWithValue }) => {
     try {
       let user;
       const res = await api.login(formData);
@@ -27,12 +28,16 @@ export const loginUser = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
   "user/register",
-  async ({ formData, navigate, toast }, { rejectWithValue }) => {
+  async ({ formData, navigate }, { rejectWithValue }) => {
     try {
       let user;
       const res = await api.register(formData);
-      console.log(res);
+      // console.log(res);
       const data = res.data;
+      if (data.message) {
+        toast.error(data.message);
+        return;
+      }
       const token = data.token;
       user = data.user;
       user = { ...user, token };
@@ -47,11 +52,11 @@ export const registerUser = createAsyncThunk(
 
 export const updateUserProfile = createAsyncThunk(
   "user/update",
-  async ({ formData, toast, token }, { rejectWithValue }) => {
+  async ({ formData, token }, { rejectWithValue }) => {
     try {
       // console.log(formData, token);
       const res = await api.updateProfile(formData, token);
-      console.log(res);
+
       toast.success("Profile updated");
       return { ...formData, token };
     } catch (err) {
@@ -62,7 +67,7 @@ export const updateUserProfile = createAsyncThunk(
 
 export const updateUserPassword = createAsyncThunk(
   "user/password",
-  async ({ formData, toast, token }, { rejectWithValue }) => {
+  async ({ formData, token }, { rejectWithValue }) => {
     try {
       const res = await api.updatePassword(formData, token);
       toast.success("Password updated");
@@ -72,7 +77,7 @@ export const updateUserPassword = createAsyncThunk(
   }
 );
 
-export const logoutUser = createAsyncThunk("user/logout", async ({ toast }) => {
+export const logoutUser = createAsyncThunk("user/logout", async () => {
   try {
     const { data } = await api.logout();
     toast.success("Logout successful");

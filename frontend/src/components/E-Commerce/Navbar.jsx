@@ -17,6 +17,10 @@ const ListItem = styled.div`
 `;
 
 const List = styled.li`
+  // background-color: #007fff;
+  // color: #fff;
+  // padding: 5px;
+  // border-radius: 5px;
   &:hover {
     cursor: pointer;
     color: rgb(37, 99, 235);

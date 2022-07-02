@@ -34,7 +34,7 @@ function UserLogin() {
     e.preventDefault();
 
     if (email && password) {
-      dispatch(loginUser({ formData, navigate, toast }));
+      dispatch(loginUser({ formData, navigate }));
     }
   };
 
@@ -105,6 +105,7 @@ function UserLogin() {
               <button
                 type="submit"
                 className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+                disabled={!email || !password}
               >
                 Sign in
               </button>

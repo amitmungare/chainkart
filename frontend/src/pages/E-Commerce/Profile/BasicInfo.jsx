@@ -38,7 +38,7 @@ const BasicInfo = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    dispatch(updateUserProfile({ formData, toast, token }));
+    dispatch(updateUserProfile({ formData, token }));
   };
 
   return (

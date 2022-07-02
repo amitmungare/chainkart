@@ -8,8 +8,9 @@ import { toast } from "react-toastify";
 import { clearCart } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const PaymentForm = () => {
+const PaymentForm = ({ name, address, add1 }) => {
   const { user } = useSelector((state) => state.user);
+
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
@@ -63,12 +64,29 @@ const PaymentForm = () => {
 
     const { error } = await stripe.confirmPayment({
       elements,
+
       confirmParams: {
-        return_url: window.location.origin,
+        return_url: "http://localhost:3000/success",
+
+        shipping: {
+          name,
+          address: {
+            line1: add1.humber,
+            line2: add1.landmark,
+            city: add1.city,
+            state: add1.state,
+            postal_code: add1.pincode,
+            country: "India",
+          },
+          tracking_number:
+            Math.random().toString(36).substring(2, 15) +
+            Math.random().toString(36).substring(2, 15),
+        },
+        receipt_email: user.email,
         payment_method_data: {
           billing_details: {
-            name: `${user.firstname} ${user.lastname}`,
-            address: `${user.hnumber} , ${user.landmark}, ${user.city}-${user.state},${user.pincode}`,
+            name: name,
+            address: address,
             email: user.email,
           },
         },
