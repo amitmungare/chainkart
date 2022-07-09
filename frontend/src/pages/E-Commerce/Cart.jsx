@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, getTotal } from "../../store/cartSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import CheckoutItem from "../../components/E-Commerce/Cart/CheckoutItem";
 

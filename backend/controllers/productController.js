@@ -5,7 +5,8 @@ const cloudinary = require("../utils/cloudinary");
 const Company = require("../models/companyModel");
 // create product
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
-  const { name, price, desc, category, subCategory, pImage, cEmail } = req.body;
+  const { name, price, desc, category, subCategory, pImage, cName, cEmail } =
+    req.body;
 
   const uploadProduct = await cloudinary.uploader.upload(pImage, {
     folder: `${category}`,
@@ -18,6 +19,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     category,
     subCategory,
     pImage: productUrl,
+    cName,
     cEmail,
   };
   const product = await Product.create(data);
