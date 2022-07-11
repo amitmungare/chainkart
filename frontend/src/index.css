@@ -24,6 +24,10 @@
   }
 
   .hover-1 {
-    @apply hover:bg-slate-200 hover:rounded-md hover:p-1;
+    @apply text-[rgb(0,0,0,0.56)] hover:bg-slate-200 hover:text-[hsl(231,48%,58%)] hover:rounded-md hover:p-1;
+  }
+
+  .text-col {
+    @apply text-[rgb(0,0,0,0.56)] font-bold;
   }
 }

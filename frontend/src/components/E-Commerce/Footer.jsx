@@ -16,7 +16,7 @@ const Footer = () => {
     <div className="flex mb-auto">
       <div className="flex flex-col flex-[1] p-5">
         <span className="font-bold text-lg mb-2">About Us</span>
-        <p className="mx-0 my-5 text-justify">
+        <p className="mx-0 my-5 text-justify text-col">
           Chainkart is a first of its kind Blockchain based e-commerce
           marketplace. Backed by Ethereum blockchain, every transaction is
           secured, authentic and from the original brand owner, guaranteed!
@@ -45,39 +45,39 @@ const Footer = () => {
         <h3 className="mb-7 font-bold">Useful Links</h3>
         <ul className="flex flex-wrap">
           <Link to="/" className="w-1/2 mb-2">
-            <li>Home</li>
+            <li className="text-col">Home</li>
           </Link>
 
           <Link to="/" className="w-1/2 mb-2">
-            <li>Electronics</li>
+            <li className="text-col">Electronics</li>
           </Link>
 
           <Link to="/" className="w-1/2 mb-2">
-            <li>Fashion</li>
+            <li className="text-col">Fashion</li>
           </Link>
 
           <Link to="/" className="w-1/2 mb-2">
-            <li>Sports</li>
+            <li className="text-col">Sports</li>
           </Link>
 
           <Link to="/" className="w-1/2 mb-2">
-            <li>Books</li>
+            <li className="text-col">Books</li>
           </Link>
 
           <Link to="/" className="w-1/2 mb-2">
-            <li>Terms</li>
+            <li className="text-col">Terms</li>
           </Link>
 
           <Link to="/" className="w-1/2 mb-2">
-            <li>Home Appliances</li>
+            <li className="text-col">Home Appliances</li>
           </Link>
 
           <Link to="/" className="w-1/2 mb-2">
-            <li>My Account</li>
+            <li className="text-col">My Account</li>
           </Link>
         </ul>
       </div>
-      <div className="flex-[1] p-5">
+      <div className="flex-[1] p-5 opacity-75">
         <h1 className="font-bold mb-7">Contact</h1>
         <div className="mb-5 flex items-center">
           <Room className="mr-2" /> Verna, Goa - 403722

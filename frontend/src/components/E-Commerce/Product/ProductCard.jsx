@@ -17,7 +17,7 @@ const ProductCard = ({ product, category, subCategory }) => {
   };
 
   return (
-    <div>
+    <div className="bg-gray-200 p-2 rounded-md">
       <Link to={`/${category}/${subCategory}/${name}`}>
         <img className="mb-5 h-56 w-full object-contain" src={img} />
       </Link>
