@@ -5,8 +5,17 @@ import {
   decreaseCart,
   removeFromCart,
 } from "../../../store/cartSlice";
+import { dispatch } from "../../../store/store";
 
-const CheckoutItem = ({ cartItem }) => {
+interface CartItem {
+  name: string;
+  desc: string;
+  price: number;
+  cartQuantity: number;
+  img: string;
+}
+
+const CheckoutItem = (cartItem: CartItem) => {
   const { price, cartQuantity, img, name } = cartItem;
   // console.log(cartItem);
   let formattedPrice = new Intl.NumberFormat("en-IN").format(cartItem.price);
@@ -14,17 +23,15 @@ const CheckoutItem = ({ cartItem }) => {
     cartQuantity * price
   );
 
-  const dispatch = useDispatch();
-
-  const handleRemove = (cartItem) => {
-    dispatch(removeFromCart(cartItem.name));
+  const handleRemove = (itemName: string) => {
+    dispatch(removeFromCart(itemName));
   };
 
-  const handleDecrease = (cartItem) => {
+  const handleDecrease = (cartItem: CartItem) => {
     dispatch(decreaseCart(cartItem));
   };
 
-  const handleIncrease = (cartItem) => {
+  const handleIncrease = (cartItem: CartItem) => {
     dispatch(addToCart(cartItem));
   };
 
@@ -57,7 +64,10 @@ const CheckoutItem = ({ cartItem }) => {
       </div>
 
       <div className="flex flex-col justify-between ml-auto">
-        <span className="cursor-pointer" onClick={() => handleRemove(cartItem)}>
+        <span
+          className="cursor-pointer"
+          onClick={() => handleRemove(cartItem.name)}
+        >
           &#10005;
         </span>
         <span>Total: ₹{formattedTotalAmount}</span>

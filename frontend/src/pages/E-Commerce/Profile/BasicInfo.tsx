@@ -1,44 +1,37 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { dispatch, selectUser } from "../../../store/store";
 import { updateUserProfile } from "../../../store/userSlice";
+import { User } from "../../../utils/dataTypes";
 
-const BasicInfo = () => {
-  const { user } = useSelector((state) => ({ ...state.user }));
-  const {
-    email,
-    firstname,
-    lastname,
-    hnumber,
-    city,
-    landmark,
-    state,
-    pincode,
-    token,
-  } = user;
+interface Props {
+  user: any;
+}
 
-  const dispatch = useDispatch();
+const BasicInfo = ({ user }: Props) => {
+  console.table(user);
+  // console.log(user1);
 
-  const [uFirstName, setUFirstName] = useState(firstname);
-  const [uLastName, setULastName] = useState(lastname);
-  const [uEmail, setUEmail] = useState(email);
+  const [uFirstName, setUFirstName] = useState(user.firstname);
+  const [uLastName, setULastName] = useState(user.lastname);
+  const [uEmail, setUEmail] = useState(user.email);
   const formData = {
     firstname: uFirstName,
     lastname: uLastName,
     email: uEmail,
-    hnumber,
-    city,
-    landmark,
-    state,
-    pincode,
+    hnumber: user.hnumber,
+    city: user.city,
+    landmark: user.landmark,
+    state: user.state,
+    pincode: user.pincode,
+    token: user.token,
   };
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (e: any) => {
     e.preventDefault();
 
-    dispatch(updateUserProfile({ formData, token }));
+    dispatch(updateUserProfile(formData));
   };
 
   return (
@@ -51,7 +44,7 @@ const BasicInfo = () => {
           <label>First Name </label>
           <input
             onChange={(e) => setUFirstName(e.target.value)}
-            placeholder={firstname}
+            placeholder={uFirstName}
             className="border-2 border-indigo-600 rounded-lg w-60"
             type="text"
           />
@@ -61,7 +54,7 @@ const BasicInfo = () => {
           <label>Last Name </label>
           <input
             onChange={(e) => setULastName(e.target.value)}
-            placeholder={lastname}
+            placeholder={uLastName}
             className="border-2 border-indigo-600 rounded-lg w-60"
             type="text"
           />
@@ -71,7 +64,7 @@ const BasicInfo = () => {
           <label>Email </label>
           <input
             onChange={(e) => setUEmail(e.target.value)}
-            placeholder={email}
+            placeholder={uEmail}
             className="border-2 border-indigo-600 rounded-lg ml-9 w-60"
             type="email"
           />

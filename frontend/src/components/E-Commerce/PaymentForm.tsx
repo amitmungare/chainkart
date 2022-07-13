@@ -6,16 +6,16 @@ import {
 } from "@stripe/react-stripe-js";
 import { toast } from "react-toastify";
 import { clearCart } from "../../store/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { dispatch, selectUser } from "../../store/store";
 
 const PaymentForm = ({ name, address, add1 }) => {
-  const { user } = useSelector((state) => state.user);
+  const user: any = useSelector(selectUser);
 
   const stripe = useStripe();
   const elements = useElements();
-  const dispatch = useDispatch();
 
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const PaymentForm = ({ name, address, add1 }) => {
     }
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
+      switch (paymentIntent?.status) {
         case "succeeded":
           toast.success("Payment succeeded!");
           break;
@@ -51,7 +51,7 @@ const PaymentForm = ({ name, address, add1 }) => {
     });
   }, [stripe]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -94,7 +94,7 @@ const PaymentForm = ({ name, address, add1 }) => {
     });
 
     if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
+      setMessage("error");
       toast.error(error.message);
     } else {
       setMessage("An unexpected error occurred.");

@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "./api";
 
+import { toast } from "react-toastify";
+
 export const createProduct = createAsyncThunk(
   "product/create",
-  async ({ formData, navigate, toast }, { rejectWithValue }) => {
+  async ({ formData, navigate }, { rejectWithValue }) => {
     try {
       const { data } = await api.createProduct(formData);
       if (data.message) {

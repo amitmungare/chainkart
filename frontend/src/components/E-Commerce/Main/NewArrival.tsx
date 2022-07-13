@@ -1,4 +1,3 @@
-import { AddShoppingCart } from "@mui/icons-material";
 import { BsCart3 } from "react-icons/bs";
 import React from "react";
 

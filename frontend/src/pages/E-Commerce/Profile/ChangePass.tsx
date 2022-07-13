@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { dispatch, selectUser } from "../../../store/store";
 import { updateUserPassword } from "../../../store/userSlice";
+import { User } from "../../../utils/dataTypes";
 
-const ChangePass = () => {
-  const {
-    user: { token },
-  } = useSelector((state) => state.user);
+interface Props {
+  token: string;
+}
+
+const ChangePass = ({ token }: Props) => {
+  // const { token } = useSelector(selectUser);
 
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-  const dispatch = useDispatch();
   const formData = {
     oldPassword: oldPass,
     newPassword: newPass,
     confirmPassword: confirmPass,
+    token,
   };
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (e: any) => {
     e.preventDefault();
 
     if (newPass !== confirmPass) {
@@ -26,7 +30,7 @@ const ChangePass = () => {
       return;
     }
 
-    dispatch(updateUserPassword({ formData, token }));
+    dispatch(updateUserPassword(formData));
   };
 
   return (

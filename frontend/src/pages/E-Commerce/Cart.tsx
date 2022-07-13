@@ -1,30 +1,39 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { clearCart, getTotal } from "../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
 
 import CheckoutItem from "../../components/E-Commerce/Cart/CheckoutItem";
+import { useSelector } from "react-redux";
+import {
+  dispatch,
+  selectCart,
+  selectCartItems,
+  selectUser,
+} from "../../store/store";
 
 const Cart = () => {
-  const { user } = useSelector((state) => state.user);
-  const name = `${user.firstname} ${user.lastname}`;
-  const address = `${user.hnumber} , ${user.landmark}, ${user.city}-${user.state},${user.pincode}`;
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const Amount = useSelector((state) => state.cart.cartTotalAmount);
+  const user: any = useSelector(selectUser);
+  // console.log(user);
+  const name = `${user?.firstname} ${user?.lastname}`;
+  const address = `${user?.hnumber} , ${user?.landmark}, ${user?.city}-${user?.state},${user?.pincode}`;
+  const cartItems = useSelector(selectCartItems);
+  const { cartTotalAmount: Amount } = useSelector(selectCart);
+
   let formattedAmount = new Intl.NumberFormat("en-IN").format(Amount);
   let sCharge = Amount > 500 ? 0 : 100;
   let formatteTotaldAmount = new Intl.NumberFormat("en-IN").format(
     Amount + sCharge
   );
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
+  // const handleClearCart = () => {
+  //   useAppDispatch(clearCart());
+  // };
 
   useEffect(() => {
     dispatch(getTotal());
+    return () => {};
   }, [cartItems, dispatch]);
 
   // console.log(cartItems);
@@ -40,7 +49,14 @@ const Cart = () => {
           <div className="flex justify-between gap-5 min-h-[70vh] ">
             <div className="flex-[2] max-w-2xl ml-4 mt-4">
               {cartItems.map((cartItem) => (
-                <CheckoutItem cartItem={cartItem} />
+                <CheckoutItem
+                  key={cartItem.name}
+                  cartQuantity={cartItem.cartQuantity}
+                  img={cartItem.img}
+                  name={cartItem.name}
+                  desc={cartItem.desc}
+                  price={cartItem.price}
+                />
               ))}
             </div>
             <div>

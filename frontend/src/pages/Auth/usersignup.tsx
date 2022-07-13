@@ -8,6 +8,7 @@ import { FaLandmark } from "react-icons/fa";
 import { FaCity } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import { dispatch, selectU } from "../../store/store";
 
 const inititalState = {
   email: "",
@@ -25,18 +26,17 @@ const inititalState = {
 const UserSignUp = () => {
   const [formData, setFormData] = useState(inititalState);
   const { confirmPassword, password } = formData;
-  const { loading, error } = useSelector((state) => ({ ...state.user }));
+  const { error, loading } = useSelector(selectU);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [passShow, setPassShow] = useState(false);
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: any) => {
     let { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {

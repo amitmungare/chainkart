@@ -8,7 +8,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/es/storage";
+import { persistStore } from "redux-persist";
 import cartReducer, { getTotal } from "./cartSlice";
 import userReducer from "./userSlice";
 import companyReducer from "./companySlice";
@@ -38,6 +39,20 @@ const store = configureStore({
     }),
 });
 
-store.dispatch(getTotal());
+store.dispatch(getTotal);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export const dispatch: AppDispatch = store.dispatch;
+
+export const selectUser = (state: RootState) => state.user.user;
+
+export const selectU = (state: RootState) => state.user;
+
+export const selectCart = (state: RootState) => state.cart;
+export const selectCartItems = (state: RootState) => state.cart.cartItems;
+
+export const persistor = persistStore(store);
 
 export default store;

@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Route, Routes } from "react-router-dom";
 import UserLogin from "./pages/Auth/userlogin";
 import CompanyLogin from "./pages/Auth/companylogin";

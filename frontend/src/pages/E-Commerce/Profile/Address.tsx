@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { dispatch, selectUser } from "../../../store/store";
 import { updateUserProfile } from "../../../store/userSlice";
+import { User } from "../../../utils/dataTypes";
 
-const Address = () => {
-  const { user } = useSelector((state) => state.user);
+interface Props {
+  user: any;
+}
+
+const Address = ({ user }: Props) => {
+  // const { user, token } = useSelector(selectUser);
   const {
     firstname,
     lastname,
@@ -14,16 +19,13 @@ const Address = () => {
     landmark,
     state,
     pincode,
-    token,
   } = user;
 
-  const dispatch = useDispatch();
-
-  const [uHNumber, setUHNumber] = useState(hnumber);
-  const [uCity, setUCity] = useState(city);
-  const [uLandmark, setULandmark] = useState(landmark);
-  const [uState, setUState] = useState(state);
-  const [uPincode, setUPincode] = useState(pincode);
+  const [uHNumber, setUHNumber] = useState<number>(hnumber);
+  const [uCity, setUCity] = useState<string>(city);
+  const [uLandmark, setULandmark] = useState<string>(landmark);
+  const [uState, setUState] = useState<string>(state);
+  const [uPincode, setUPincode] = useState<number>(pincode);
 
   const formData = {
     firstname,
@@ -34,12 +36,13 @@ const Address = () => {
     landmark: uLandmark,
     state: uState,
     pincode: uPincode,
+    token: user.token,
   };
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (e: any) => {
     e.preventDefault();
 
-    dispatch(updateUserProfile({ formData, toast, token }));
+    dispatch(updateUserProfile(formData));
   };
   return (
     <div className="min-h-screen flex flex-col justify-between ml-12">
@@ -50,8 +53,8 @@ const Address = () => {
         <div className="flex gap-2 items-center">
           <label>House Number </label>
           <input
-            onChange={(e) => setUHNumber(e.target.value)}
-            placeholder={hnumber}
+            onChange={(e) => setUHNumber(parseInt(e.target.value))}
+            placeholder={hnumber.toString()}
             className="border-2 border-indigo-600 rounded-lg"
             type="text"
           />
@@ -120,8 +123,8 @@ const Address = () => {
         <div className="flex gap-2 items-center">
           <label>Pincode </label>
           <input
-            onChange={(e) => setUPincode(e.target.value)}
-            placeholder={pincode}
+            onChange={(e) => setUPincode(parseInt(e.target.value))}
+            placeholder={pincode.toString()}
             style={{ WebkitAppearance: "none" }}
             className="border-2 border-indigo-600 rounded-lg ml-11"
             type="number"

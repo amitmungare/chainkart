@@ -2,11 +2,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart } from "../../../store/cartSlice";
+import { dispatch } from "../../../store/store";
 
 // import { add } from ;
 
 const ProductCard = ({ product, category, subCategory }) => {
-  const dispatch = useDispatch();
   const { name, price, img } = product;
 
   let formattedPrice = new Intl.NumberFormat("en-IN").format(price);

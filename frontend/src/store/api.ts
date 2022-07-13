@@ -1,21 +1,26 @@
 import axios from "axios";
+import {
+  Login,
+  Register,
+  UpdatePassword,
+  UpdateProfie,
+} from "../utils/dataTypes";
 
 const API = axios.create({ baseURL: "http://localhost:4000/api/v1" });
 
-
 // User
-export const login = (formData) => API.post("/login", formData);
+export const login = (formData: Login) => API.post("/login", formData);
 
-export const register = (formData) => API.post("/register", formData);
+export const register = (formData: Register) => API.post("/register", formData);
 
-export const updateProfile = (formData, token) =>
+export const updateProfile = (formData: UpdateProfie) =>
   API.put("/me/update", formData, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${formData.token}` },
   });
 
-export const updatePassword = (formData, token) =>
+export const updatePassword = (formData: UpdatePassword) =>
   API.put("/password/update", formData, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${formData.token}` },
   });
 
 export const logout = () => API.get("/logout");

@@ -1,6 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+interface cartItem {
+  name: string;
+  desc: string;
+  price: number;
+  img: string;
+  cartQuantity: number;
+}
+
+interface initialState1 {
+  cartItems: cartItem[];
+  cartTotalQuantity: number;
+  cartTotalAmount: number;
+}
+
+const initialState: initialState1 = {
   cartItems: [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
@@ -10,7 +24,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (state: initialState1, action: PayloadAction<cartItem>) => {
       const itemIndex = state.cartItems.findIndex(
         (item) => item.name === action.payload.name
       );
@@ -21,14 +35,14 @@ const cartSlice = createSlice({
         state.cartItems.push(tempProduct);
       }
     },
-    removeFromCart: (state, action) => {
+    removeFromCart: (state: initialState1, action: PayloadAction<string>) => {
       const nextCartItems = state.cartItems.filter(
         (item) => item.name !== action.payload
       );
 
       state.cartItems = nextCartItems;
     },
-    decreaseCart(state, action) {
+    decreaseCart(state: initialState1, action: PayloadAction<cartItem>) {
       const itemIndex = state.cartItems.findIndex(
         (item) => item.name === action.payload.name
       );
@@ -43,10 +57,10 @@ const cartSlice = createSlice({
         state.cartItems = nextCartItems;
       }
     },
-    clearCart(state, action) {
+    clearCart(state: initialState1, action: any) {
       state.cartItems = [];
     },
-    getTotal(state, action) {
+    getTotal(state: initialState1, action: any) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { price, cartQuantity } = cartItem;

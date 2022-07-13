@@ -15,7 +15,7 @@ const ProductItem = ({ products }) => {
   let formattedPrice = new Intl.NumberFormat("en-IN").format(product.price);
   // console.log(formatted);
 
-  const handleAdd = (product) => {
+  const handleAdd = (product: any) => {
     dispatch(addToCart(product));
   };
 

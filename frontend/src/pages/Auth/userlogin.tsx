@@ -1,11 +1,11 @@
 import { Mail, Visibility } from "@mui/icons-material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/userSlice";
-import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import { useSelector } from "react-redux";
+import { dispatch, selectU } from "../../store/store";
 
 const initialState = {
   email: "",
@@ -15,9 +15,9 @@ const initialState = {
 function UserLogin() {
   const [formData, setFormData] = useState(initialState);
   const { email, password } = formData;
-  const { loading, error } = useSelector((state) => ({ ...state.user }));
+  // const { loading, error } = useSelector((state) => ({ ...state.user }));
+  const { error, loading } = useSelector(selectU);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [passShow, setPassShow] = useState(false);
 
@@ -25,15 +25,16 @@ function UserLogin() {
   //   error && toast.error(error);
   // }, [error]);
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (email && password) {
+      console.log(formData);
       dispatch(loginUser({ formData, navigate }));
     }
   };

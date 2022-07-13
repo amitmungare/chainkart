@@ -1,11 +1,11 @@
 import { PermIdentityOutlined, ShoppingBagOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logoutUser } from "../../store/userSlice";
-import { toast } from "react-toastify";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { dispatch, selectCartItems, selectUser } from "../../store/store";
 
 const ListItem = styled.div`
   position: absolute;
@@ -42,12 +42,11 @@ const Menu = styled.div`
 `;
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
-  const items = useSelector((state) => state.cart.cartItems);
+  const items = useSelector(selectCartItems);
   const handleLogOut = async () => {
-    dispatch(logoutUser({ toast }));
+    dispatch(logoutUser());
   };
 
   return (
@@ -139,7 +138,7 @@ const Navbar = () => {
           </NavLink>
         </div>
         <div className="flex justify-center items-center">
-          {user ? (
+          {user.active ? (
             <span
               onClick={handleLogOut}
               className="hover mt-2 text-[18px] font-semibold text-[rgb(0,0,0,0.56)]"
