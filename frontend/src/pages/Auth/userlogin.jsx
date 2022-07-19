@@ -38,11 +38,13 @@ function UserLogin() {
     }
   };
 
+  // #0E3E86
+
   return (
-    <>
+    <div className="bg-[#0E3E86] h-screen">
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl font-bold text-center text-indigo-600 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-center text-white sm:text-3xl">
             Get started today!
           </h1>
 
@@ -50,10 +52,12 @@ function UserLogin() {
             onSubmit={handleSubmit}
             className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl"
           >
-            <p className="text-lg font-medium">Sign in to your account</p>
+            <p className="text-lg font-medium text-white">
+              Sign in to your account
+            </p>
 
             <div>
-              <label htmlFor="email" className="text-sm font-medium">
+              <label htmlFor="email" className="text-sm font-medium text-white">
                 Email
               </label>
 
@@ -64,7 +68,6 @@ function UserLogin() {
                   name="email"
                   onChange={onInputChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter email"
                   required={true}
                 />
 
@@ -75,7 +78,10 @@ function UserLogin() {
             </div>
 
             <div>
-              <label htmlFor="password" className="text-sm font-medium">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-white"
+              >
                 Password
               </label>
 
@@ -85,8 +91,8 @@ function UserLogin() {
                   name="password"
                   id="password"
                   onChange={onInputChange}
-                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm   "
-                  placeholder="Enter password"
+                  className="w-full p-4 pr-12 text-sm  border-gray-200 rounded-lg shadow-sm   "
+
                   // required={true}
                 />
 
@@ -104,30 +110,30 @@ function UserLogin() {
             ) : (
               <button
                 type="submit"
-                className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+                className="block w-full px-5 py-3 text-sm font-medium text-white bg-blue-700 rounded-lg"
                 disabled={!email || !password}
               >
                 Sign in
               </button>
             )}
 
-            <p className="text-sm text-center text-gray-500">
+            <p className="text-sm text-center text-white">
               No account?
-              <Link className="m-1 text-indigo-600" to="/signup">
+              <Link className="m-1 text-blue-700" to="/signup">
                 Sign up
               </Link>
             </p>
 
-            <p className="text-sm text-center text-gray-500">
+            <p className="text-sm text-center text-white ">
               Forgot Password?
-              <Link className="m-1 text-indigo-600" to="/signup">
+              <Link className="m-1 text-blue-700" to="/signup">
                 Reset
               </Link>
             </p>
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
