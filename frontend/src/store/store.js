@@ -8,7 +8,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/es/storage";
 import cartReducer, { getTotal } from "./cartSlice";
 import userReducer from "./userSlice";
 import companyReducer from "./companySlice";

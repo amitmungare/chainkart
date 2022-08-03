@@ -54,12 +54,12 @@ const Payment = () => {
     payment();
   });
 
-  const appearance = {
-    theme: "flat",
-  };
   const options = {
     clientSecret,
-    appearance,
+    loader: "auto",
+    appearance: {
+      theme: "flat",
+    },
   };
   return (
     <div>

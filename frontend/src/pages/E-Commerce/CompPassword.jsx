@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const CompPassword = () => {
   const [email, setEmail] = React.useState("");
@@ -16,8 +17,8 @@ const CompPassword = () => {
       data
     );
     console.log(res);
-    if (res.data.status === "success") {
-      alert("Password updated successfully");
+    if (res.data.success) {
+      toast.success("Password updated successfully");
     }
   };
 

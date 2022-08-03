@@ -66,7 +66,7 @@ const PaymentForm = ({ name, address, add1 }) => {
       elements,
 
       confirmParams: {
-        return_url: "http://localhost:3000/success",
+        return_url: "http:localhost:3000/success",
 
         shipping: {
           name,

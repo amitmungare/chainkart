@@ -6,11 +6,11 @@ import { useNavigate } from "react-router-dom";
 import CheckoutItem from "../../components/E-Commerce/Cart/CheckoutItem";
 
 const Cart = () => {
-  const { user } = useSelector((state) => state.user);
-  const name = `${user.firstname} ${user.lastname}`;
-  const address = `${user.hnumber} , ${user.landmark}, ${user.city}-${user.state},${user.pincode}`;
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const Amount = useSelector((state) => state.cart.cartTotalAmount);
+  const { user } = useSelector((state) => state?.user);
+  const name = `${user?.firstname} ${user?.lastname}`;
+  const address = `${user?.hnumber} , ${user?.landmark}, ${user?.city}-${user?.state},${user?.pincode}`;
+  const cartItems = useSelector((state) => state?.cart?.cartItems);
+  const Amount = useSelector((state) => state?.cart?.cartTotalAmount);
   let formattedAmount = new Intl.NumberFormat("en-IN").format(Amount);
   let sCharge = Amount > 500 ? 0 : 100;
   let formatteTotaldAmount = new Intl.NumberFormat("en-IN").format(

@@ -39,12 +39,13 @@ function UserLogin() {
   };
 
   // #0E3E86
+  // #89CFF0
 
   return (
-    <div className="bg-[#0E3E86] h-screen">
+    <div className="bg-sky-300 h-screen">
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl font-bold text-center text-white sm:text-3xl">
+          <h1 className="text-2xl font-bold text-center text-black sm:text-3xl">
             Get started today!
           </h1>
 
@@ -52,12 +53,12 @@ function UserLogin() {
             onSubmit={handleSubmit}
             className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl"
           >
-            <p className="text-lg font-medium text-white">
+            <p className="text-lg  text-black font-bold">
               Sign in to your account
             </p>
 
             <div>
-              <label htmlFor="email" className="text-sm font-medium text-white">
+              <label htmlFor="email" className="text-sm font-medium text-black">
                 Email
               </label>
 
@@ -80,7 +81,7 @@ function UserLogin() {
             <div>
               <label
                 htmlFor="password"
-                className="text-sm font-medium text-white"
+                className="text-sm font-medium text-black"
               >
                 Password
               </label>
@@ -110,23 +111,23 @@ function UserLogin() {
             ) : (
               <button
                 type="submit"
-                className="block w-full px-5 py-3 text-sm font-medium text-white bg-blue-700 rounded-lg"
+                className="block w-full px-5 py-3 text-sm font-bold text-white bg-[#0369a1] rounded-lg"
                 disabled={!email || !password}
               >
                 Sign in
               </button>
             )}
 
-            <p className="text-sm text-center text-white">
+            <p className="text-sm text-center text-black">
               No account?
-              <Link className="m-1 text-blue-700" to="/signup">
+              <Link className="m-1 text-white " to="/signup">
                 Sign up
               </Link>
             </p>
 
-            <p className="text-sm text-center text-white ">
+            <p className="text-sm text-center text-black ">
               Forgot Password?
-              <Link className="m-1 text-blue-700" to="/signup">
+              <Link className="m-1 text-white " to="/signup">
                 Reset
               </Link>
             </p>
