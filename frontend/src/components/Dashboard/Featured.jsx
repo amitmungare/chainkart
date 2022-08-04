@@ -4,9 +4,7 @@ import {
   MoreVert,
 } from "@mui/icons-material";
 import React from "react";
-import { CircularProgressbar } from "react-circular-progressbar";
 import styled from "styled-components";
-import "react-circular-progressbar/dist/styles.css";
 
 const Container = styled.div`
   flex: 2;

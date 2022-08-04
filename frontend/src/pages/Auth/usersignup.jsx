@@ -49,13 +49,14 @@ const UserSignUp = () => {
     <>
       <div className="flex gap-3 relative">
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+          <h1 className="absolute right-10 left-6 text-2xl font-bold text-center text-[#0369a1] sm:text-3xl">
+            Get started today
+          </h1>
           <div className="max-w-lg mx-auto">
-            <h1 className="text-2xl font-bold text-center ml-auto text-indigo-600 sm:text-3xl">
-              Get started today
-            </h1>
-
-            <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
-              <p className="text-lg font-medium">Create your new account</p>
+            <form className="p-8 mt-14 mb-0 space-y-4 rounded-lg shadow-2xl">
+              <p className="text-md font-bold text-black">
+                Create your new account
+              </p>
 
               <div className="flex gap-1">
                 <div>
@@ -66,8 +67,7 @@ const UserSignUp = () => {
                       type="text"
                       name="firstname"
                       onChange={onInputChange}
-                      className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                      placeholder="Enter first name"
+                      className="input"
                     />
                   </div>
                 </div>
@@ -81,8 +81,7 @@ const UserSignUp = () => {
                       id="name"
                       name="lastname"
                       onChange={onInputChange}
-                      className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                      placeholder="Enter last name"
+                      className="input"
                     />
                   </div>
                 </div>
@@ -97,8 +96,7 @@ const UserSignUp = () => {
                     id="email"
                     name="email"
                     onChange={onInputChange}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Enter email"
+                    className="input"
                   />
 
                   <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -116,8 +114,7 @@ const UserSignUp = () => {
                     id="password"
                     name="password"
                     onChange={onInputChange}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Enter password"
+                    className="input"
                   />
 
                   <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -138,8 +135,7 @@ const UserSignUp = () => {
                     id="password"
                     name="confirmPassword"
                     onChange={onInputChange}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Confirm password"
+                    className="input"
                   />
 
                   <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -169,8 +165,7 @@ const UserSignUp = () => {
                       id="name"
                       name="hnumber"
                       onChange={onInputChange}
-                      className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                      placeholder="Enter house no. / flat no."
+                      className="input"
                     />
                   </div>
                 </div>
@@ -184,8 +179,7 @@ const UserSignUp = () => {
                       id="name"
                       name="pincode"
                       onChange={onInputChange}
-                      className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                      placeholder="Enter pincode"
+                      className="input"
                     />
                   </div>
                 </div>
@@ -199,8 +193,7 @@ const UserSignUp = () => {
                     type="text"
                     name="landmark"
                     onChange={onInputChange}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Enter landmark"
+                    className="input"
                   />
 
                   <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -217,8 +210,7 @@ const UserSignUp = () => {
                     type="text"
                     name="city"
                     onChange={onInputChange}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Enter city"
+                    className="input"
                   />
 
                   <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -233,7 +225,7 @@ const UserSignUp = () => {
                 <select
                   name="state"
                   onChange={onInputChange}
-                  className="mt-2 border-2 rounded-lg border-indigo-700 p-1"
+                  className="mt-2 rounded-lg border-2 border-[#0369a1] p-1"
                 >
                   <option value="">Select State</option>
                   <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -277,18 +269,25 @@ const UserSignUp = () => {
         {loading ? (
           <CircularProgress className="ml-20" />
         ) : (
+          // <button
+          //   type="submit"
+          //   onClick={handleSubmit}
+          //   className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+          // >
+          //   Create your Account
+          // </button>
           <button
             type="submit"
             onClick={handleSubmit}
-            className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+            className="block w-full px-5 py-3 text-sm font-bold text-white bg-[#0369a1] rounded-lg"
           >
-            Create your Account
+            Register
           </button>
         )}
 
         <p className="text-sm text-center text-gray-500 mt-2">
           Already have an account?
-          <Link className="m-1" to="/login">
+          <Link className="m-1 text-[#0369a1] " to="/login">
             Sign in
           </Link>
         </p>

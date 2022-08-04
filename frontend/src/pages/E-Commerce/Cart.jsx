@@ -43,62 +43,66 @@ const Cart = () => {
                 <CheckoutItem cartItem={cartItem} />
               ))}
             </div>
-            <div>
-              <div className="bg-[#f0f8ff] w-[400px] max-h-[300px] relative mr-10  rounded-2xl">
-                <div className="p-7">
-                  <span className="font-bold text-xl">Shipping details</span>
-                  <div className="flex justify-between mt-6">
-                    <span>Name</span>
-                    <span>{name}</span>
-                  </div>
+            {user && (
+              <div>
+                <div className="bg-[#f0f8ff] w-[400px] max-h-[300px] relative mr-10  rounded-2xl">
+                  <div className="p-7">
+                    <span className="font-bold text-xl">Shipping details</span>
+                    <div className="flex justify-between mt-6">
+                      <span>Name</span>
+                      <span>{name}</span>
+                    </div>
 
-                  <div className="flex justify-between mt-2">
-                    <span>Address</span>
-                    <span>{address}</span>
-                  </div>
+                    <div className="flex justify-between mt-2">
+                      <span>Address</span>
+                      <span>{address}</span>
+                    </div>
 
-                  <button
-                    onClick={() => navigate("/profile")}
-                    className=" bg-[#0E3995] text-white p-2 w-full mt-6 "
-                  >
-                    Change Details
-                  </button>
+                    <button
+                      onClick={() => navigate("/profile")}
+                      className=" bg-[#0E3995] text-white p-2 w-full mt-6 "
+                    >
+                      Change Details
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-[#0369a1] w-[400px] max-h-[400px] relative mr-10 mt-10 rounded-2xl">
+                  <div className="p-7">
+                    <span className="font-bold text-white text-xl">
+                      Order Summary
+                    </span>
+                    <div className="flex justify-between mt-6 text-white">
+                      <span>Subtotal</span>
+                      <span>₹{formattedAmount}</span>
+                    </div>
+
+                    <div className="flex justify-between mt-2 text-white">
+                      <span>Shipping Charges</span>
+                      <span>₹{Amount > 500 ? 0 : 100}</span>
+                    </div>
+
+                    <span className=" text-white text-xs  mt-8">
+                      *Shipping charges of ₹100 will be levied if cart value is
+                      below ₹500.
+                    </span>
+
+                    <div className="flex justify-between mt-10 text-white">
+                      <span>Total Price</span>
+                      <span>₹{formatteTotaldAmount}</span>
+                    </div>
+
+                    <button
+                      // to="/payment"
+                      onClick={() => navigate("/payment")}
+                      className="bg-sky-100 text-black p-2 mt-3 w-full  "
+                    >
+                      Proceed to payment
+                    </button>
+                  </div>
                 </div>
               </div>
-
-              <div className="bg-[#f0f8ff] w-[400px] max-h-[400px] relative mr-10 mt-10 rounded-2xl">
-                <div className="p-7">
-                  <span className="font-bold text-xl">Order Summary</span>
-                  <div className="flex justify-between mt-6">
-                    <span>Subtotal</span>
-                    <span>₹{formattedAmount}</span>
-                  </div>
-
-                  <div className="flex justify-between mt-2">
-                    <span>Shipping Charges</span>
-                    <span>₹{Amount > 500 ? 0 : 100}</span>
-                  </div>
-
-                  <span className=" text-[#3B434E] text-xs  mt-8">
-                    *Shipping charges of ₹100 will be levied if cart value is
-                    below ₹500.
-                  </span>
-
-                  <div className="flex justify-between mt-10">
-                    <span>Total Price</span>
-                    <span>₹{formatteTotaldAmount}</span>
-                  </div>
-
-                  <button
-                    // to="/payment"
-                    onClick={() => navigate("/payment")}
-                    className=" bg-[#0E3995] text-white p-2 mt-3 w-full  "
-                  >
-                    Proceed to payment
-                  </button>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </>
       )}

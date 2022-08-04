@@ -42,7 +42,7 @@ function UserLogin() {
   // #89CFF0
 
   return (
-    <div className="bg-sky-300 h-screen">
+    <div className="bg-slate-50 h-screen">
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto">
           <h1 className="text-2xl font-bold text-center text-black sm:text-3xl">
@@ -107,11 +107,11 @@ function UserLogin() {
             </div>
 
             {loading ? (
-              <CircularProgress className="ml-[6rem]" />
+              <CircularProgress className="ml-[12rem]" />
             ) : (
               <button
                 type="submit"
-                className="block w-full px-5 py-3 text-sm font-bold text-white bg-[#0369a1] rounded-lg"
+                className="cursor-pointer block w-full px-5 py-3 text-sm font-bold text-white bg-[#0369a1] rounded-lg"
                 disabled={!email || !password}
               >
                 Sign in
@@ -120,14 +120,14 @@ function UserLogin() {
 
             <p className="text-sm text-center text-black">
               No account?
-              <Link className="m-1 text-white " to="/signup">
+              <Link className="m-1 text-[#0369a1] " to="/signup">
                 Sign up
               </Link>
             </p>
 
             <p className="text-sm text-center text-black ">
               Forgot Password?
-              <Link className="m-1 text-white " to="/signup">
+              <Link className="m-1 text-[#0369a1] " to="/signup">
                 Reset
               </Link>
             </p>

@@ -39,7 +39,7 @@ const ChangePass = () => {
           <label>Enter current password </label>
           <input
             onChange={(e) => setOldPass(e.target.value)}
-            className="border-2 border-indigo-600 rounded-lg w-60"
+            className="border-2 border-[#0369a1] p-[3px] rounded-lg w-60"
             type="password"
           />
         </div>
@@ -48,7 +48,7 @@ const ChangePass = () => {
           <label>Enter new password </label>
           <input
             onChange={(e) => setNewPass(e.target.value)}
-            className="border-2 border-indigo-600 rounded-lg w-60 ml-5"
+            className="border-2 border-[#0369a1] p-[3px] rounded-lg w-60 ml-5"
             type="password"
           />
         </div>
@@ -57,14 +57,14 @@ const ChangePass = () => {
           <label>Confirm new password </label>
           <input
             onChange={(e) => setConfirmPass(e.target.value)}
-            className="border-2 border-indigo-600 rounded-lg ml-1 w-60"
+            className="border-2 border-[#0369a1] p-[3px] rounded-lg ml-1 w-60"
             type="password"
           />
         </div>
 
         <button
           onClick={handleUpdate}
-          className=" w-1/3 bg-indigo-600 p-3 rounded-lg text-white"
+          className=" w-1/3 bg-[#0369a1] p-3 rounded-lg text-white"
         >
           Update Password
         </button>

@@ -52,7 +52,7 @@ const Address = () => {
           <input
             onChange={(e) => setUHNumber(e.target.value)}
             placeholder={hnumber}
-            className="border-2 border-indigo-600 rounded-lg"
+            className="border-2 border-[#0369a1] p-[3px] rounded-lg"
             type="text"
           />
         </div>
@@ -62,7 +62,7 @@ const Address = () => {
           <input
             onChange={(e) => setUCity(e.target.value)}
             placeholder={city}
-            className="border-2 border-indigo-600 rounded-lg ml-[77px]"
+            className="border-2 border-[#0369a1] p-[3px] rounded-lg ml-[77px]"
             type="text"
           />
         </div>
@@ -72,7 +72,7 @@ const Address = () => {
           <input
             onChange={(e) => setULandmark(e.target.value)}
             placeholder={landmark}
-            className="border-2 border-indigo-600 rounded-lg ml-8"
+            className="border-2 border-[#0369a1] p-[3px] rounded-lg ml-8"
             type="text"
           />
         </div>
@@ -82,7 +82,7 @@ const Address = () => {
 
           <select
             placeholder={state}
-            className="ml-16 border-2 rounded-lg border-indigo-700 p-1"
+            className="ml-16 border-2 rounded-lg border-[#0369a1] p-[3px]"
           >
             <option>Select State</option>
             <option>Andhra Pradesh</option>
@@ -123,14 +123,14 @@ const Address = () => {
             onChange={(e) => setUPincode(e.target.value)}
             placeholder={pincode}
             style={{ WebkitAppearance: "none" }}
-            className="border-2 border-indigo-600 rounded-lg ml-11"
+            className="p-[3px] border-2 border-[#0369a1] rounded-lg ml-11"
             type="number"
           />
         </div>
 
         <button
           onClick={handleUpdate}
-          className="w-1/5 bg-[#0E3995] p-3 rounded-lg text-white "
+          className="w-1/5 bg-[#0369a1] p-3 rounded-lg text-white "
         >
           Update
         </button>

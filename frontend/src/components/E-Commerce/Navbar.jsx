@@ -148,7 +148,9 @@ const Navbar = () => {
             </span>
           ) : (
             <NavLink to="/login">
-              <span className="hover mt-2">Sign in</span>
+              <span className="font-semibold text-gray-600 hover:text-indigo-500">
+                Sign in
+              </span>
             </NavLink>
           )}
         </div>

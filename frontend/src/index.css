@@ -30,4 +30,8 @@
   .text-col {
     @apply text-[rgb(0,0,0,0.56)] font-bold;
   }
+
+  .input {
+    @apply w-full p-4 pr-12 text-sm border-2 border-[#0369a1] rounded-lg shadow-sm;
+  }
 }

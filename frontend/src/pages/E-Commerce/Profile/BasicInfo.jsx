@@ -52,7 +52,7 @@ const BasicInfo = () => {
           <input
             onChange={(e) => setUFirstName(e.target.value)}
             placeholder={firstname}
-            className="border-2 border-indigo-600 rounded-lg w-60"
+            className="p-[3px] border-2 border-[#0369a1] rounded-lg w-60"
             type="text"
           />
         </div>
@@ -62,7 +62,7 @@ const BasicInfo = () => {
           <input
             onChange={(e) => setULastName(e.target.value)}
             placeholder={lastname}
-            className="border-2 border-indigo-600 rounded-lg w-60"
+            className="p-[3px] border-2 border-[#0369a1] rounded-lg w-60"
             type="text"
           />
         </div>
@@ -72,20 +72,20 @@ const BasicInfo = () => {
           <input
             onChange={(e) => setUEmail(e.target.value)}
             placeholder={email}
-            className="border-2 border-indigo-600 rounded-lg ml-9 w-60"
+            className="p-[3px] border-2 border-[#0369a1] rounded-lg ml-9 w-60"
             type="email"
           />
         </div>
 
         <Link to="/profile/basicInfo/changePassword">
-          <button className="w-1/6 bg-indigo-600 p-3 rounded-lg text-white">
+          <button className="w-1/6 bg-[#0369a1] p-3 rounded-lg text-white">
             Change Password
           </button>
         </Link>
 
         <button
           onClick={handleUpdate}
-          className=" w-1/6 bg-indigo-600 p-3 rounded-lg text-white"
+          className=" w-1/6 bg-[#0369a1] p-3 rounded-lg text-white"
         >
           Update
         </button>

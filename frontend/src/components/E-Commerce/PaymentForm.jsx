@@ -60,13 +60,11 @@ const PaymentForm = ({ name, address, add1 }) => {
 
     setIsLoading(true);
 
-    dispatch(clearCart());
-
     const { error } = await stripe.confirmPayment({
       elements,
 
       confirmParams: {
-        return_url: "http:localhost:3000/success",
+        return_url: "http://127.0.0.1:3000/success",
 
         shipping: {
           name,
@@ -93,12 +91,14 @@ const PaymentForm = ({ name, address, add1 }) => {
       },
     });
 
+    dispatch(clearCart());
+
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
       toast.error(error.message);
     } else {
       setMessage("An unexpected error occurred.");
-      toast.error("An unexpected error occurred.");
+      toast.error(error.message);
     }
 
     setIsLoading(false);
