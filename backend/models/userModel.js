@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minLength: 8,
     select: false,
   },
   hnumber: {
@@ -61,6 +60,10 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     default: "user",
+  },
+  walletAddress: {
+    type: String,
+    required: true,
   },
   resetPasswordToken: String,
   resetPasswordExpire: Date,

@@ -7,9 +7,11 @@ const sendEmail = require("../utils/sendEmail");
 const Company = require("../models/companyModel");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
+const { default: axios } = require("axios");
 
 // register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  let walladdress;
   // console.log(req.body);
   const {
     firstname,
@@ -23,6 +25,25 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     pincode,
   } = req.body;
 
+  const randomnumber = (Math.random() * 1000000).toPrecision(6);
+
+  console.log(randomnumber);
+
+  var config = {
+    method: "get",
+    url: `https://api-eu1.tatum.io/v3/ethereum/address/xpub6EyYTU64qekKJ4PUGriXDBdGV7LB4UacdT6fro1xBBzXYZM3XdfbDit9ocAjsfXfscMXtJdWn5LVm8eRtxcoT7aGm7mof5tS6C6Gc2ee65c/${
+      2 + randomnumber
+    }`,
+    headers: {
+      "x-api-key": "d7afa9c3-24ba-4e77-b4e5-a0bd338b5425",
+      "x-testnet-type": "ethereum-ropsten",
+    },
+  };
+
+  let ress = await axios(config);
+
+  walladdress = ress.data.address;
+
   const user = await User.create({
     firstname,
     lastname,
@@ -33,11 +54,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     landmark,
     state,
     pincode,
-
-    // avatar:{
-    //     public_id:"this is a sample id",
-    //     url:"profilepicurl"
-    // }
+    walletAddress: walladdress,
   });
 
   sendToken(user, 201, res);
