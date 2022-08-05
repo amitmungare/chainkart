@@ -48,8 +48,8 @@ const Item = styled.div`
 
 const Name = styled(NavLink)`
   font-size: 24px;
-  // font-weight: bold;
-  color: #000;
+  font-weight: bold;
+  color: #0369a1;
 
   &:hover {
     background-color: rgb(160, 160, 160);
@@ -81,7 +81,7 @@ const TitleBar = () => {
         <Name to="/dashboard/cprofile">{company.name}</Name>
         <Items>
           <Item onClick={handleLogOut}>
-            <ExitToApp className="text-indigo-600" />
+            <ExitToApp className="text-[#0369a1]" />
             Logout
           </Item>
         </Items>

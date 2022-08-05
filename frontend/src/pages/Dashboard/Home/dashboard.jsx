@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import CProfile from "../cprofile";
 import DashHome from "./DashHome";
@@ -12,6 +12,7 @@ import styled from "styled-components";
 import Users from "../Users";
 import AddNew from "../Products/AddNew";
 import ProductTable from "../Products/ProductTable";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -21,22 +22,27 @@ const Container2 = styled.div`
 `;
 
 const Dashboard = () => {
+  const company = useSelector((state) => state.company.company);
   return (
     <>
-      <Container>
-        <SideBar />
-        <Container2>
-          <TitleBar />
-          <Routes>
-            <Route path="/" element={<DashHome />} />
-            <Route path="users" element={<Users />} />
-            <Route path="products" element={<ProductTable />} />
-            <Route path="addNew" element={<AddNew />} />
-            <Route path="cprofile" element={<CProfile />} />
-            <Route path="transactions" element={<Transaction />} />
-          </Routes>
-        </Container2>
-      </Container>
+      {!company ? (
+        <Navigate to="/clogin" />
+      ) : (
+        <Container>
+          <SideBar />
+          <Container2>
+            <TitleBar />
+            <Routes>
+              <Route path="/" element={<DashHome />} />
+              <Route path="users" element={<Users />} />
+              <Route path="products" element={<ProductTable />} />
+              <Route path="addNew" element={<AddNew />} />
+              <Route path="cprofile" element={<CProfile />} />
+              <Route path="transactions" element={<Transaction />} />
+            </Routes>
+          </Container2>
+        </Container>
+      )}
     </>
   );
 };

@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard/Home/dashboard";
 import Payment from "./pages/E-Commerce/Payment";
 import CompPassword from "./pages/E-Commerce/CompPassword";
 import Success from "./pages/E-Commerce/success";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <ToastContainer />
       <Routes>
         <Route path="/*" element={<Home />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
 
         <Route path="login" element={<UserLogin />} />
         <Route path="clogin" element={<CompanyLogin />} />

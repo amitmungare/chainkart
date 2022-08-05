@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../assets/Logo.svg";
 import styled from "styled-components";
 import {
   AccountCircleOutlined,
@@ -28,7 +27,7 @@ const Container = styled.div`
 const Logo = styled.span`
   font-size: 20px;
   font-weight: bold;
-  color: #6439ff;
+  color: #0369a1;
 `;
 
 const Center = styled.div`
@@ -74,21 +73,21 @@ const SideBar = () => {
         <Lists>
           <Link to="/dashboard">
             <List>
-              <Dashboard style={{ fontSize: "24px", color: "#7451f8" }} />
+              <Dashboard style={{ fontSize: "24px", color: "#0369a1" }} />
               <Text>Dashboard</Text>
             </List>
           </Link>
 
           <Link to="/dashboard/products">
             <List>
-              <Store style={{ fontSize: "24px", color: "#7451f8" }} />
+              <Store style={{ fontSize: "24px", color: "#0369a1" }} />
               <Text>Products</Text>
             </List>
           </Link>
 
           <Link to="/dashboard/users">
             <List>
-              <PersonOutline style={{ fontSize: "24px", color: "#7451f8" }} />
+              <PersonOutline style={{ fontSize: "24px", color: "#0369a1" }} />
               <Text>Users</Text>
             </List>
           </Link>
@@ -96,7 +95,7 @@ const SideBar = () => {
           <Link to="/dashboard/cprofile">
             <List>
               <AccountCircleOutlined
-                style={{ fontSize: "24px", color: "#7451f8" }}
+                style={{ fontSize: "24px", color: "#0369a1" }}
               />
               <Text>Profile</Text>
             </List>
@@ -104,7 +103,7 @@ const SideBar = () => {
 
           <Link to="/dashboard/transactions">
             <List>
-              <Paid style={{ fontSize: "24px", color: "#7451f8" }} />
+              <Paid style={{ fontSize: "24px", color: "#0369a1" }} />
               <Text>All Transactions</Text>
             </List>
           </Link>

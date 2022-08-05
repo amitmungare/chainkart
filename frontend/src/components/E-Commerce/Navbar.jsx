@@ -23,7 +23,7 @@ const List = styled.li`
 
   &:hover {
     cursor: pointer;
-    color: rgb(37, 99, 235);
+    color: #0369a1;
     font-weight: bold;
   }
 `;
@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between w-full mt-9 ">
-      <NavLink to="/" className="text-indigo-600 text-2xl font-bold px-3 ">
+      <NavLink to="/" className="text-[#0369a1] text-2xl font-bold px-3 ">
         Chainkart
       </NavLink>
 

@@ -71,12 +71,12 @@ const CompanyRegister = () => {
     <>
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl font-bold text-center text-indigo-600 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-center text-[#0369a1] sm:text-3xl">
             Get started
           </h1>
 
           <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
-            <p className="text-lg font-medium">Sign up with us now!</p>
+            <p className="text-lg font-bold text-black">Sign up with us now!</p>
 
             <div>
               <label htmlFor="name" className="text-sm font-medium">
@@ -88,8 +88,7 @@ const CompanyRegister = () => {
                   type="text"
                   name="name"
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter company name"
+                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-md"
                 />
               </div>
             </div>
@@ -105,8 +104,7 @@ const CompanyRegister = () => {
                   name="email"
                   // onChange={onInputChange}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter email"
+                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-md"
                 />
               </div>
             </div>
@@ -122,8 +120,7 @@ const CompanyRegister = () => {
                   name="c_number"
                   // onChange={onInputChange}
                   onChange={(e) => setCin(e.target.value)}
-                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter CIN number"
+                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-md"
                 />
               </div>
             </div>
@@ -138,8 +135,7 @@ const CompanyRegister = () => {
                     name="city"
                     // onChange={onInputChange}
                     onChange={(e) => setCity(e.target.value)}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Enter city"
+                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-md"
                   />
                 </div>
               </div>
@@ -153,8 +149,7 @@ const CompanyRegister = () => {
                     name="postal_code"
                     // onChange={onInputChange}
                     onChange={(e) => setPostalCode(e.target.value)}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Enter postal code"
+                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-md"
                   />
                 </div>
               </div>
@@ -173,7 +168,7 @@ const CompanyRegister = () => {
                 file:mr-4 file:py-2 file:px-4
                     file:rounded-full file:border-0
                     file:text-sm file:font-semibold
-                    file:bg-violet-50 file:text-violet-700
+                    file:bg-violet-50 file:text-[#0369a1]
                     hover:file:bg-violet-100  "
                   type="file"
                 />
@@ -191,7 +186,7 @@ const CompanyRegister = () => {
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
-                file:bg-violet-50 file:text-violet-700
+                file:bg-violet-50 file:text-[#0369a1]
                 hover:file:bg-violet-100"
                   type="file"
                 />
@@ -203,7 +198,7 @@ const CompanyRegister = () => {
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+                className="block w-full px-5 py-3 text-sm font-bold text-white bg-[#0369a1] rounded-lg"
               >
                 Submit Application
               </button>
@@ -211,7 +206,7 @@ const CompanyRegister = () => {
 
             <p className="text-sm text-center text-gray-500">
               Already have an account ?
-              <NavLink className="m-1 text-violet-700" to="/clogin">
+              <NavLink className="m-1 text-[#0369a1]" to="/clogin">
                 Sign in
               </NavLink>
             </p>
