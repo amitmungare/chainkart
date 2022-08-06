@@ -6,10 +6,10 @@ import { createProduct } from "../../../store/productSlice";
 import { CircularProgress } from "@mui/material";
 
 const AddNew = () => {
-  const { email } = useSelector((state) => state.company.company);
+  const { email, name } = useSelector((state) => state.company.company);
   const { loading, error } = useSelector((state) => ({ ...state.company }));
   const [selected, setSelected] = useState("");
-  const [name, setName] = useState("");
+  const [name1, setName1] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
 
@@ -72,13 +72,14 @@ const AddNew = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      name,
+      name: name1,
       desc,
       price,
       pImage,
       category: selected,
       subCategory: selected2,
       cEmail: email,
+      cName: name,
     };
     dispatch(createProduct({ formData, navigate, toast }));
   };
@@ -101,7 +102,7 @@ const AddNew = () => {
                 <input
                   type="text"
                   name="name"
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setName1(e.target.value)}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter product name"
                 />

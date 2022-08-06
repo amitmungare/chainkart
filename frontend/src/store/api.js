@@ -2,7 +2,6 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://localhost:4000/api/v1" });
 
-
 // User
 export const login = (formData) => API.post("/login", formData);
 
@@ -24,6 +23,11 @@ export const logout = () => API.get("/logout");
 
 export const processPayment = (data) => API.post("/payment/process", data);
 
+// Order
+
+export const createOrder = (data) => API.post("/order/new", data);
+
+export const fetchOrders = (user) => API.post("orders/me", user);
 // Company
 
 export const cLogin = (formData) => API.post("/company/login", formData);
@@ -35,6 +39,8 @@ export const cRegister = (formData) => {
 
 export const cLogout = () => API.get("/company/logout");
 
-// Product
+// Product // Company
 
 export const createProduct = (formData) => API.post("/product/new", formData);
+
+export const fetchProducts = (cEmail) => API.post("/product/get", cEmail);

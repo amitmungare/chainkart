@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 
 import styled from "styled-components";
 import { userColumns, userRows } from "../../../productData";
+import { fetchProducts } from "../../../store/api";
+import { useSelector } from "react-redux";
 
 const DataTable1 = styled.div`
   height: 600px;
@@ -21,6 +23,14 @@ const DataTableTitle = styled.div`
 `;
 
 const ProductTable = () => {
+  const company = useSelector((state) => state.company.company);
+  useEffect(() => {
+    const getProducts = async () => {
+      const res = await fetchProducts(company.email);
+      console.log(res.data);
+    };
+    getProducts();
+  }, []);
   return (
     <DataTable1>
       <DataTableTitle>
