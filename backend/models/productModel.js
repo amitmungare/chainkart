@@ -31,13 +31,12 @@ const productSchema = new mongoose.Schema(
     cName: {
       type: String,
       required: true,
-      unique: true,
     },
     cEmail: {
       type: String,
       required: true,
     },
-    productHash: {
+    tokenID: {
       type: String,
     },
   },

@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchOrders } from "../../../store/api";
 
 const Orders = () => {
   const user = useSelector((state) => state?.user?.user);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchOrders1 = async () => {
       const res = await fetchOrders(user);
-      console.log(res.data);
+      setOrders(res.data);
     };
     fetchOrders1();
   }, []);

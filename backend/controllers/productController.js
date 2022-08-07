@@ -3,6 +3,7 @@ const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const cloudinary = require("../utils/cloudinary");
 const Company = require("../models/companyModel");
+const { default: axios } = require("axios");
 // create product
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   const { name, price, desc, category, subCategory, pImage, cName, cEmail } =
@@ -23,6 +24,34 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     cEmail,
   };
   const product = await Product.create(data);
+
+  var data2 = JSON.stringify({
+    chain: "ETH",
+    to: "0x687422eEA2cB73B5d3e242bA5456b782919AFc85",
+    url: `http://127.0.0.1:3000/${category}/${subCategory}/${product._id}`,
+    tokenId: "ASSET_UNIT",
+  });
+
+  var config = {
+    method: "post",
+    url: "https://api-eu1.tatum.io/v3/nft/mint",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": "d7afa9c3-24ba-4e77-b4e5-a0bd338b5425",
+      "x-testnet-type": "ethereum-ropsten",
+    },
+    data: data2,
+  };
+
+  const res1 = await axios(config);
+  const txId = {
+    tokenID: res1.data.txId,
+  };
+
+  await Product.findByIdAndUpdate(product._id, txId, {
+    new: true,
+    runValidators: true,
+  });
 
   res.status(201).json({
     success: true,
