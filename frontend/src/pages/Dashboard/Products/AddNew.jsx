@@ -4,14 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createProduct } from "../../../store/productSlice";
 import { CircularProgress } from "@mui/material";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import storage from "../../../store/firebase";
 
 const AddNew = () => {
+  const [progress, setProgress] = useState(0);
   const { email, name } = useSelector((state) => state.company.company);
   const { loading, error } = useSelector((state) => ({ ...state.company }));
   const [selected, setSelected] = useState("");
   const [name1, setName1] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageURL, setImageURL] = useState("");
 
   const [selected2, setSelected2] = useState("");
   const [pImage, setPImage] = useState(null);
@@ -69,13 +74,33 @@ const AddNew = () => {
     setSelected2(e.target.value);
   };
 
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const storageRef = ref(storage, "products");
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(prog);
+      },
+      (err) => console.log(err),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => setImageURL(url));
+      }
+    );
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
       name: name1,
       desc,
       price,
-      pImage,
+      pImage: imageURL,
       category: selected,
       subCategory: selected2,
       cEmail: email,
@@ -193,7 +218,7 @@ const AddNew = () => {
               <input
                 accept="image/*"
                 id="file2"
-                onChange={(e) => transformedFile(e.target.files[0])}
+                onChange={(e) => setImage(e.target.files[0])}
                 className="mt-2 block w-full text-sm text-slate-500
               file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0
@@ -202,6 +227,16 @@ const AddNew = () => {
               hover:file:bg-violet-100"
                 type="file"
               />
+
+              <div>
+                <button
+                  onClick={handleUpload}
+                  className="bg-blue-500 p-2 rounded-md text-white mt-2"
+                >
+                  Upload
+                </button>
+                <div>{progress} % </div>
+              </div>
             </div>
 
             {loading ? (

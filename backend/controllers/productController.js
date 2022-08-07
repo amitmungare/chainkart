@@ -9,17 +9,17 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   const { name, price, desc, category, subCategory, pImage, cName, cEmail } =
     req.body;
 
-  const uploadProduct = await cloudinary.uploader.upload(pImage, {
-    folder: `${category}`,
-  });
-  const productUrl = uploadProduct.url;
+  // const uploadProduct = await cloudinary.uploader.upload(pImage, {
+  //   folder: `${category}`,
+  // });
+  // const productUrl = uploadProduct.url;
   const data = {
     name,
     price,
     desc,
     category,
     subCategory,
-    pImage: productUrl,
+    pImage,
     cName,
     cEmail,
   };
