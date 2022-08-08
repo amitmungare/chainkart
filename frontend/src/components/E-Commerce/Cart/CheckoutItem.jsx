@@ -7,7 +7,7 @@ import {
 } from "../../../store/cartSlice";
 
 const CheckoutItem = ({ cartItem }) => {
-  const { price, cartQuantity, img, name } = cartItem;
+  const { price, cartQuantity, pImage, name } = cartItem;
   // console.log(cartItem);
   let formattedPrice = new Intl.NumberFormat("en-IN").format(cartItem.price);
   let formattedTotalAmount = new Intl.NumberFormat("en-IN").format(
@@ -31,7 +31,7 @@ const CheckoutItem = ({ cartItem }) => {
   return (
     <div className="flex gap-6 border-b-2 p-5">
       <div>
-        <img className="h-[150px] w-[150px]" src={img} />
+        <img className="h-[170px] w-[120px]" src={pImage} />
       </div>
       <div className="flex flex-col justify-between">
         <div className="flex flex-col">

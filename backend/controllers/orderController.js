@@ -2,15 +2,20 @@ const Order = require("../models/orderModel");
 const Product = require("../models/productModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const User = require("../models/userModel");
 
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
-  const { orderItems, totalPrice, user } = req.body;
+  const { orderItems, totalPrice, user, cEmail } = req.body;
   // console.log(orderItems);
+
+  const user1 = await User.findById(user._id);
+  console.log(orderItems);
 
   const order = await Order.create({
     orderItems: orderItems,
     totalPrice,
     user: user._id,
+    uName: user1.firstname,
   });
 
   res.status(201).json({

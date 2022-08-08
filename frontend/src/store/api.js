@@ -43,4 +43,14 @@ export const cLogout = () => API.get("/company/logout");
 
 export const createProduct = (formData) => API.post("/product/new", formData);
 
-export const fetchProducts = (cEmail) => API.post("/product/get", cEmail);
+export const fetchProducts = (cEmail) =>
+  API.post("/product/get", {
+    cEmail,
+  });
+
+export const fetchProductsByCat = (subCategory) =>
+  API.post("/product/getByCat", subCategory);
+
+//Transaction
+
+export const fetchT = (cEmail) => API.post("/company/getAllT", { cEmail });

@@ -35,7 +35,11 @@ const ProductTable = () => {
     <DataTable1>
       <DataTableTitle>
         Products
-        <Link to="/dashboard/addNew" style={{ textDecoration: "none" }}>
+        <Link
+          to="/dashboard/addNew"
+          className="bg-[#0369a1] text-white p-2 rounded-md text-sm"
+          style={{ textDecoration: "none" }}
+        >
           Add New Product
         </Link>
       </DataTableTitle>

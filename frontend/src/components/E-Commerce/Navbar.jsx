@@ -66,8 +66,8 @@ const Navbar = () => {
             <NavLink className="hover-1" to="/Electronics/Headphones">
               Headphones
             </NavLink>
-            <NavLink className="hover-1" to="/Electronics/Smartphones">
-              Smartphones
+            <NavLink className="hover-1" to="/Electronics/SmartPhones">
+              SmartPhones
             </NavLink>
           </ListItem>
         </Menu>

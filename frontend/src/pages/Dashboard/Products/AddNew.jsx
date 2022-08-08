@@ -10,7 +10,7 @@ import storage from "../../../store/firebase";
 const AddNew = () => {
   const [progress, setProgress] = useState(0);
   const { email, name } = useSelector((state) => state.company.company);
-  const { loading, error } = useSelector((state) => ({ ...state.company }));
+  const { loading, error } = useSelector((state) => state.product);
   const [selected, setSelected] = useState("");
   const [name1, setName1] = useState("");
   const [desc, setDesc] = useState("");
@@ -24,50 +24,8 @@ const AddNew = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const electronics = ["Laptops", "SmartPhones", "Headphones"];
-  // const fashion = ["Shoes", "Shirts", "Watches"];
-  // const sports = ["Badminton", "Cricket", "Football"];
-  // const books = ["Autobiography", "Fiction", "Textbook"];
-  // const home_appliances = ["Washing Machines", "Air Conditioner", "Television"];
-
-  // let type = null;
-  // let options = null;
-
-  // if (selected === "Electronics") {
-  //   type = electronics;
-  // } else if (selected === "Fashion") {
-  //   type = fashion;
-  // } else if (selected === "Sports") {
-  //   type = sports;
-  // } else if (selected === "Books") {
-  //   type = books;
-  // } else if (selected === "Home_Appliances") {
-  //   type = home_appliances;
-  // }
-
-  // if (type) {
-  //   options = type.map((el) => (
-  //     <option key={el} value={el}>
-  //       {el}
-  //     </option>
-  //   ));
-  // }
-
   const handleSelect = (e) => {
     setSelected(e.target.value);
-  };
-
-  const transformedFile = (file) => {
-    const reader = new FileReader();
-
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setPImage(reader.result);
-      };
-    } else {
-      setPImage("");
-    }
   };
 
   const handleCat2 = (e) => {
@@ -76,7 +34,8 @@ const AddNew = () => {
 
   const handleUpload = (e) => {
     e.preventDefault();
-    const storageRef = ref(storage, "products");
+    const random = Math.floor(Math.random() * 10000) + 1;
+    const storageRef = ref(storage, `${selected2}/${random}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
 
     uploadTask.on(

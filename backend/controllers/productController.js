@@ -63,7 +63,16 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const { cEmail } = req.body;
-  const products = await Product.find({ email: cEmail });
+  const products = await Product.find({ cEmail });
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
+
+exports.getProductsBySubCat = catchAsyncErrors(async (req, res, next) => {
+  const { subCategory } = req.body;
+  const products = await Product.find({ subCategory });
   res.status(200).json({
     success: true,
     products,

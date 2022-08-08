@@ -17,7 +17,6 @@ const Success = () => {
   useEffect(() => {
     const createO = async () => {
       const res = await createOrder(data);
-      console.log(res.data);
     };
     createO();
   }, []);

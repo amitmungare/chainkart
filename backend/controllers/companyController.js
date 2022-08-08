@@ -1,6 +1,7 @@
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Company = require("../models/companyModel");
+const Order = require("../models/orderModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
@@ -78,6 +79,30 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "logged out",
+  });
+});
+
+// Transactions of company
+
+exports.getAllTransactions = catchAsyncErrors(async (req, res, next) => {
+  const { cEmail } = req.body;
+  let orders = [];
+  let name = [];
+
+  const transactions = await Order.find();
+  transactions.forEach((transaction) => {
+    transaction.orderItems.forEach((orderItem) => {
+      if (orderItem.cEmail === cEmail) {
+        name.push(transaction.uName);
+        orders.push(orderItem);
+      }
+    });
+  });
+  console.log(name);
+
+  res.status(200).json({
+    orders,
+    name,
   });
 });
 

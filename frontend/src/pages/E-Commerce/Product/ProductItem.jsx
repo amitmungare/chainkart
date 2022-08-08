@@ -33,7 +33,7 @@ const ProductItem = ({ products }) => {
       <div className="grid gap-8 lg:items-start lg:grid-cols-4">
         <div className="lg:col-span-3">
           <div className="relative mt-4">
-            <img alt="" src={product.img} className="" />
+            <img alt="" src={product.pImage} className="w-[40%]" />
           </div>
         </div>
 

@@ -7,8 +7,10 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { fetchT } from "../../store/api";
 
 const TableContainer1 = styled(TableContainer)``;
 
@@ -31,6 +33,18 @@ const Status = styled.span`
 `;
 
 const List = () => {
+  const company = useSelector((state) => state.company.company);
+  const [transactions, setTransactions] = useState([]);
+  console.log(transactions);
+
+  useEffect(() => {
+    const fetchTransaction = async () => {
+      const res = await fetchT(company.email);
+      setTransactions(res.data);
+    };
+    fetchTransaction();
+  }, []);
+
   const rows = [
     {
       id: 1143155,

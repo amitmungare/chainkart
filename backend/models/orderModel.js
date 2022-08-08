@@ -20,10 +20,15 @@ const orderSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
-        img: {
+        pImage: {
           type: String,
           required: true,
         },
+        cEmail: {
+          type: String,
+          required: true,
+        },
+
         //   product: {
         //     type: mongoose.Schema.ObjectId,
         //     ref: "Product",
@@ -31,6 +36,11 @@ const orderSchema = new mongoose.Schema(
         //   },
       },
     ],
+    uName: {
+      type: String,
+      required: true,
+    },
+
     user: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
