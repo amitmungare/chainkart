@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -23,11 +23,12 @@ const DataTableTitle = styled.div`
 `;
 
 const ProductTable = () => {
+  const [products, setProducts] = useState([]);
   const company = useSelector((state) => state.company.company);
   useEffect(() => {
     const getProducts = async () => {
       const res = await fetchProducts(company.email);
-      console.log(res.data);
+      setProducts(res.data.products);
     };
     getProducts();
   }, []);
