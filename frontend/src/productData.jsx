@@ -2,25 +2,24 @@ import image from "./assets/product_img.png";
 
 export const userColumns = [
   { field: "id", headerName: "ID", width: 70 },
-  {
-    field: "product",
-    headerName: "Product",
-    width: 200,
-  },
-  {
-    field: "productimg",
-    headerName: "Product Image",
-    width: 230,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          {console.log(params)}
-          <img className="cellImg" src={params.value} alt="" />
-          {params.row.productimg}
-        </div>
-      );
-    },
-  },
+  // {
+  //   field: "product",
+  //   headerName: "Product",
+  //   width: 200,
+  // },
+  // {
+  //   field: "productimg",
+  //   headerName: "Product Image",
+  //   width: 230,
+  //   renderCell: (params) => {
+  //     return (
+  //       <div className="cellWithImg">
+  //         <img className="cellImg" src={params.value} alt="" />
+  //         {params.row.productimg}
+  //       </div>
+  //     );
+  //   },
+  // },
   {
     field: "price",
     headerName: "Price",

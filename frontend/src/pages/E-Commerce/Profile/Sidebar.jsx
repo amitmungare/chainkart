@@ -10,10 +10,10 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <>
-      <ul className="bg-sky-100 p-4 flex-[1] flex flex-col max-w-[200px]  gap-4">
+      <ul className="bg-sky-100 p-4 flex-[1] flex flex-col max-w-[200px]  gap-4 shadow-lg">
         <Link
           to="/profile/basicInfo"
-          className="hover:bg-[#ece8ff] hover:rounded-lg"
+          className="hover:bg-[#ece8ff] hover:rounded-lg hover:shadow-md"
         >
           <li className="flex  gap-1 p-[5px]">
             <InfoOutlined className="text-[#0369a1]" />

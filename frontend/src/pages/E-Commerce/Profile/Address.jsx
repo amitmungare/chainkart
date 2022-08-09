@@ -47,12 +47,12 @@ const Address = () => {
         className="p-5 flex flex-col gap-4"
         style={{ boxShadow: "2px 4px 10px 1px rgba(201, 201, 201, 0.47)" }}
       >
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center ">
           <label>House Number </label>
           <input
             onChange={(e) => setUHNumber(e.target.value)}
             placeholder={hnumber}
-            className="border-2 border-[#0369a1] p-[3px] rounded-lg"
+            className="input-1 "
             type="text"
           />
         </div>
@@ -62,7 +62,7 @@ const Address = () => {
           <input
             onChange={(e) => setUCity(e.target.value)}
             placeholder={city}
-            className="border-2 border-[#0369a1] p-[3px] rounded-lg ml-[77px]"
+            className="input-1 ml-[77px] "
             type="text"
           />
         </div>
@@ -72,7 +72,7 @@ const Address = () => {
           <input
             onChange={(e) => setULandmark(e.target.value)}
             placeholder={landmark}
-            className="border-2 border-[#0369a1] p-[3px] rounded-lg ml-8"
+            className="input-1 ml-8"
             type="text"
           />
         </div>
@@ -80,10 +80,7 @@ const Address = () => {
         <div className="flex gap-2 items-center">
           <label>State </label>
 
-          <select
-            placeholder={state}
-            className="ml-16 border-2 rounded-lg border-[#0369a1] p-[3px]"
-          >
+          <select placeholder={state} className="input-1 ml-16">
             <option>Select State</option>
             <option>Andhra Pradesh</option>
             <option>Arunachal Pradesh</option>
@@ -123,14 +120,14 @@ const Address = () => {
             onChange={(e) => setUPincode(e.target.value)}
             placeholder={pincode}
             style={{ WebkitAppearance: "none" }}
-            className="p-[3px] border-2 border-[#0369a1] rounded-lg ml-11"
+            className="input-1 ml-11"
             type="number"
           />
         </div>
 
         <button
           onClick={handleUpdate}
-          className="w-1/5 bg-[#0369a1] p-3 rounded-lg text-white "
+          className="w-1/5 bg-indigo-600 p-3 rounded-lg text-white text-lg "
         >
           Update
         </button>

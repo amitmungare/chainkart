@@ -19,7 +19,7 @@ const ListItem = styled.div`
 const List = styled.li`
   font-weight: 600;
   font-size: 18px;
-  color: rgb(0, 0, 0, 0.56);
+  color: rgb(0, 0, 0);
 
   &:hover {
     cursor: pointer;

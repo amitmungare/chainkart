@@ -10,7 +10,7 @@ const ListContainer = styled.div`
 
 const ListTitle = styled.div`
   font-weight: 500;
-  color: gray;
+  color: #0369a1;
   margin-bottom: 15px;
 `;
 

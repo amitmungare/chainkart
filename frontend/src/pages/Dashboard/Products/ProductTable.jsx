@@ -25,6 +25,7 @@ const DataTableTitle = styled.div`
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
   const company = useSelector((state) => state.company.company);
+  console.log(products);
   useEffect(() => {
     const getProducts = async () => {
       const res = await fetchProducts(company.email);
@@ -33,25 +34,44 @@ const ProductTable = () => {
     getProducts();
   }, []);
   return (
-    <DataTable1>
-      <DataTableTitle>
-        Products
-        <Link
-          to="/dashboard/addNew"
-          className="bg-[#0369a1] text-white p-2 rounded-md text-sm"
-          style={{ textDecoration: "none" }}
-        >
-          Add New Product
-        </Link>
-      </DataTableTitle>
-      <DataGrid
-        rows={userRows}
-        columns={userColumns}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
-      />
-    </DataTable1>
+    <div className="flex justify-center items-center h-[70vh] relative">
+      <Link
+        to="/dashboard/addNew"
+        className="bg-indigo-600 text-white p-2 rounded-md text-sm absolute top-[17rem]"
+        style={{ textDecoration: "none" }}
+      >
+        Add new product
+      </Link>
+      <div className="w-full h-full p-5 flex flex-col gap-10">
+        <table className="shadow-lg rounded-2xl bg-white">
+          <thead className="bg-indigo-600 text-white">
+            <tr>
+              <th className="p-1">ID</th>
+              <th>Name</th>
+              <th>Price</th>
+
+              <th>Category</th>
+              <th>Subcategory</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <tr key={product._id}>
+                <td className="text-center p-2">{product._id.slice(-2)}</td>
+                <td className="text-center p-2">{product.name}</td>
+                <td className="text-center">{product.price}</td>
+                <td className="text-center">{product.category}</td>
+                <td className="text-center">{product.subCategory}</td>
+                <td className="text-center text-indigo-600 rounded-3xl'">
+                  Update
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 
