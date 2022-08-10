@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/userSlice";
-import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
 
 const initialState = {

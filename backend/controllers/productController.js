@@ -25,19 +25,19 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   };
   const product = await Product.create(data);
 
-  var data2 = JSON.stringify({
+  let data2 = JSON.stringify({
     chain: "ETH",
     to: "0x687422eEA2cB73B5d3e242bA5456b782919AFc85",
     url: `http://127.0.0.1:3000/${category}/${subCategory}/${product._id}`,
     tokenId: "ASSET_UNIT",
   });
 
-  var config = {
+  let config = {
     method: "post",
     url: "https://api-eu1.tatum.io/v3/nft/mint",
     headers: {
       "Content-Type": "application/json",
-      "x-api-key": "d7afa9c3-24ba-4e77-b4e5-a0bd338b5425",
+      "x-api-key": "bd61d9f4-9870-4e45-97ec-fe222523455e",
       "x-testnet-type": "ethereum-ropsten",
     },
     data: data2,

@@ -37,7 +37,6 @@ const List = () => {
   const company = useSelector((state) => state.company.company);
   const [transactions, setTransactions] = useState([]);
   const [customers, setCustomers] = useState([]);
-  console.log(transactions);
 
   useEffect(() => {
     const fetchTransaction = async () => {

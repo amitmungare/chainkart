@@ -61,10 +61,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
-  // walletAddress: {
-  //   type: String,
-  //   required: true,
-  // },
+  walletAddress: {
+    type: String,
+    required: true,
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });

@@ -25,24 +25,19 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     pincode,
   } = req.body;
 
-  // const randomnumber = (Math.random() * 1000000).toPrecision(6);
+  const randomnumber = (Math.random() * 1000000).toPrecision(6);
 
-  // console.log(randomnumber);
+  let config = {
+    method: "get",
+    url: `https://api-eu1.tatum.io/v3/ethereum/address/xpub6EsA7Hze8MkBV597dpcUz9hekiqRG5KtqKJuw8hbpixLs1ZhdsdTZCN53a5Mb96VoWTF3xWuumh7uKRuzJNPUH7aCvJ5LrGfwhhFFm5aSUW/${randomnumber}`,
+    headers: {
+      "x-api-key": "bd61d9f4-9870-4e45-97ec-fe222523455e",
+      "x-testnet-type": "ethereum-ropsten",
+    },
+  };
+  let ress = await axios(config);
 
-  // var config = {
-  //   method: "get",
-  //   url: `https://api-eu1.tatum.io/v3/ethereum/address/xpub6EyYTU64qekKJ4PUGriXDBdGV7LB4UacdT6fro1xBBzXYZM3XdfbDit9ocAjsfXfscMXtJdWn5LVm8eRtxcoT7aGm7mof5tS6C6Gc2ee65c/${
-  //     2 + randomnumber
-  //   }`,
-  //   headers: {
-  //     "x-api-key": "d7afa9c3-24ba-4e77-b4e5-a0bd338b5425",
-  //     "x-testnet-type": "ethereum-ropsten",
-  //   },
-  // };
-
-  // let ress = await axios(config);
-
-  // walladdress = ress.data.address;
+  walladdress = ress.data.address;
 
   const user = await User.create({
     firstname,
@@ -54,7 +49,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     landmark,
     state,
     pincode,
-    // walletAddress: walladdress,
+    walletAddress: walladdress,
   });
 
   sendToken(user, 201, res);
