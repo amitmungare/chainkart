@@ -36,9 +36,9 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    tokenID: {
-      type: String,
-    },
+    // tokenID: {
+    //   type: String,
+    // },
   },
   { timestamps: true }
 );
