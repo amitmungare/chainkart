@@ -1,5 +1,4 @@
 {
-  "homepage": "http://Shreyas2121.github.io/fy",
   "name": "chainkart",
   "version": "0.1.0",
   "proxy": "http://localhost:4000",
@@ -28,6 +27,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.0.3",
+    "react-top-loading-bar": "^2.1.0",
     "recharts": "^2.1.9",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.5",

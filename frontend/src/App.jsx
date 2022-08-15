@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import UserLogin from "./pages/Auth/userlogin";
 import CompanyLogin from "./pages/Auth/companylogin";
 import UserSignUp from "./pages/Auth/usersignup";
@@ -12,11 +12,27 @@ import Payment from "./pages/E-Commerce/Payment";
 import CompPassword from "./pages/E-Commerce/CompPassword";
 import Success from "./pages/E-Commerce/success";
 import NotFound from "./pages/NotFound";
+import { useEffect, useState } from "react";
+import LoadingBar from "react-top-loading-bar";
 
 const App = () => {
+  const location = useLocation();
+
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    setProgress(100);
+  }, [location]);
+
   return (
     <div className=" flex flex-col justify-between">
       <ToastContainer />
+      <LoadingBar
+        color="#2663a3"
+        progress={progress}
+        waitingTime={400}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <Routes>
         <Route path="/*" element={<Home />} />
         {/* <Route path="*" element={<NotFound />} /> */}
