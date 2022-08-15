@@ -108,7 +108,7 @@ const Navbar = () => {
             <NavLink className="hover-1" to="/Books/Autobiography">
               Autobiography
             </NavLink>
-            <NavLink className="hover-1" to="/Books/Textbooks">
+            <NavLink className="hover-1" to="/Books/Textbook">
               Textbooks
             </NavLink>
             <NavLink className="hover-1" to="/Books/Fiction">

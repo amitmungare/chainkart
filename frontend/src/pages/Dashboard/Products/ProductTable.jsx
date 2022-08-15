@@ -34,10 +34,10 @@ const ProductTable = () => {
     getProducts();
   }, []);
   return (
-    <div className="flex justify-center items-center h-[70vh] relative">
+    <div className="flex justify-center items-center h-[70vh] flex-col">
       <Link
         to="/dashboard/addNew"
-        className="bg-indigo-600 text-white p-2 rounded-md text-sm absolute top-[17rem]"
+        className="bg-indigo-600 text-white p-2 rounded-md text-sm mt-3  "
         style={{ textDecoration: "none" }}
       >
         Add new product

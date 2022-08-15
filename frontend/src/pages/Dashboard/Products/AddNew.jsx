@@ -163,8 +163,8 @@ const AddNew = () => {
                     <option value="Autobiography">Autobiography</option>
                     <option value="Fiction">Fiction</option>
                     <option value="Textbook">Textbook</option>
-                    <option value="Washing Machines">Washing Machines</option>
-                    <option value="Air Conditioner">Air Conditioner</option>
+                    <option value="Washing_Machines">Washing Machines</option>
+                    <option value="Air_Conditioner">Air Conditioner</option>
                     <option value="Television">Television</option>
                   </select>
                 </div>
