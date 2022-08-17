@@ -3,9 +3,11 @@ import { Badge } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logoutUser } from "../../store/userSlice";
+import { logoutUser, selectUser } from "../../store/userSlice";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { selectCartItems } from "../../store/cartSlice";
 
 const ListItem = styled.div`
   position: absolute;
@@ -42,12 +44,12 @@ const Menu = styled.div`
 `;
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
 
-  const items = useSelector((state) => state.cart.cartItems);
+  const items = useAppSelector(selectCartItems);
   const handleLogOut = async () => {
-    dispatch(logoutUser({ toast }));
+    dispatch(logoutUser());
   };
 
   return (

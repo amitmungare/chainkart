@@ -1,6 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CartItem } from "../types.";
+import { RootState } from "./store";
 
-const initialState = {
+interface IS {
+  cartItems: CartItem[];
+  cartTotalQuantity: number;
+  cartTotalAmount: number;
+}
+
+const initialState: IS = {
   cartItems: [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
@@ -10,7 +18,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (state, action: PayloadAction<CartItem>) => {
       const itemIndex = state.cartItems.findIndex(
         (item) => item.name === action.payload.name
       );
@@ -21,14 +29,14 @@ const cartSlice = createSlice({
         state.cartItems.push(tempProduct);
       }
     },
-    removeFromCart: (state, action) => {
+    removeFromCart: (state, action: PayloadAction<string>) => {
       const nextCartItems = state.cartItems.filter(
         (item) => item.name !== action.payload
       );
 
       state.cartItems = nextCartItems;
     },
-    decreaseCart(state, action) {
+    decreaseCart(state, action: PayloadAction<CartItem>) {
       const itemIndex = state.cartItems.findIndex(
         (item) => item.name === action.payload.name
       );
@@ -43,10 +51,10 @@ const cartSlice = createSlice({
         state.cartItems = nextCartItems;
       }
     },
-    clearCart(state, action) {
+    clearCart(state) {
       state.cartItems = [];
     },
-    getTotal(state, action) {
+    getTotal(state) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { price, cartQuantity } = cartItem;
@@ -68,6 +76,10 @@ const cartSlice = createSlice({
     },
   },
 });
+
+export const selectCartItems = (state: RootState) => state.cart.cartItems;
+
+export const selectCart = (state: RootState) => state.cart;
 
 export const { addToCart, removeFromCart, decreaseCart, clearCart, getTotal } =
   cartSlice.actions;

@@ -1,5 +1,5 @@
 import React from "react";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "../../components/E-Commerce/PaymentForm";
@@ -7,20 +7,23 @@ import "./payment.css";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as api from "../../store/api";
+import { useAppSelector } from "../../store/hooks";
+import { selectUser } from "../../store/userSlice";
+import { selectCart, selectCartItems } from "../../store/cartSlice";
 
 const stripePromise = loadStripe(
   "pk_test_51LC9yhSE5P4xQp6tex03MR2aoEiW5ZP1HvJ4ArhnZ4dN7fbBn5K6wlMrczHkpUJQSMLnr8ImJRE3G3rc17H1FPdg006fkGsf4G"
 );
 
 const Payment = () => {
-  const { user } = useSelector((state) => state.user);
-  const name = `${user.firstname} ${user.lastname}`;
-  const address = `${user.hnumber} , ${user.landmark}, ${user.city}-${user.state},${user.pincode}`;
-  const humber = user.hnumber;
-  const landmark = user.landmark;
-  const city = user.city;
-  const state = user.state;
-  const pincode = user.pincode;
+  const user = useAppSelector(selectUser);
+  const name = `${user?.firstname} ${user?.lastname}`;
+  const address = `${user?.hnumber} , ${user?.landmark}, ${user?.city}-${user?.state},${user?.pincode}`;
+  const humber = user?.hnumber;
+  const landmark = user?.landmark;
+  const city = user?.city;
+  const state = user?.state;
+  const pincode = user?.pincode;
 
   const add1 = {
     humber,
@@ -29,8 +32,8 @@ const Payment = () => {
     state,
     pincode,
   };
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const Amount = useSelector((state) => state.cart.cartTotalAmount);
+  const cartItems = useAppSelector(selectCartItems);
+  const { cartTotalAmount: Amount } = useAppSelector(selectCart);
 
   const paymentData = {
     name,
@@ -54,7 +57,7 @@ const Payment = () => {
     payment();
   });
 
-  const options = {
+  const options: StripeElementsOptions = {
     clientSecret,
     loader: "auto",
     appearance: {
@@ -65,7 +68,7 @@ const Payment = () => {
     <div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <PaymentForm name={name} address={address} add1={add1} />
+          <PaymentForm name={name} address={address} />
         </Elements>
       )}
     </div>

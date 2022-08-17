@@ -7,15 +7,17 @@ import {
 import { toast } from "react-toastify";
 import { clearCart } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { selectUser } from "../../store/userSlice";
 
-const PaymentForm = ({ name, address, add1 }) => {
-  const { user } = useSelector((state) => state.user);
+const PaymentForm = ({ name, address }) => {
+  const user = useAppSelector(selectUser);
 
   const stripe = useStripe();
   const elements = useElements();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const PaymentForm = ({ name, address, add1 }) => {
     }
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
+      switch (paymentIntent?.status) {
         case "succeeded":
           toast.success("Payment succeeded!");
           break;
@@ -66,26 +68,11 @@ const PaymentForm = ({ name, address, add1 }) => {
       confirmParams: {
         return_url: "http://127.0.0.1:3000/success",
 
-        shipping: {
-          name,
-          address: {
-            line1: add1.humber,
-            line2: add1.landmark,
-            city: add1.city,
-            state: add1.state,
-            postal_code: add1.pincode,
-            country: "India",
-          },
-          tracking_number:
-            Math.random().toString(36).substring(2, 15) +
-            Math.random().toString(36).substring(2, 15),
-        },
-        receipt_email: user.email,
         payment_method_data: {
           billing_details: {
             name: name,
             address: address,
-            email: user.email,
+            email: user?.email,
           },
         },
       },
@@ -94,7 +81,7 @@ const PaymentForm = ({ name, address, add1 }) => {
     dispatch(clearCart());
 
     if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
+      setMessage(String(error.message));
       toast.error(error.message);
     } else {
       setMessage("An unexpected error occurred.");

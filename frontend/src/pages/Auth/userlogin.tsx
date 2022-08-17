@@ -1,10 +1,9 @@
 import { Mail, Visibility } from "@mui/icons-material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../../store/userSlice";
+import { loginUser, selectU } from "../../store/userSlice";
 import { CircularProgress } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const initialState = {
   email: "",
@@ -14,9 +13,9 @@ const initialState = {
 function UserLogin() {
   const [formData, setFormData] = useState(initialState);
   const { email, password } = formData;
-  const { loading, error } = useSelector((state) => ({ ...state.user }));
+  const { loading, error } = useAppSelector(selectU);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [passShow, setPassShow] = useState(false);
 

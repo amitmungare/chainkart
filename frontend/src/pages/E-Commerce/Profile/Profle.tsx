@@ -1,20 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import Address from "../Profile/Address";
-import BasicInfo from "../Profile/BasicInfo";
-import Orders from "../Profile/Orders";
-import Sidebar from "../../../pages/E-Commerce/Profile/Sidebar";
+import Address from "./Address";
+import BasicInfo from "./BasicInfo";
+import Orders from "./Orders";
+import Sidebar from "./Sidebar";
 import ChangePass from "./ChangePass";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../../store/hooks";
+import { selectUser } from "../../../store/userSlice";
 
 const Profile = () => {
-  const { user } = useSelector((state) => state.user);
+  const user = useAppSelector(selectUser);
   // let user = true;
   return (
     <>
       {user ? (
-        <div className="min-h-screen flex gap-3">
+        <div className="min-h-screen overflow-x-scroll flex gap-3">
           <Sidebar />
           <div className="flex-[6]">
             <Routes>

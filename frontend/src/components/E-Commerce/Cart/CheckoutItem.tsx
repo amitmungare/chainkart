@@ -1,30 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import {
   addToCart,
   decreaseCart,
   removeFromCart,
 } from "../../../store/cartSlice";
+import { useAppDispatch } from "../../../store/hooks";
+import { CartItem } from "../../../types.";
+import { formatPrice } from "../../../utils";
 
-const CheckoutItem = ({ cartItem }) => {
+interface IProps {
+  cartItem: CartItem;
+}
+
+const CheckoutItem = ({ cartItem }: IProps) => {
   const { price, cartQuantity, pImage, name } = cartItem;
-  // console.log(cartItem);
-  let formattedPrice = new Intl.NumberFormat("en-IN").format(cartItem.price);
-  let formattedTotalAmount = new Intl.NumberFormat("en-IN").format(
-    cartQuantity * price
-  );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleRemove = (cartItem) => {
+  const handleRemove = (cartItem: CartItem) => {
     dispatch(removeFromCart(cartItem.name));
   };
 
-  const handleDecrease = (cartItem) => {
+  const handleDecrease = (cartItem: CartItem) => {
     dispatch(decreaseCart(cartItem));
   };
 
-  const handleIncrease = (cartItem) => {
+  const handleIncrease = (cartItem: CartItem) => {
     dispatch(addToCart(cartItem));
   };
 
@@ -36,7 +38,7 @@ const CheckoutItem = ({ cartItem }) => {
       <div className="flex flex-col justify-between">
         <div className="flex flex-col">
           <span className="font-bold">{name}</span>
-          <span>₹{formattedPrice}</span>
+          <span>₹{formatPrice(price)}</span>
         </div>
 
         <div className="w-16 border-2 p-1 flex justify-center gap-2">
@@ -60,7 +62,7 @@ const CheckoutItem = ({ cartItem }) => {
         <span className="cursor-pointer" onClick={() => handleRemove(cartItem)}>
           &#10005;
         </span>
-        <span>Total: ₹{formattedTotalAmount}</span>
+        <span>Total: ₹{formatPrice(cartQuantity * price)}</span>
       </div>
     </div>
   );

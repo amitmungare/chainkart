@@ -3,27 +3,23 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { updateUserProfile } from "../../../store/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { selectUser, updateUserProfile } from "../../../store/userSlice";
 
 const BasicInfo = () => {
-  const { user } = useSelector((state) => ({ ...state.user }));
-  const {
-    email,
-    firstname,
-    lastname,
-    hnumber,
-    city,
-    landmark,
-    state,
-    pincode,
-    token,
-  } = user;
+  const user = useAppSelector(selectUser);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const [uFirstName, setUFirstName] = useState(firstname);
-  const [uLastName, setULastName] = useState(lastname);
-  const [uEmail, setUEmail] = useState(email);
+  const [uFirstName, setUFirstName] = useState(user?.firstname);
+  const [uLastName, setULastName] = useState(user?.lastname);
+  const [uEmail, setUEmail] = useState(user?.email);
+  const hnumber = user?.hnumber;
+  const city = user?.city;
+  const landmark = user?.landmark;
+  const state = user?.state;
+  const pincode = user?.pincode;
+  const token = user?.token;
   const formData = {
     firstname: uFirstName,
     lastname: uLastName,
@@ -51,7 +47,7 @@ const BasicInfo = () => {
           <label>First Name </label>
           <input
             onChange={(e) => setUFirstName(e.target.value)}
-            placeholder={firstname}
+            placeholder={user?.firstname}
             className="p-[3px] border-2 border-[#0369a1] rounded-lg w-60"
             type="text"
           />
@@ -61,7 +57,7 @@ const BasicInfo = () => {
           <label>Last Name </label>
           <input
             onChange={(e) => setULastName(e.target.value)}
-            placeholder={lastname}
+            placeholder={user?.lastname}
             className="p-[3px] border-2 border-[#0369a1] rounded-lg w-60"
             type="text"
           />
@@ -71,7 +67,7 @@ const BasicInfo = () => {
           <label>Email </label>
           <input
             onChange={(e) => setUEmail(e.target.value)}
-            placeholder={email}
+            placeholder={user?.email}
             className="p-[3px] border-2 border-[#0369a1] rounded-lg ml-9 w-60"
             type="email"
           />

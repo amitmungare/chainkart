@@ -1,22 +1,27 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { clearCart, getTotal } from "../../store/cartSlice";
+import {
+  clearCart,
+  getTotal,
+  selectCart,
+  selectCartItems,
+} from "../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
 
 import CheckoutItem from "../../components/E-Commerce/Cart/CheckoutItem";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { selectUser } from "../../store/userSlice";
+import { formatPrice } from "../../utils";
 
 const Cart = () => {
-  const { user } = useSelector((state) => state?.user);
+  const user = useAppSelector(selectUser);
   const name = `${user?.firstname} ${user?.lastname}`;
   const address = `${user?.hnumber} , ${user?.landmark}, ${user?.city}-${user?.state},${user?.pincode}`;
-  const cartItems = useSelector((state) => state?.cart?.cartItems);
-  const Amount = useSelector((state) => state?.cart?.cartTotalAmount);
-  let formattedAmount = new Intl.NumberFormat("en-IN").format(Amount);
+  const cartItems = useAppSelector(selectCartItems);
+  const { cartTotalAmount: Amount } = useAppSelector(selectCart);
+
   let sCharge = Amount > 500 ? 0 : 100;
-  let formatteTotaldAmount = new Intl.NumberFormat("en-IN").format(
-    Amount + sCharge
-  );
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleClearCart = () => {
@@ -74,7 +79,7 @@ const Cart = () => {
                     </span>
                     <div className="flex justify-between mt-6 text-white">
                       <span>Subtotal</span>
-                      <span>₹{formattedAmount}</span>
+                      <span>₹{formatPrice(Amount)}</span>
                     </div>
 
                     <div className="flex justify-between mt-2 text-white">
@@ -89,7 +94,7 @@ const Cart = () => {
 
                     <div className="flex justify-between mt-10 text-white">
                       <span>Total Price</span>
-                      <span>₹{formatteTotaldAmount}</span>
+                      <span>₹{formatPrice(Amount + sCharge)}</span>
                     </div>
 
                     <button

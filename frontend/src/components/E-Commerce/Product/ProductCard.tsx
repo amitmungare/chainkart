@@ -27,7 +27,7 @@ const ProductCard = ({ product, category, subCategory }: IProps) => {
     <div className=" p-2 rounded-md">
       <Link to={`/${category}/${subCategory}/${name}`}>
         <LazyLoadImage
-          className="mb-5 h-56 w-full object-contain"
+          className="mb-5 h-56 w-full object-contain ml-[5rem]"
           src={pImage}
           loading="eager"
           effect="blur"

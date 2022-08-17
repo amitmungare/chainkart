@@ -3,11 +3,12 @@ import { Mail, Visibility } from "@mui/icons-material";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../store/userSlice";
+import { registerUser, selectU } from "../../store/userSlice";
 import { FaLandmark } from "react-icons/fa";
 import { FaCity } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const inititalState = {
   email: "",
@@ -25,18 +26,18 @@ const inititalState = {
 const UserSignUp = () => {
   const [formData, setFormData] = useState(inititalState);
   const { confirmPassword, password } = formData;
-  const { loading, error } = useSelector((state) => ({ ...state.user }));
+  const { loading, error } = useAppSelector(selectU);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [passShow, setPassShow] = useState(false);
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: any) => {
     let { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -269,13 +270,6 @@ const UserSignUp = () => {
         {loading ? (
           <CircularProgress className="ml-20" />
         ) : (
-          // <button
-          //   type="submit"
-          //   onClick={handleSubmit}
-          //   className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
-          // >
-          //   Create your Account
-          // </button>
           <button
             type="submit"
             onClick={handleSubmit}

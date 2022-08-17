@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { updateUserPassword } from "../../../store/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { selectUser, updateUserPassword } from "../../../store/userSlice";
 
 const ChangePass = () => {
-  const {
-    user: { token },
-  } = useSelector((state) => state.user);
+  // const {
+  //   user: { token },
+  // } = useSelector((state) => state.user);
+
+  const user = useAppSelector(selectUser);
+  const token = user?.token;
 
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const formData = {
     oldPassword: oldPass,
     newPassword: newPass,
     confirmPassword: confirmPass,
   };
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (e: any) => {
     e.preventDefault();
 
     if (newPass !== confirmPass) {

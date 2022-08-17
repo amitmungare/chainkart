@@ -1,34 +1,25 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { updateUserProfile } from "../../../store/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { selectUser, updateUserProfile } from "../../../store/userSlice";
 
 const Address = () => {
-  const { user } = useSelector((state) => state.user);
-  const {
-    firstname,
-    lastname,
-    email,
-    hnumber,
-    city,
-    landmark,
-    state,
-    pincode,
-    token,
-  } = user;
+  const user = useAppSelector(selectUser);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const [uHNumber, setUHNumber] = useState(hnumber);
-  const [uCity, setUCity] = useState(city);
-  const [uLandmark, setULandmark] = useState(landmark);
-  const [uState, setUState] = useState(state);
-  const [uPincode, setUPincode] = useState(pincode);
+  const [uHNumber, setUHNumber] = useState(user?.hnumber);
+  const [uCity, setUCity] = useState(user?.city);
+  const [uLandmark, setULandmark] = useState(user?.landmark);
+  const [uState, setUState] = useState(user?.state);
+  const [uPincode, setUPincode] = useState(user?.pincode);
+
+  const token = user?.token;
 
   const formData = {
-    firstname,
-    lastname,
-    email,
+    firstname: user?.firstname,
+    lastname: user?.lastname,
+    email: user?.email,
     hnumber: uHNumber,
     city: uCity,
     landmark: uLandmark,
@@ -36,7 +27,7 @@ const Address = () => {
     pincode: uPincode,
   };
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (e: any) => {
     e.preventDefault();
 
     dispatch(updateUserProfile({ formData, toast, token }));
@@ -51,7 +42,7 @@ const Address = () => {
           <label>House Number </label>
           <input
             onChange={(e) => setUHNumber(e.target.value)}
-            placeholder={hnumber}
+            placeholder={user?.hnumber}
             className="input-1 "
             type="text"
           />
@@ -61,7 +52,7 @@ const Address = () => {
           <label>City </label>
           <input
             onChange={(e) => setUCity(e.target.value)}
-            placeholder={city}
+            placeholder={user?.city}
             className="input-1 ml-[77px] "
             type="text"
           />
@@ -71,7 +62,7 @@ const Address = () => {
           <label>Landmark </label>
           <input
             onChange={(e) => setULandmark(e.target.value)}
-            placeholder={landmark}
+            placeholder={user?.landmark}
             className="input-1 ml-8"
             type="text"
           />
@@ -80,7 +71,7 @@ const Address = () => {
         <div className="flex gap-2 items-center">
           <label>State </label>
 
-          <select placeholder={state} className="input-1 ml-16">
+          <select placeholder={user?.state} className="input-1 ml-16">
             <option>Select State</option>
             <option>Andhra Pradesh</option>
             <option>Arunachal Pradesh</option>
@@ -117,8 +108,8 @@ const Address = () => {
         <div className="flex gap-2 items-center">
           <label>Pincode </label>
           <input
-            onChange={(e) => setUPincode(e.target.value)}
-            placeholder={pincode}
+            onChange={(e) => setUPincode(Number(e.target.value))}
+            placeholder={user?.pincode.toString()}
             style={{ WebkitAppearance: "none" }}
             className="input-1 ml-11"
             type="number"

@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "./api";
 import { toast } from "react-toastify";
+import { RootState } from "./store";
+import { User } from "../types.";
 
 export const loginUser = createAsyncThunk(
   "user/login",
-  async ({ formData, navigate }, { rejectWithValue }) => {
+  async ({ formData, navigate }: any, { rejectWithValue }) => {
     try {
-      let user;
+      let user: any;
       const res = await api.login(formData);
       const data = res.data;
       if (data.message) {
@@ -16,6 +18,7 @@ export const loginUser = createAsyncThunk(
       const token = data.token;
       user = data.user;
       user = { ...user, token };
+      console.log(user);
       toast.success("Login successful");
       navigate("/");
       return user;
@@ -28,9 +31,9 @@ export const loginUser = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
   "user/register",
-  async ({ formData, navigate }, { rejectWithValue }) => {
+  async ({ formData, navigate }: any, { rejectWithValue }) => {
     try {
-      let user;
+      let user: any;
       const res = await api.register(formData);
       // console.log(res);
       const data = res.data;
@@ -52,7 +55,7 @@ export const registerUser = createAsyncThunk(
 
 export const updateUserProfile = createAsyncThunk(
   "user/update",
-  async ({ formData, token }, { rejectWithValue }) => {
+  async ({ formData, token }: any, { rejectWithValue }) => {
     try {
       // console.log(formData, token);
       const res = await api.updateProfile(formData, token);
@@ -67,7 +70,7 @@ export const updateUserProfile = createAsyncThunk(
 
 export const updateUserPassword = createAsyncThunk(
   "user/password",
-  async ({ formData, token }, { rejectWithValue }) => {
+  async ({ formData, token }: any, { rejectWithValue }) => {
     try {
       const res = await api.updatePassword(formData, token);
       toast.success("Password updated");
@@ -86,7 +89,13 @@ export const logoutUser = createAsyncThunk("user/logout", async () => {
   }
 });
 
-const initialState = {
+interface IS {
+  user: User | null;
+  loading: boolean;
+  error: any;
+}
+
+const initialState: IS = {
   user: null,
   loading: false,
   error: null,
@@ -95,68 +104,72 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-
+  reducers: {},
   extraReducers: {
-    [loginUser.pending]: (state, action) => {
+    [loginUser.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [loginUser.fulfilled]: (state, action) => {
+    [loginUser.fulfilled.toString()]: (state, action) => {
       state.loading = false;
       state.user = action.payload;
     },
-    [loginUser.rejected]: (state, action) => {
+    [loginUser.rejected.toString()]: (state, action) => {
       state.loading = false;
       // console.log(error);
       state.error = action.payload;
     },
 
-    [logoutUser.pending]: (state, action) => {
+    [logoutUser.pending.toString()]: (state, action) => {
       state.loading = true;
     },
-    [logoutUser.fulfilled]: (state, action) => {
+    [logoutUser.fulfilled.toString()]: (state, action) => {
       state.loading = false;
       state.user = null;
     },
-    [logoutUser.rejected]: (state, { error }) => {
+    [logoutUser.rejected.toString()]: (state, { error }) => {
       state.loading = false;
       state.error = error.message;
     },
 
-    [registerUser.pending]: (state, action) => {
+    [registerUser.pending.toString()]: (state, action) => {
       state.loading = true;
     },
-    [registerUser.fulfilled]: (state, action) => {
+    [registerUser.fulfilled.toString()]: (state, action) => {
       state.loading = false;
       state.user = action.payload;
     },
-    [registerUser.rejected]: (state, { error }) => {
+    [registerUser.rejected.toString()]: (state, { error }) => {
       state.loading = false;
       state.error = error.message;
     },
 
-    [updateUserProfile.pending]: (state, action) => {
+    [updateUserProfile.pending.toString()]: (state, action) => {
       state.loading = true;
     },
-    [updateUserProfile.fulfilled]: (state, action) => {
+    [updateUserProfile.fulfilled.toString()]: (state, action) => {
       state.loading = false;
       state.user = action.payload;
     },
-    [updateUserProfile.rejected]: (state, action) => {
+    [updateUserProfile.rejected.toString()]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
 
-    [updateUserPassword.pending]: (state, action) => {
+    [updateUserPassword.pending.toString()]: (state, action) => {
       state.loading = true;
     },
-    [updateUserPassword.fulfilled]: (state, action) => {
+    [updateUserPassword.fulfilled.toString()]: (state, action) => {
       state.loading = false;
     },
-    [updateUserPassword.rejected]: (state, action) => {
+    [updateUserPassword.rejected.toString()]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
   },
 });
+
+export const selectUser = (state: RootState) => state.user.user;
+
+export const selectU = (state: RootState) => state.user;
 
 export default userSlice.reducer;
