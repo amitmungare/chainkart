@@ -12,7 +12,7 @@ import Payment from "./pages/E-Commerce/Payment";
 import CompPassword from "./pages/E-Commerce/CompPassword";
 import Success from "./pages/E-Commerce/success";
 import NotFound from "./pages/NotFound";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoadingBar from "react-top-loading-bar";
 
 const App = () => {

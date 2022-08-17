@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Routes, useParams, Route } from "react-router-dom";
 import Products from "../../../components/E-Commerce/Product/Products";
-import { data } from "../../../data1";
 import { fetchProductsByCat } from "../../../store/api";
 import ProductItem from "./ProductItem";
 

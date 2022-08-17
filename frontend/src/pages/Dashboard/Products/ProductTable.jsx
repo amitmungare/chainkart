@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 
 import styled from "styled-components";
-import { userColumns, userRows } from "../../../productData";
 import { fetchProducts } from "../../../store/api";
 import { useSelector } from "react-redux";
 

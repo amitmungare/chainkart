@@ -85,13 +85,6 @@ const SideBar = () => {
             </List>
           </Link>
 
-          <Link to="/dashboard/users">
-            <List>
-              <PersonOutline style={{ fontSize: "24px", color: "#0369a1" }} />
-              <Text>Users</Text>
-            </List>
-          </Link>
-
           <Link to="/dashboard/cprofile">
             <List>
               <AccountCircleOutlined

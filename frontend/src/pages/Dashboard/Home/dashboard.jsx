@@ -9,7 +9,6 @@ import TitleBar from "../../../components/Dashboard/titlebar";
 
 import styled from "styled-components";
 
-import Users from "../Users";
 import AddNew from "../Products/AddNew";
 import ProductTable from "../Products/ProductTable";
 import { useSelector } from "react-redux";
@@ -34,7 +33,7 @@ const Dashboard = () => {
             <TitleBar />
             <Routes>
               <Route path="/" element={<DashHome />} />
-              <Route path="users" element={<Users />} />
+
               <Route path="products" element={<ProductTable />} />
               <Route path="addNew" element={<AddNew />} />
               <Route path="cprofile" element={<CProfile />} />
