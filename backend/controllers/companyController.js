@@ -88,21 +88,23 @@ exports.getAllTransactions = catchAsyncErrors(async (req, res, next) => {
   const { cEmail } = req.body;
   let orders = [];
   let name = [];
+  let date = [];
 
   const transactions = await Order.find();
   transactions.forEach((transaction) => {
     transaction.orderItems.forEach((orderItem) => {
       if (orderItem.cEmail === cEmail) {
+        date.push(new Date(transaction.createdAt).toLocaleDateString());
         name.push(transaction.uName);
         orders.push(orderItem);
       }
     });
   });
-  console.log(name);
 
   res.status(200).json({
     orders,
     name,
+    date,
   });
 });
 

@@ -24,7 +24,6 @@ const DataTableTitle = styled.div`
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
   const company = useSelector((state) => state.company.company);
-  console.log(products);
   useEffect(() => {
     const getProducts = async () => {
       const res = await fetchProducts(company.email);

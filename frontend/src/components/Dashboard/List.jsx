@@ -37,12 +37,14 @@ const List = () => {
   const company = useSelector((state) => state.company.company);
   const [transactions, setTransactions] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [dates, setDates] = useState([]);
 
   useEffect(() => {
     const fetchTransaction = async () => {
       const res = await fetchT(company.email);
       setCustomers(res.data.name);
       setTransactions(res.data.orders);
+      setDates(res.data.date);
     };
     fetchTransaction();
   }, []);
@@ -54,8 +56,8 @@ const List = () => {
           <TableRow>
             <TableCell className="tableCell">Product ID</TableCell>
             <TableCell className="tableCell">Product Name</TableCell>
-            <TableCell className="tableCell">Customer Name</TableCell>
-            {/* <TableCell className="tableCell">Date</TableCell> */}
+            <TableCell className="tableCell">Customer</TableCell>
+            <TableCell className="tableCell">Date</TableCell>
             <TableCell className="tableCell">Price</TableCell>
           </TableRow>
         </TableHead>
@@ -72,7 +74,7 @@ const List = () => {
                   </CellWrapper>
                 </TableCell>
                 <TableCell className="tableCell">{customers[i]}</TableCell>
-                {/* <TableCell className="tableCell">{transaction.date}</TableCell> */}
+                <TableCell className="tableCell">{dates[i]}</TableCell>
                 <TableCell className="tableCell">{transaction.price}</TableCell>
               </TableRow>
             );

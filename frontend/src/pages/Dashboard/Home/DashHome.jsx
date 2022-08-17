@@ -34,15 +34,15 @@ const DashHome = () => {
   return (
     <>
       <Widgets>
-        <Widget type="user" />
-        <Widget type="order" />
+        <Widget type="p_sold" />
         <Widget type="earning" />
         <Widget type="products" />
+        <Widget type="review" />
       </Widgets>
-      <Charts>
+      {/* <Charts>
         <Featured />
         <Chart />
-      </Charts>
+      </Charts> */}
       <ListContainer>
         <ListTitle>Latest Transaction</ListTitle>
         <List />

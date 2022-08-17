@@ -5,9 +5,11 @@ import {
   ShoppingCartOutlined,
   Store,
 } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { fetchProducts, fetchT } from "../../../store/api";
 
 const Widgets = styled.div`
   display: flex;
@@ -21,7 +23,8 @@ const Widgets = styled.div`
 const Left = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 10px;
 `;
 const Title = styled.span`
   font-weight: bold;
@@ -37,11 +40,7 @@ const Right = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
-const Percentage = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-`;
+
 const Link1 = styled.span`
   width: max-content;
   font-size: 12 px;
@@ -49,13 +48,38 @@ const Link1 = styled.span`
 `;
 
 const Widget = ({ type }) => {
+  const [no, setNo] = useState(0);
+  const [earning, setEarning] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const price = earning.reduce((a, b) => a + b.price, 0);
+
+  const company = useSelector((state) => state.company.company);
+
+  useEffect(() => {
+    const fetchTransaction = async () => {
+      const res = await fetchT(company.email);
+
+      setNo(res.data.orders.length);
+      setEarning(res.data.orders);
+    };
+
+    const getProducts = async () => {
+      const res = await fetchProducts(company.email);
+      setProducts(res.data.products);
+    };
+    fetchTransaction();
+    getProducts();
+  }, []);
+
   let data;
-  let amount = 1000;
+  // let amount = 1000;
   switch (type) {
-    case "user":
+    case "review":
       data = {
-        title: "USERS",
+        title: "REVIEWS",
         isMoney: false,
+        states: "Coming soon",
         link: "See all users",
         icon: (
           <PersonOutlined
@@ -72,11 +96,12 @@ const Widget = ({ type }) => {
       };
       break;
 
-    case "order":
+    case "p_sold":
       data = {
-        title: "ORDERS",
+        title: "ITEMS SOLD",
         isMoney: false,
-        link: "View all orders",
+        states: no,
+        link: "View all transactions",
         icon: (
           <ShoppingCartOutlined
             style={{
@@ -96,6 +121,7 @@ const Widget = ({ type }) => {
       data = {
         title: "EARNINGS",
         isMoney: true,
+        states: price,
         link: "View net earnings",
         icon: (
           <MonetizationOnOutlined
@@ -116,6 +142,7 @@ const Widget = ({ type }) => {
       data = {
         title: "PRODUCTS",
         isMoney: false,
+        states: products.length,
         link: "See details",
         icon: (
           <Store
@@ -141,18 +168,12 @@ const Widget = ({ type }) => {
         <Title>{data.title}</Title>
         <Counter>
           {data.isMoney && "₹"}
-          {amount}
+          {data.states}
         </Counter>
-        <Link1>{data.link}</Link1>
+        {/* <Link1>{data.link}</Link1> */}
       </Left>
 
-      <Right>
-        <Percentage>
-          <KeyboardArrowUp />
-          10 %
-        </Percentage>
-        {data.icon}
-      </Right>
+      <Right>{data.icon}</Right>
     </Widgets>
   );
 };

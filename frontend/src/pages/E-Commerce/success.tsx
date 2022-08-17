@@ -28,11 +28,21 @@ const Success = () => {
   }, []);
 
   return (
-    <div className="h-screen flex justify-center items-center flex-col gap-2">
-      <h1>Paymeny Successfull!</h1>
-      <NavLink to="/" className="bg-blue-600 text-white p-2 rounded-md">
-        Go to Home
-      </NavLink>
+    <div className="h-screen flex justify-center items-center flex-col gap-2 bg-emerald-100">
+      <div className="bg-white shadow-2xl p-[5rem] rounded-lg ">
+        <div className="flex flex-col gap-3">
+          <h1>
+            Payment{" "}
+            <span className="text-emerald-700 font-bold">Successfull!</span>
+          </h1>
+          <NavLink
+            to="/"
+            className="bg-teal-500 text-center text-white p-2 rounded-md"
+          >
+            Go to Home
+          </NavLink>
+        </div>
+      </div>
     </div>
   );
 };
