@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const CompPassword = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const data = {
       email,
@@ -16,7 +16,7 @@ const CompPassword = () => {
       "http://localhost:4000/api/v1/company/admin",
       data
     );
-    console.log(res);
+
     if (res.data.success) {
       toast.success("Password updated successfully");
     }

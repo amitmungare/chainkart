@@ -60,7 +60,7 @@ const Navbar = () => {
         <Menu>
           <List>Electronics</List>
           <ListItem>
-            <NavLink className="hover-1" to="/Electronics/Laptops">
+            <NavLink className="hover-1 text-black" to="/Electronics/Laptops">
               Laptop
             </NavLink>
             <NavLink className="hover-1" to="/Electronics/Headphones">

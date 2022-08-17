@@ -9,10 +9,11 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/es/storage";
-import cartReducer, { getTotal } from "./cartSlice";
+import cartReducer from "./cartSlice";
 import userReducer from "./userSlice";
 import companyReducer from "./companySlice";
 import productReducer from "./productSlice";
+import { useAppSelector } from "./hooks";
 
 const reducers = combineReducers({
   cart: cartReducer,
@@ -38,6 +39,8 @@ const store = configureStore({
     }),
 });
 
-store.dispatch(getTotal());
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

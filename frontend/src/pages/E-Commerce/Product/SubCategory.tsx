@@ -5,29 +5,21 @@ import { useEffect } from "react";
 import { Routes, useParams, Route } from "react-router-dom";
 import Products from "../../../components/E-Commerce/Product/Products";
 import { fetchProductsByCat } from "../../../store/api";
+import { Product } from "../../../types.";
 import ProductItem from "./ProductItem";
 
 const SubCategory = () => {
   const { category, subCategory } = useParams();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // const res = Object.entries(data).filter((cat) => cat[0] === category);
-  // const category1 = res[0][1];
-  // const res1 = Object.entries(category1).filter(
-  //   (subCat) => subCat[0] === subCategory
-  // );
-  // const products = res1[0][1];
-  console.log(products);
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
-      // const res = await fetchProductsByCat(subCategory);
+
       const res = await axios.post(
         "http://localhost:4000/api/v1/product/getBySubCat",
-        {
-          subCategory,
-        }
+        { subCategory }
       );
       setProducts(res.data.products);
       setLoading(false);

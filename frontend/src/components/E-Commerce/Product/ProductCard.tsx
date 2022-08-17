@@ -5,17 +5,21 @@ import { addToCart } from "../../../store/cartSlice";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { Product } from "../../../types.";
+import { useAppDispatch } from "../../../store/hooks";
+import { formatPrice } from "../../../utils";
 
-// import { add } from ;
+interface IProps {
+  product: Product;
+  category?: string;
+  subCategory?: string;
+}
 
-const ProductCard = ({ product, category, subCategory }) => {
-  const dispatch = useDispatch();
+const ProductCard = ({ product, category, subCategory }: IProps) => {
+  const dispatch = useAppDispatch();
   const { name, price, pImage } = product;
 
-  let formattedPrice = new Intl.NumberFormat("en-IN").format(price);
-  // console.log(formatted);
-
-  const handleAdd = (product) => {
+  const handleAdd = (product: Product) => {
     dispatch(addToCart(product));
   };
 
@@ -31,7 +35,7 @@ const ProductCard = ({ product, category, subCategory }) => {
       </Link>
       <div className="flex flex-col">
         <span>{name}</span>
-        <span>₹{formattedPrice}</span>
+        <span>₹{formatPrice(price)}</span>
         <button
           onClick={() => handleAdd(product)}
           className="bg-indigo-600 p-2 rounded-lg text-white w-28 h-auto"

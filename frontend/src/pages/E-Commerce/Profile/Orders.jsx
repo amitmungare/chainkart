@@ -20,7 +20,7 @@ const Orders = () => {
         <div className="w-full h-full p-5 flex flex-col gap-10">
           {orders.map((order, i) => (
             <table className="shadow-lg rounded-2xl bg-white">
-              <thead className="bg-indigo-600 text-white">
+              <thead className="bg-[#0369a1] text-white">
                 <tr>
                   <th className="p-1">Order ID</th>
                   <th className="p-2">Name</th>
