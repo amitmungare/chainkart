@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Routes, useParams, Route } from "react-router-dom";
 import Products from "../../../components/E-Commerce/Product/Products";
 import { fetchProductsByCat } from "../../../store/api";
-import { Product } from "../../../types.";
+import { Product } from "../../../types";
 import ProductItem from "./ProductItem";
 
 const SubCategory = () => {

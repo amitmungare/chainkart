@@ -164,8 +164,8 @@ const AddNew = () => {
                     <option value="Autobiography">Autobiography</option>
                     <option value="Fiction">Fiction</option>
                     <option value="Textbook">Textbook</option>
-                    <option value="Washing_Machines">Washing Machines</option>
-                    <option value="Air_Conditioner">Air Conditioner</option>
+                    <option value="Washing_Machines">Washing_Machines</option>
+                    <option value="Air_Conditioner">Air_Conditioner</option>
                     <option value="Television">Television</option>
                   </select>
                 </div>

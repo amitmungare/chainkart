@@ -136,7 +136,7 @@ const Navbar = () => {
             </NavLink>
             <NavLink
               className="hover-1 text-black"
-              to="/Home_Appliances/Washing_Machine"
+              to="/Home_Appliances/Washing_Machines"
             >
               Washing Machine
             </NavLink>
