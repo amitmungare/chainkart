@@ -43,7 +43,7 @@ const Address = () => {
           <input
             onChange={(e) => setUHNumber(e.target.value)}
             placeholder={user?.hnumber}
-            className="input-1 "
+            className="input-1"
             type="text"
           />
         </div>
@@ -118,7 +118,7 @@ const Address = () => {
 
         <button
           onClick={handleUpdate}
-          className="w-1/5 bg-indigo-600 p-3 rounded-lg text-white text-lg "
+          className="w-1/5 bg-[#0369a1] p-3 rounded-lg text-white text-lg "
         >
           Update
         </button>

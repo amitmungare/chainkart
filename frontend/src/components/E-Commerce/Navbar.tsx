@@ -65,10 +65,16 @@ const Navbar = () => {
             <NavLink className="hover-1 text-black" to="/Electronics/Laptops">
               Laptop
             </NavLink>
-            <NavLink className="hover-1" to="/Electronics/Headphones">
+            <NavLink
+              className="hover-1 text-black"
+              to="/Electronics/Headphones"
+            >
               Headphones
             </NavLink>
-            <NavLink className="hover-1" to="/Electronics/SmartPhones">
+            <NavLink
+              className="hover-1 text-black"
+              to="/Electronics/SmartPhones"
+            >
               SmartPhones
             </NavLink>
           </ListItem>
@@ -77,13 +83,13 @@ const Navbar = () => {
         <Menu>
           <List>Sports</List>
           <ListItem>
-            <NavLink className="hover-1" to="/Sports/Cricket">
+            <NavLink className="hover-1 text-black" to="/Sports/Cricket">
               Cricket
             </NavLink>
-            <NavLink className="hover-1" to="/Sports/Football">
+            <NavLink className="hover-1 text-black" to="/Sports/Football">
               Football
             </NavLink>
-            <NavLink className="hover-1" to="/Sports/Badminton">
+            <NavLink className="hover-1 text-black" to="/Sports/Badminton">
               Badminton
             </NavLink>
           </ListItem>
@@ -92,13 +98,13 @@ const Navbar = () => {
         <Menu>
           <List>Fashion</List>
           <ListItem>
-            <NavLink className="hover-1" to="/Fashion/Shirts">
+            <NavLink className="hover-1 text-black" to="/Fashion/Shirts">
               Shirts
             </NavLink>
-            <NavLink className="hover-1" to="/Fashion/Shoes">
+            <NavLink className="hover-1 text-black" to="/Fashion/Shoes">
               Shoes
             </NavLink>
-            <NavLink className="hover-1" to="/Fashion/Watches">
+            <NavLink className="hover-1 text-black" to="/Fashion/Watches">
               Watches
             </NavLink>
           </ListItem>
@@ -107,13 +113,13 @@ const Navbar = () => {
         <Menu>
           <List>Books</List>
           <ListItem>
-            <NavLink className="hover-1" to="/Books/Autobiography">
+            <NavLink className="hover-1 text-black" to="/Books/Autobiography">
               Autobiography
             </NavLink>
-            <NavLink className="hover-1" to="/Books/Textbook">
+            <NavLink className="hover-1 text-black" to="/Books/Textbook">
               Textbooks
             </NavLink>
-            <NavLink className="hover-1" to="/Books/Fiction">
+            <NavLink className="hover-1 text-black" to="/Books/Fiction">
               Fiction
             </NavLink>
           </ListItem>
@@ -122,13 +128,22 @@ const Navbar = () => {
         <Menu>
           <List>Home Appliances</List>
           <ListItem>
-            <NavLink className="hover-1" to="/Home_Appliances/Television">
+            <NavLink
+              className="hover-1 text-black"
+              to="/Home_Appliances/Television"
+            >
               Television
             </NavLink>
-            <NavLink className="hover-1" to="/Home_Appliances/Washing_Machine">
+            <NavLink
+              className="hover-1 text-black"
+              to="/Home_Appliances/Washing_Machine"
+            >
               Washing Machine
             </NavLink>
-            <NavLink className="hover-1" to="/Home_Appliances/Air_Conditioner">
+            <NavLink
+              className="hover-1 text-black"
+              to="/Home_Appliances/Air_Conditioner"
+            >
               Air Conditioner
             </NavLink>
           </ListItem>
