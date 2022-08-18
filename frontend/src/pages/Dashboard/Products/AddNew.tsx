@@ -70,7 +70,7 @@ const AddNew = () => {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     const formData = {
       name: name1,
@@ -167,22 +167,6 @@ const AddNew = () => {
 
                     className="mt-2 border-2 rounded-lg border-indigo-700 p-1"
                   >
-                    {/* <option value="">Select sub-category</option>
-                    <option value="Laptops">Laptops</option>
-                    <option value="Headphones">Headphones</option>
-                    <option value="SmartPhones">SmartPhones</option>
-                    <option value="Shoes">Shoes</option>
-                    <option value="Shirts">Shirts</option>
-                    <option value="Watches">Watches</option>
-                    <option value="Badminton">Badminton</option>
-                    <option value="Cricket">Cricket</option>
-                    <option value="Football">Football</option>
-                    <option value="Autobiography">Autobiography</option>
-                    <option value="Fiction">Fiction</option>
-                    <option value="Textbook">Textbook</option>
-                    <option value="Washing_Machines">Washing_Machines</option>
-                    <option value="Air_Conditioner">Air_Conditioner</option>
-                    <option value="Television">Television</option> */}
                     <option>--</option>
                     {listItems}
                   </select>
@@ -196,7 +180,10 @@ const AddNew = () => {
               <input
                 accept="image/*"
                 id="file2"
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => {
+                  if (!e.target.files?.[0]) return;
+                  setImage(e.target.files[0]);
+                }}
                 className="mt-2 block w-full text-sm text-slate-500
               file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0

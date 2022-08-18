@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "./api";
 import { toast } from "react-toastify";
 import { RootState } from "./store";
-import { User } from "../types.";
+import { User } from "../types";
 
 export const loginUser = createAsyncThunk(
   "user/login",

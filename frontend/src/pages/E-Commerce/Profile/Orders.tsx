@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchOrders } from "../../../store/api";
 import { useAppSelector } from "../../../store/hooks";
 import { selectUser } from "../../../store/userSlice";
-import { Order } from "../../../types.";
+import { Order } from "../../../types";
 
 const Orders = () => {
   const user = useAppSelector(selectUser);

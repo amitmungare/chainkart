@@ -28,6 +28,7 @@ export interface User {
   pincode: number;
   state: string;
   landmark: string;
+  role: string;
 }
 
 export interface OrderItem {
