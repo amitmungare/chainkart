@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../../store/firebase";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { selectComapny } from "../../../store/companySlice";
+import { data } from "../../../utils";
 
 const AddNew = () => {
   const [progress, setProgress] = useState(0);
@@ -22,14 +23,29 @@ const AddNew = () => {
 
   const [selected2, setSelected2] = useState("");
 
+  const [listItems, setListItems] = useState<any>();
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const list = () =>
+      data
+        .filter((item) => item.name == selected)
+        .map((item, i) => (
+          <option value={item.subCat} key={item.subCat}>
+            {item.subCat}
+          </option>
+        ));
+    setListItems(list);
+  }, [selected]);
 
   const handleSelect = (e: any) => {
     setSelected(e.target.value);
   };
 
   const handleCat2 = (e: any) => {
+    console.log(e.target.value);
     setSelected2(e.target.value);
   };
 
@@ -151,7 +167,7 @@ const AddNew = () => {
 
                     className="mt-2 border-2 rounded-lg border-indigo-700 p-1"
                   >
-                    <option value="">Select sub-category</option>
+                    {/* <option value="">Select sub-category</option>
                     <option value="Laptops">Laptops</option>
                     <option value="Headphones">Headphones</option>
                     <option value="SmartPhones">SmartPhones</option>
@@ -166,7 +182,9 @@ const AddNew = () => {
                     <option value="Textbook">Textbook</option>
                     <option value="Washing_Machines">Washing_Machines</option>
                     <option value="Air_Conditioner">Air_Conditioner</option>
-                    <option value="Television">Television</option>
+                    <option value="Television">Television</option> */}
+                    <option>--</option>
+                    {listItems}
                   </select>
                 </div>
               </div>
