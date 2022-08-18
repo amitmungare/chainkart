@@ -11,7 +11,6 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders1 = async () => {
       const res = await fetchOrders(user);
-      console.log(res.data.orders);
       setOrders(res.data.orders);
     };
     fetchOrders1();

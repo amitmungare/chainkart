@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchProducts, fetchT } from "../../../store/api";
+import { selectComapny } from "../../../store/companySlice";
+import { useAppSelector } from "../../../store/hooks";
 
 const Widgets = styled.div`
   display: flex;
@@ -52,20 +54,20 @@ const Widget = ({ type }) => {
   const [earning, setEarning] = useState([]);
   const [products, setProducts] = useState([]);
 
-  const price = earning.reduce((a, b) => a + b.price, 0);
+  const price = earning.reduce((a, b: any) => a + b.price, 0);
 
-  const company = useSelector((state) => state.company.company);
+  const company = useAppSelector(selectComapny);
 
   useEffect(() => {
     const fetchTransaction = async () => {
-      const res = await fetchT(company.email);
+      const res = await fetchT(company?.email);
 
       setNo(res.data.orders.length);
       setEarning(res.data.orders);
     };
 
     const getProducts = async () => {
-      const res = await fetchProducts(company.email);
+      const res = await fetchProducts(company?.email);
       setProducts(res.data.products);
     };
     fetchTransaction();

@@ -12,6 +12,9 @@ import styled from "styled-components";
 import AddNew from "../Products/AddNew";
 import ProductTable from "../Products/ProductTable";
 import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { selectComapny } from "../../../store/companySlice";
+import UpdateProduct from "../Products/UpdateProduct";
 
 const Container = styled.div`
   display: flex;
@@ -21,7 +24,7 @@ const Container2 = styled.div`
 `;
 
 const Dashboard = () => {
-  const company = useSelector((state) => state.company.company);
+  const company = useAppSelector(selectComapny);
   return (
     <>
       {!company ? (
@@ -35,6 +38,7 @@ const Dashboard = () => {
               <Route path="/" element={<DashHome />} />
 
               <Route path="products" element={<ProductTable />} />
+              <Route path="update/:id" element={<UpdateProduct />} />
               <Route path="addNew" element={<AddNew />} />
               <Route path="cprofile" element={<CProfile />} />
               <Route path="transactions" element={<Transaction />} />

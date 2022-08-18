@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { DataGrid } from "@mui/x-data-grid";
+import { Link, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { fetchProducts } from "../../../store/api";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { selectComapny } from "../../../store/companySlice";
+import { Product } from "../../../types";
 
 const DataTable1 = styled.div`
   height: 600px;
@@ -22,11 +23,12 @@ const DataTableTitle = styled.div`
 `;
 
 const ProductTable = () => {
-  const [products, setProducts] = useState([]);
-  const company = useSelector((state) => state.company.company);
+  const [products, setProducts] = useState<Product[]>([]);
+  const company = useAppSelector(selectComapny);
+  const navigate = useNavigate();
   useEffect(() => {
     const getProducts = async () => {
-      const res = await fetchProducts(company.email);
+      const res = await fetchProducts(company?.email);
       setProducts(res.data.products);
     };
     getProducts();
@@ -61,7 +63,10 @@ const ProductTable = () => {
                 <td className="text-center">{product.price}</td>
                 <td className="text-center">{product.category}</td>
                 <td className="text-center">{product.subCategory}</td>
-                <td className="text-center text-indigo-600 rounded-3xl'">
+                <td
+                  onClick={() => navigate(`/dashboard/update/${product._id}`)}
+                  className="cursor-pointer text-center text-indigo-600 rounded-3xl'"
+                >
                   Update
                 </td>
               </tr>

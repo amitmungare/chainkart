@@ -14,10 +14,10 @@ const CompanyRegister = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const [imagep, setImagep] = useState("");
-  const [imagec, setImagec] = useState("");
+  const [imagep, setImagep] = useState<any>();
+  const [imagec, setImagec] = useState<any>();
 
-  const transformedFile = (file) => {
+  const transformedFile = (file: any) => {
     const reader = new FileReader();
 
     if (file) {
@@ -30,7 +30,7 @@ const CompanyRegister = () => {
     }
   };
 
-  const transformedFileC = (file) => {
+  const transformedFileC = (file: any) => {
     const reader = new FileReader();
 
     if (file) {
@@ -43,7 +43,7 @@ const CompanyRegister = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const formData = {
@@ -181,7 +181,7 @@ const CompanyRegister = () => {
                   id="file2"
                   required
                   accept="image/*"
-                  onChange={(e) => transformedFileC(e.target.files[0])}
+                  onChange={(e) => transformedFileC(e.target?.files[0])}
                   className="mt-2 block w-full text-sm text-slate-500
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-full file:border-0

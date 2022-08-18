@@ -21,6 +21,8 @@ router.route("/product/get").post(getAllProducts);
 
 router.route("/product/getBySubCat").post(getProductsBySubCat);
 
+router.route("/product/update/:id").put(updateProduct);
+
 // router
 //   .route("/admin/product/:id")
 //   .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)

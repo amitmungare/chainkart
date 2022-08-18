@@ -11,6 +11,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { fetchT } from "../../store/api";
+import { useAppSelector } from "../../store/hooks";
+import { selectComapny } from "../../store/companySlice";
 
 const TableContainer1 = styled(TableContainer)``;
 
@@ -34,14 +36,14 @@ const Status = styled.span`
 
 const List = () => {
   let i = -1;
-  const company = useSelector((state) => state.company.company);
+  const company = useAppSelector(selectComapny);
   const [transactions, setTransactions] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [dates, setDates] = useState([]);
 
   useEffect(() => {
     const fetchTransaction = async () => {
-      const res = await fetchT(company.email);
+      const res = await fetchT(company?.email);
       setCustomers(res.data.name);
       setTransactions(res.data.orders);
       setDates(res.data.date);
@@ -62,7 +64,7 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {transactions.map((transaction) => {
+          {transactions.map((transaction: any) => {
             i++;
             return (
               <TableRow>

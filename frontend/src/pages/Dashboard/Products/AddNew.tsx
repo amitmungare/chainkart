@@ -2,37 +2,38 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { createProduct } from "../../../store/productSlice";
+import { createProduct, selectP } from "../../../store/productSlice";
 import { CircularProgress } from "@mui/material";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../../store/firebase";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { selectComapny } from "../../../store/companySlice";
 
 const AddNew = () => {
   const [progress, setProgress] = useState(0);
-  const { email, name } = useSelector((state) => state.company.company);
-  const { loading, error } = useSelector((state) => state.product);
+  const company = useAppSelector(selectComapny);
+  const { isLoading } = useAppSelector(selectP);
   const [selected, setSelected] = useState("");
   const [name1, setName1] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<any | null>(null);
   const [imageURL, setImageURL] = useState("");
 
   const [selected2, setSelected2] = useState("");
-  const [pImage, setPImage] = useState(null);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleSelect = (e) => {
+  const handleSelect = (e: any) => {
     setSelected(e.target.value);
   };
 
-  const handleCat2 = (e) => {
+  const handleCat2 = (e: any) => {
     setSelected2(e.target.value);
   };
 
-  const handleUpload = (e) => {
+  const handleUpload = (e: any) => {
     e.preventDefault();
     const random = Math.floor(Math.random() * 10000) + 1;
     const storageRef = ref(storage, `${selected2}/${random}`);
@@ -62,8 +63,8 @@ const AddNew = () => {
       pImage: imageURL,
       category: selected,
       subCategory: selected2,
-      cEmail: email,
-      cName: name,
+      cEmail: company?.email,
+      cName: company?.name,
     };
     dispatch(createProduct({ formData, navigate, toast }));
   };
@@ -198,7 +199,7 @@ const AddNew = () => {
               </div>
             </div>
 
-            {loading ? (
+            {isLoading ? (
               <CircularProgress />
             ) : (
               <button

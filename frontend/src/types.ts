@@ -7,7 +7,7 @@ export interface Product {
   createdAt: Date;
   name: string;
   pImage: string;
-  id: string;
+  _id: string;
   updatedAt: Date;
   subCategory: string;
 }
@@ -46,4 +46,16 @@ export interface Order {
   updatedAt: Date;
   createdAt: Date;
   totalPrice: number;
+}
+
+export interface Company {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  token: string;
+  cin: string;
+  postalCode: number;
+  imagec: string;
+  imagep: string;
 }

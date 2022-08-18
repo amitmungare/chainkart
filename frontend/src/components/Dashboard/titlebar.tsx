@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { ExitToApp, SearchOutlined } from "@mui/icons-material";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutCompany } from "../../store/companySlice";
+import { logoutCompany, selectComapny } from "../../store/companySlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const Container = styled.div`
   height: 50px;
@@ -62,9 +63,9 @@ const Name = styled(NavLink)`
 `;
 
 const TitleBar = () => {
-  const company = useSelector((state) => state.company.company);
+  const company = useAppSelector(selectComapny);
   // console.log(company);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
@@ -78,7 +79,7 @@ const TitleBar = () => {
           <Input type="text" placeholder="Search..." />
           <SearchOutlined />
         </Search>
-        <Name to="/dashboard/cprofile">{company.name}</Name>
+        <Name to="/dashboard/cprofile">{company?.name}</Name>
         <Items>
           <Item onClick={handleLogOut}>
             <ExitToApp className="text-[#0369a1]" />

@@ -3,9 +3,9 @@ import { InputOutlined, Visibility } from "@mui/icons-material";
 
 import { useNavigate, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginCompany } from "../../store/companySlice";
-import { toast } from "react-toastify";
+import { loginCompany, selectC } from "../../store/companySlice";
 import { CircularProgress } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const initialState = {
   email: "",
@@ -13,18 +13,20 @@ const initialState = {
 };
 
 function CompanyLogin() {
+  const { isLoading } = useAppSelector(selectC);
+
   const [formData, setFormData] = useState(initialState);
   const [passShow, setPassShow] = useState(false);
-  const { loading, error } = useSelector((state) => ({ ...state.company }));
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: any) => {
     let { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch(loginCompany({ formData, navigate }));
   };
@@ -82,7 +84,7 @@ function CompanyLogin() {
               </div>
             </div>
 
-            {loading ? (
+            {isLoading ? (
               <CircularProgress />
             ) : (
               <button

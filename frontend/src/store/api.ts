@@ -44,15 +44,19 @@ export const cLogout = () => API.get("/company/logout");
 export const createProduct = (formData: any) =>
   API.post("/product/new", formData);
 
-export const fetchProducts = (cEmail: string) =>
+export const fetchProducts = (cEmail: any) =>
   API.post("/product/get", {
     cEmail,
   });
+
+export const updateProduct = (data: any) => {
+  // console.log(data);
+  return API.put(`/product/update/${data.id}`, data);
+};
 
 export const fetchProductsByCat = (subCategory: string) =>
   API.post("/product/getBySubCat", subCategory);
 
 //Transaction
 
-export const fetchT = (cEmail: string) =>
-  API.post("/company/getAllT", { cEmail });
+export const fetchT = (cEmail: any) => API.post("/company/getAllT", { cEmail });

@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { Company } from "../types";
 import * as api from "./api";
+import { RootState } from "./store";
 
 export const loginCompany = createAsyncThunk(
   "company/login",
-  async ({ formData, navigate }, { rejectWithValue }) => {
+  async ({ formData, navigate }: any, { rejectWithValue }) => {
     try {
-      let comapny;
+      let comapny: any;
       const res = await api.cLogin(formData);
       const data = res.data;
       console.log(data);
@@ -17,6 +19,7 @@ export const loginCompany = createAsyncThunk(
       const token = data.token;
       comapny = data.user;
       comapny = { ...comapny, token };
+      console.log(comapny);
       toast.success("Login successful");
       navigate("/dashboard");
       return comapny;
@@ -35,7 +38,13 @@ export const logoutCompany = createAsyncThunk("comapny/logout", async () => {
   }
 });
 
-const initialState = {
+interface IS {
+  company: Company | null;
+  isLoading: boolean;
+  error: any;
+}
+
+const initialState: IS = {
   company: null,
   isLoading: false,
   error: null,
@@ -44,7 +53,7 @@ const initialState = {
 const companySlice = createSlice({
   name: "company",
   initialState,
-
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loginCompany.pending, (state, action) => {
       state.isLoading = true;
@@ -55,7 +64,7 @@ const companySlice = createSlice({
     });
     builder.addCase(loginCompany.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error.message;
+      // state.error = error.message;
     });
 
     builder.addCase(logoutCompany.pending, (state, action) => {
@@ -69,9 +78,13 @@ const companySlice = createSlice({
 
     builder.addCase(logoutCompany.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error.message;
+      // state.error = error.message;
     });
   },
 });
+
+export const selectComapny = (state: RootState) => state.company.company;
+
+export const selectC = (state: RootState) => state.company;
 
 export default companySlice.reducer;

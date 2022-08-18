@@ -6,7 +6,6 @@ import {
 } from "@stripe/react-stripe-js";
 import { toast } from "react-toastify";
 import { clearCart } from "../../store/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/userSlice";
 
