@@ -1,12 +1,14 @@
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { useEffect } from "react";
 import { Routes, useParams, Route } from "react-router-dom";
-import Products from "../../../components/E-Commerce/Product/Products";
-import { fetchProductsByCat } from "../../../store/api";
 import { Product } from "../../../types";
-import ProductItem from "./ProductItem";
+
+const Products = lazy(
+  () => import("../../../components/E-Commerce/Product/Products")
+);
+const ProductItem = lazy(() => import("./ProductItem"));
 
 const SubCategory = () => {
   const { category, subCategory } = useParams();
@@ -32,22 +34,24 @@ const SubCategory = () => {
       {loading ? (
         <CircularProgress className="ml-[12rem]" />
       ) : (
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Products
-                products={products}
-                category={category}
-                subCategory={subCategory}
-              />
-            }
-          />
-          <Route
-            path=":productName"
-            element={<ProductItem products={products} />}
-          />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Products
+                  products={products}
+                  category={category}
+                  subCategory={subCategory}
+                />
+              }
+            />
+            <Route
+              path=":productName"
+              element={<ProductItem products={products} />}
+            />
+          </Routes>
+        </Suspense>
       )}
     </>
   );

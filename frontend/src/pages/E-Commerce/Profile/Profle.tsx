@@ -1,14 +1,14 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Address from "./Address";
-import BasicInfo from "./BasicInfo";
-import Orders from "./Orders";
-import Sidebar from "./Sidebar";
-import ChangePass from "./ChangePass";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
 import { selectUser } from "../../../store/userSlice";
+
+const BasicInfo = lazy(() => import("./BasicInfo"));
+const Orders = lazy(() => import("./Orders"));
+const Address = lazy(() => import("./Address"));
+const ChangePass = lazy(() => import("./ChangePass"));
+const Sidebar = lazy(() => import("./Sidebar"));
 
 const Profile = () => {
   const user = useAppSelector(selectUser);
@@ -17,19 +17,21 @@ const Profile = () => {
     <>
       {user ? (
         <div className="min-h-screen overflow-x-scroll flex gap-3">
-          <Sidebar />
-          <div className="flex-[6]">
-            <Routes>
-              <Route path="/basicInfo/*" element={<BasicInfo />} />
-              <Route
-                path="/basicInfo/changePassword"
-                element={<ChangePass />}
-              />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Sidebar />
+            <div className="flex-[6]">
+              <Routes>
+                <Route path="/basicInfo/*" element={<BasicInfo />} />
+                <Route
+                  path="/basicInfo/changePassword"
+                  element={<ChangePass />}
+                />
 
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/address" element={<Address />} />
-            </Routes>
-          </div>
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/address" element={<Address />} />
+              </Routes>
+            </div>
+          </Suspense>
         </div>
       ) : (
         <div className="flex justify-center items-center h-[70vh]">

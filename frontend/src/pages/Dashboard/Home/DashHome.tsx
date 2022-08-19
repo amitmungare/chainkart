@@ -1,10 +1,11 @@
-import React from "react";
-import Widget from "../../../components/Dashboard/widget/Widget";
-import Chart from "../../../components/Dashboard/Chart";
-import Featured from "../../../components/Dashboard/Featured";
+import React, { lazy, Suspense } from "react";
 
 import styled from "styled-components";
-import List from "../../../components/Dashboard/List";
+
+const Widget = lazy(
+  () => import("../../../components/Dashboard/widget/Widget")
+);
+const List = lazy(() => import("../../../components/Dashboard/List"));
 
 const Widgets = styled.div`
   display: flex;
@@ -33,20 +34,19 @@ const ListTitle = styled.div`
 const DashHome = () => {
   return (
     <>
-      <Widgets>
-        <Widget type="p_sold" />
-        <Widget type="earning" />
-        <Widget type="products" />
-        <Widget type="review" />
-      </Widgets>
-      {/* <Charts>
-        <Featured />
-        <Chart />
-      </Charts> */}
-      <ListContainer>
-        <ListTitle>Latest Transaction</ListTitle>
-        <List />
-      </ListContainer>
+      <Suspense fallback={<div>Loading..</div>}>
+        <Widgets>
+          <Widget type="p_sold" />
+          <Widget type="earning" />
+          <Widget type="products" />
+          <Widget type="review" />
+        </Widgets>
+
+        <ListContainer>
+          <ListTitle>Latest Transaction</ListTitle>
+          <List />
+        </ListContainer>
+      </Suspense>
     </>
   );
 };

@@ -1,18 +1,22 @@
-import React from "react";
-import Slider from "./Slider";
-import Preview from "./Preview";
-import NewArrival from "./NewArrival";
-import Banner from "./Banner";
-import AboutUs from "./AboutUs";
+import { CircularProgress } from "@mui/material";
+import React, { lazy, Suspense } from "react";
+
+const Slider = lazy(() => import("./Slider"));
+const Preview = lazy(() => import("./Preview"));
+const NewArrival = lazy(() => import("./NewArrival"));
+const Banner = lazy(() => import("./Banner"));
+const AboutUs = lazy(() => import("./AboutUs"));
 
 const Main = () => {
   return (
     <div>
-      <Slider />
-      <Preview />
-      <NewArrival />
-      <AboutUs />
-      <Banner />
+      <Suspense fallback={<CircularProgress />}>
+        <Slider />
+        <Preview />
+        <NewArrival />
+        <AboutUs />
+        <Banner />
+      </Suspense>
     </div>
   );
 };

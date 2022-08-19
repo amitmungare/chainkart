@@ -75,10 +75,10 @@ const TitleBar = () => {
   return (
     <Container>
       <Wrapper>
-        <Search>
+        {/* <Search>
           <Input type="text" placeholder="Search..." />
           <SearchOutlined />
-        </Search>
+        </Search> */}
         <Name to="/dashboard/cprofile">{company?.name}</Name>
         <Items>
           <Item onClick={handleLogOut}>

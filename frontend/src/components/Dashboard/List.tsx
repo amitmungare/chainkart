@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { fetchT } from "../../store/api";
 import { useAppSelector } from "../../store/hooks";
 import { selectComapny } from "../../store/companySlice";
+import { formatPrice } from "../../utils";
 
 const TableContainer1 = styled(TableContainer)``;
 
@@ -77,7 +78,9 @@ const List = () => {
                 </TableCell>
                 <TableCell className="tableCell">{customers[i]}</TableCell>
                 <TableCell className="tableCell">{dates[i]}</TableCell>
-                <TableCell className="tableCell">{transaction.price}</TableCell>
+                <TableCell className="tableCell">
+                  {formatPrice(transaction.price)}
+                </TableCell>
               </TableRow>
             );
           })}

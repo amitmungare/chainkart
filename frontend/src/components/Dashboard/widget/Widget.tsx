@@ -12,6 +12,7 @@ import styled from "styled-components";
 import { fetchProducts, fetchT } from "../../../store/api";
 import { selectComapny } from "../../../store/companySlice";
 import { useAppSelector } from "../../../store/hooks";
+import { formatPrice } from "../../../utils";
 
 const Widgets = styled.div`
   display: flex;
@@ -121,9 +122,9 @@ const Widget = ({ type }) => {
 
     case "earning":
       data = {
-        title: "EARNINGS",
+        title: "TOTAL REVENUE",
         isMoney: true,
-        states: price,
+        states: formatPrice(price),
         link: "View net earnings",
         icon: (
           <MonetizationOnOutlined
