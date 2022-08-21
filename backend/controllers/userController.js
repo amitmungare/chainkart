@@ -290,12 +290,21 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 exports.updateCompanyPassword = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
 
+  const hashedP = await bcrypt.hash(password, 10);
+
   // const newPassword = await bcrypt.hash(password, 10);
   // console.log(newPassword);
 
   const newCompanyPassword = {
-    password,
+    password: hashedP,
   };
+
+  await sendEmail({
+    email: email,
+    subject: `Login Credentials`,
+    message: `This is to inform that your company has been successfully verified and is ready to begin their journey on Chainkart.
+      Here are the credential details: \n\n Login Idl: ${email} \n\n Password: ${password} \n\n If you have not requested this email then, please ignore it.`,
+  });
 
   const company = await Company.findOneAndUpdate(
     { email: email },

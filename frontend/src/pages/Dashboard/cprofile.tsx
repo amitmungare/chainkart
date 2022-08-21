@@ -1,9 +1,11 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 import { selectComapny } from "../../store/companySlice";
 import { useAppSelector } from "../../store/hooks";
 import Modal from "@mui/material/Modal";
 import { Box } from "@mui/material";
+import { toast } from "react-toastify";
+
+import * as api from "../../store/api";
 
 const style = {
   position: "absolute" as "absolute",
@@ -20,9 +22,36 @@ const style = {
 const CProfile = () => {
   const company = useAppSelector(selectComapny);
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleUpdate = async (e: any) => {
+    e.preventDefault();
+
+    if (!oldPass || !newPass || !confirmPass) return;
+
+    if (newPass !== confirmPass) {
+      toast.error("Password does not match");
+      return;
+    }
+
+    const data = {
+      email: company?.email,
+      oldPassword: oldPass,
+      newPassword: newPass,
+    };
+
+    const res = await api.updateCPassword1(data);
+    if (res.status === 200) {
+      toast.success("Password updated successfully");
+    }
+  };
 
   return (
     <>
@@ -63,11 +92,17 @@ const CProfile = () => {
               </div>
             </div>
 
-            <button
+            {/* <button
               onClick={handleOpen}
               className="block w-1/2 px-5 py-3 text-sm font-bold text-white bg-[#0369a1] rounded-lg"
             >
               View uploaded files
+            </button> */}
+            <button
+              onClick={handleOpen}
+              className="block w-1/2 px-5 py-3 text-sm font-bold text-white bg-[#0369a1] rounded-lg"
+            >
+              Change Password
             </button>
             <Modal
               open={open}
@@ -76,19 +111,47 @@ const CProfile = () => {
               aria-describedby="modal-modal-description"
             >
               <Box sx={style}>
-                <img src={company?.imagec} />
-                <img src={company?.imagep} />
+                {/* <img src={company?.imagec} />
+                <img src={company?.imagep} /> */}
+                <form
+                  className="p-5 flex flex-col gap-4"
+                  style={{
+                    boxShadow: "2px 4px 10px 1px rgba(201, 201, 201, 0.47)",
+                  }}
+                >
+                  <input
+                    onChange={(e) => setOldPass(e.target.value)}
+                    className="border-2 border-[#0369a1] p-[3px] rounded-lg w-60"
+                    type="password"
+                    placeholder="Old Password"
+                  />
+
+                  <input
+                    onChange={(e) => setNewPass(e.target.value)}
+                    className="border-2 border-[#0369a1] p-[3px] rounded-lg w-60"
+                    type="password"
+                    placeholder="New Password"
+                  />
+
+                  <input
+                    onChange={(e) => setConfirmPass(e.target.value)}
+                    className="border-2 border-[#0369a1] p-[3px] rounded-lg w-60"
+                    type="password"
+                    placeholder="Confirm Password"
+                  />
+
+                  <button
+                    onClick={handleUpdate}
+                    className=" bg-[#0369a1] p-3 rounded-lg text-white"
+                  >
+                    Update Password
+                  </button>
+                </form>
               </Box>
             </Modal>
           </div>
         </div>
       </div>
-      {/* {open && (
-        <div className="flex gap-3 ml-[400px]">
-          <img src={company?.imagec} />
-          <img src={company?.imagep} />
-        </div>
-      )} */}
     </>
   );
 };

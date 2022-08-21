@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Mail, Visibility } from "@mui/icons-material";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { registerUser, selectU } from "../../store/userSlice";
 import { FaLandmark } from "react-icons/fa";
 import { FaCity } from "react-icons/fa";

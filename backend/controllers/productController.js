@@ -1,7 +1,6 @@
 const Product = require("../models/productModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const cloudinary = require("../utils/cloudinary");
 const Company = require("../models/companyModel");
 const { default: axios } = require("axios");
 // create product

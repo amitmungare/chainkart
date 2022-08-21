@@ -4,6 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as api from "../../store/api";
 import { CircularProgress } from "@mui/material";
+import storage from "../../store/firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const CompanyRegister = () => {
   const [name, setName] = useState("");
@@ -14,37 +16,64 @@ const CompanyRegister = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const [imagep, setImagep] = useState<any>();
-  const [imagec, setImagec] = useState<any>();
+  const [cImage, setCImage] = useState<any>();
+  const [panImage, setPanImage] = useState<any>();
 
-  const transformedFile = (file: any) => {
-    const reader = new FileReader();
+  const [panImageURL, setPanImageURL] = useState("");
+  const [cImageURL, setCImageURL] = useState("");
 
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setImagep(reader.result);
-      };
+  const handleUpload = (e: any, ex: number) => {
+    e.preventDefault();
+
+    // if (!cImage || !panImage) {
+    //   toast.error("Please upload all the images");
+    //   return;
+    // }
+
+    const uploadImage = (image: any, text: string) => {
+      // const random = Math.floor(Math.random() * 10000) + 1;
+      const storageRef = ref(storage, `Documents/${text}/${name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (err) => console.log(err),
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            if (text === "PAN_CARD") {
+              setPanImageURL(url);
+              toast.success("Image Uploaded");
+            } else {
+              setCImageURL(url);
+              toast.success("Image Uploaded");
+            }
+          });
+        }
+      );
+    };
+    if (ex === 1) {
+      uploadImage(panImage, "PAN_CARD");
     } else {
-      setImagep("");
-    }
-  };
-
-  const transformedFileC = (file: any) => {
-    const reader = new FileReader();
-
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setImagec(reader.result);
-      };
-    } else {
-      setImagec("");
+      uploadImage(cImage, "BLANK_CHEQUE");
     }
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (
+      !name ||
+      !email ||
+      !cin ||
+      !city ||
+      !postalCode ||
+      !panImageURL ||
+      !cImageURL
+    ) {
+      toast.error("Please fill all the fields");
+      return;
+    }
 
     const formData = {
       name,
@@ -52,8 +81,8 @@ const CompanyRegister = () => {
       cin,
       city,
       postalCode,
-      imagep,
-      imagec,
+      panImageURL,
+      cImageURL,
     };
 
     setLoading(true);
@@ -162,7 +191,10 @@ const CompanyRegister = () => {
                 <input
                   id="file1"
                   required
-                  onChange={(e) => transformedFile(e.target.files[0])}
+                  onChange={(e) => {
+                    if (!e.target.files?.[0]) return;
+                    setPanImage(e.target.files[0]);
+                  }}
                   accept="image/*"
                   className="mt-2 block w-full text-sm text-slate-500
                 file:mr-4 file:py-2 file:px-4
@@ -181,7 +213,10 @@ const CompanyRegister = () => {
                   id="file2"
                   required
                   accept="image/*"
-                  onChange={(e) => transformedFileC(e.target?.files[0])}
+                  onChange={(e) => {
+                    if (!e.target.files?.[0]) return;
+                    setCImage(e.target.files[0]);
+                  }}
                   className="mt-2 block w-full text-sm text-slate-500
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-full file:border-0
@@ -191,6 +226,21 @@ const CompanyRegister = () => {
                   type="file"
                 />
               </div>
+            </div>
+
+            <div className="flex justify-start">
+              <button
+                className="bg-[#0369a1] p-2 rounded-md cursor-pointer text-white"
+                onClick={(e: any) => handleUpload(e, 1)}
+              >
+                Upload Document
+              </button>
+              <button
+                className="bg-[#0369a1] p-2 rounded-md cursor-pointer text-white ml-[90px]"
+                onClick={(e: any) => handleUpload(e, 2)}
+              >
+                Upload Document
+              </button>
             </div>
             {loading ? (
               <CircularProgress className="ml-52" color="info" />

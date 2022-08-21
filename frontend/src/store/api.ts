@@ -37,6 +37,12 @@ export const cRegister = (formData: any) => {
   return API.post("/company/register", formData);
 };
 
+export const updateCPassword = (formData: any) =>
+  API.put("/company/admin", formData);
+
+export const updateCPassword1 = (formData: any) =>
+  API.put("/company/password/update", formData);
+
 export const cLogout = () => API.get("/company/logout");
 
 // Product // Company

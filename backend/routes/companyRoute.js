@@ -34,9 +34,7 @@ router.route("/company/logout").get(logout);
 
 router.route("/company/me").get(isAuthenticatedCompany, getCompanyDetails);
 
-router
-  .route("/company/password/update")
-  .put(isAuthenticatedCompany, updatePassword);
+router.route("/company/password/update").put(updatePassword);
 
 router.route("/company/me/update").put(isAuthenticatedCompany, updateProfile);
 

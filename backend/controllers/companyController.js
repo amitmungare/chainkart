@@ -5,37 +5,20 @@ const Order = require("../models/orderModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-const cloudinary = require("../utils/cloudinary");
 // register a company
 exports.registerCompany = catchAsyncErrors(async (req, res, next) => {
-  let { name, email, cin, postalCode, imagep, imagec } = req.body;
-  console.log(name);
+  let { name, email, cin, postalCode, panImageURL, cImageURL } = req.body;
   try {
-    if (imagep && imagec) {
-      const uploadPan = await cloudinary.uploader.upload(imagep, {
-        folder: "panCard",
-      });
-      const panCard = uploadPan.url;
-      imagep = panCard;
-      const uploadCheq = await cloudinary.uploader.upload(imagec, {
-        folder: "blankCheque",
-      });
-      const blankCheque = uploadCheq.url;
-      imagec = blankCheque;
+    const company = await Company.create({
+      name,
+      email,
+      cin,
+      postalCode,
+      imagep: panImageURL,
+      imagec: cImageURL,
+    });
 
-      if (uploadPan && uploadCheq) {
-        const company = await Company.create({
-          name,
-          email,
-          cin,
-          postalCode,
-          imagep,
-          imagec,
-        });
-
-        sendToken(company, 201, res);
-      }
-    }
+    sendToken(company, 201, res);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -59,7 +42,6 @@ exports.loginCompany = catchAsyncErrors(async (req, res, next) => {
   }
 
   const isPasswordMatched = await company.comparePassword(password);
-  console.log(isPasswordMatched);
 
   if (!isPasswordMatched) {
     return res.json({ message: "Wrong password" });
@@ -67,6 +49,26 @@ exports.loginCompany = catchAsyncErrors(async (req, res, next) => {
 
   sendToken(company, 200, res);
 });
+
+// exports.updateCPassword = catchAsyncErrors(async (req, res, next) => {
+//   const comapny = await Company.findById(req.body.email);
+
+//   const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
+
+//   if (!isPasswordMatched) {
+//     return next(new ErrorHander("old password not matched", 400));
+//   }
+
+//   if (req.body.newPassword !== req.body.confirmPassword) {
+//     return next(new ErrorHander("password does not match", 400));
+//   }
+
+//   user.password = req.body.newPassword;
+
+//   await user.save();
+
+//   sendToken(user, 200, res);
+// });
 
 // logout company
 
@@ -188,7 +190,9 @@ exports.getCompanyDetails = catchAsyncErrors(async (req, res, next) => {
 
 // update company password
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
-  const company = await Company.findById(req.company.id).select("+password");
+  const company = await Company.findOne({ email: req.body.email }).select(
+    "+password"
+  );
 
   const isPasswordMatched = await company.comparePassword(req.body.oldPassword);
 
@@ -196,9 +200,9 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("old password not matched", 400));
   }
 
-  if (req.body.newPassword !== req.body.confirmPassword) {
-    return next(new ErrorHander("password does not match", 400));
-  }
+  // if (req.body.newPassword !== req.body.confirmPassword) {
+  //   return next(new ErrorHander("password does not match", 400));
+  // }
 
   company.password = req.body.newPassword;
 

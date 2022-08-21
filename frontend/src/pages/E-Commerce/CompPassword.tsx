@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/userSlice";
 
+import * as api from "../../store/api";
+
 import { Navigate } from "react-router-dom";
 
 const CompPassword = () => {
@@ -16,12 +18,10 @@ const CompPassword = () => {
     const data = {
       email,
       password,
+      key: 1,
     };
 
-    const res = await axios.put(
-      "http://localhost:4000/api/v1/company/admin",
-      data
-    );
+    const res = await api.updateCPassword(data);
 
     if (res.data.success) {
       toast.success("Password updated successfully");
