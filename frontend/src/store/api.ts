@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:4000/api/v1" });
+const API = axios.create({
+  baseURL: "https://chainkartblockchainstore.herokuapp.com/api/v1",
+});
 
 // User
 export const login = (formData: any) => API.post("/login", formData);

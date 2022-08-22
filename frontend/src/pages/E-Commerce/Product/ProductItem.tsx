@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import { addToCart } from "../../../store/cartSlice";
-import { Product } from "../../../types.";
+import { CartItem, Product } from "../../../types";
 import { useAppDispatch } from "../../../store/hooks";
 import { formatPrice } from "../../../utils";
 
@@ -15,7 +15,7 @@ const ProductItem = ({ products }: IProps) => {
   const product = products.filter((product) => product.name === productName)[0];
   const dispatch = useAppDispatch();
 
-  const handleAdd = (product: Product) => {
+  const handleAdd = (product: any) => {
     dispatch(addToCart(product));
   };
 

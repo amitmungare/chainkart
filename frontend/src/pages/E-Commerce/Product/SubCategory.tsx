@@ -20,7 +20,7 @@ const SubCategory = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:4000/api/v1/product/getBySubCat",
+        "https://chainkartblockchainstore.herokuapp.com/api/v1/product/getBySubCat",
         { subCategory }
       );
       setProducts(res.data.products);

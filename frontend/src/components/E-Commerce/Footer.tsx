@@ -24,21 +24,41 @@ const Footer = () => {
           sell on our platform? Sign your company up now!
         </p>
         <div className="flex">
-          <div className="logo bg-[#3B5999] ">
+          <a
+            href="http://www.facebook.com/chainkart"
+            target="_blank"
+            rel="noreferer"
+            className="logo bg-[#3B5999] "
+          >
             <Facebook />
-          </div>
+          </a>
 
-          <div className="logo bg-[#E4405F]">
+          <a
+            className="logo bg-[#E4405F]"
+            href="https://www.instagram.com/invites/contact/?i=zj8u2jee0nxq&utm_content=p7gyhhz"
+            target="_blank"
+            rel="noreferer"
+          >
             <Instagram />
-          </div>
+          </a>
 
-          <div className="logo bg-[#55ACEE]">
+          <a
+            className="logo bg-[#55ACEE]"
+            href="http://www.twitter.com/chainkart"
+            target="_blank"
+            rel="noreferer"
+          >
             <Twitter />
-          </div>
+          </a>
 
-          <div className="logo bg-[#0E76A8] ">
+          <a
+            className="logo bg-[#0E76A8] "
+            href="http://www.linkedin.com/in/chainkart"
+            target="_blank"
+            rel="noreferer"
+          >
             <LinkedIn />
-          </div>
+          </a>
         </div>
       </div>
       <div className="flex-[1] p-5">

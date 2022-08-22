@@ -13,7 +13,6 @@ import cartReducer from "./cartSlice";
 import userReducer from "./userSlice";
 import companyReducer from "./companySlice";
 import productReducer from "./productSlice";
-import { useAppSelector } from "./hooks";
 
 const reducers = combineReducers({
   cart: cartReducer,

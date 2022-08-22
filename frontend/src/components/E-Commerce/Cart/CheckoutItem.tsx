@@ -6,7 +6,7 @@ import {
   removeFromCart,
 } from "../../../store/cartSlice";
 import { useAppDispatch } from "../../../store/hooks";
-import { CartItem } from "../../../types.";
+import { CartItem } from "../../../types";
 import { formatPrice } from "../../../utils";
 
 interface IProps {

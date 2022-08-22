@@ -5,7 +5,7 @@ import { addToCart } from "../../../store/cartSlice";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { Product } from "../../../types.";
+import { Product } from "../../../types";
 import { useAppDispatch } from "../../../store/hooks";
 import { formatPrice } from "../../../utils";
 
@@ -19,7 +19,7 @@ const ProductCard = ({ product, category, subCategory }: IProps) => {
   const dispatch = useAppDispatch();
   const { name, price, pImage } = product;
 
-  const handleAdd = (product: Product) => {
+  const handleAdd = (product: any) => {
     dispatch(addToCart(product));
   };
 

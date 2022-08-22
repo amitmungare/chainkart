@@ -5,33 +5,20 @@ import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "../../components/E-Commerce/PaymentForm";
 import "./payment.css";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import * as api from "../../store/api";
 import { useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/userSlice";
 import { selectCart, selectCartItems } from "../../store/cartSlice";
 
 const stripePromise = loadStripe(
-  "pk_test_51LC9yhSE5P4xQp6tex03MR2aoEiW5ZP1HvJ4ArhnZ4dN7fbBn5K6wlMrczHkpUJQSMLnr8ImJRE3G3rc17H1FPdg006fkGsf4G"
+  String(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)
 );
 
 const Payment = () => {
   const user = useAppSelector(selectUser);
   const name = `${user?.firstname} ${user?.lastname}`;
   const address = `${user?.hnumber} , ${user?.landmark}, ${user?.city}-${user?.state},${user?.pincode}`;
-  const humber = user?.hnumber;
-  const landmark = user?.landmark;
-  const city = user?.city;
-  const state = user?.state;
-  const pincode = user?.pincode;
 
-  const add1 = {
-    humber,
-    landmark,
-    city,
-    state,
-    pincode,
-  };
   const cartItems = useAppSelector(selectCartItems);
   const { cartTotalAmount: Amount } = useAppSelector(selectCart);
 
